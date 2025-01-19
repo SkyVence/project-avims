@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { Link } from '@/i18n/routing'
-import { useRouter, usePathname } from '@/i18n/routing'
+import { useRouter, usePathname } from 'next/navigation'
 import { LayoutDashboard, Package, Boxes, Settings, LogOut, User, Moon, Sun, Plus } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { cn } from "@/lib/utils"
@@ -26,19 +26,25 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useTranslations } from 'next-intl'
+import { signOut, useSession } from 'next-auth/react'
 
-const session = {
-  user: {
-    name: 'John Doe',
-    role: 'admin',
-  },
-}
+
 export function SidebarUI() {
   const t = useTranslations('sidebar')
+  const { data: session } = useSession()
   const { theme, setTheme } = useTheme()
   const pathname = usePathname()
   const router = useRouter()
 
+  // If we're on the login page, don't render the sidebar
+  if (pathname === '/login') {
+    return null
+  }
+
+  const handleLogout = async () => {
+    await signOut({ redirect: false })
+    router.push('/login')
+  }
   const sidebarItems = [
     {
       title: t('main-title'),
@@ -58,7 +64,6 @@ export function SidebarUI() {
       ],
     },
   ]
-  
   // Si on est sur la page de connexion, on ne rend pas la barre latérale
   if (pathname === '/login') {
     return null
@@ -143,7 +148,7 @@ export function SidebarUI() {
                   <span>{t('footer-changeTheme')}</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={handleLogout}>
                   <LogOut className="mr-2 size-4" />
                   <span>{t('footer-logout')}</span>
                 </DropdownMenuItem>

@@ -28,5 +28,11 @@
 		"footer-adminDashboard": "Panneau d'administration",
 		"footer-changeTheme": "Changer de thème",
 		"footer-logout": "Se déconnecter"
-	}
+	},
+	"Login": {
+		"title": "Connexion",
+		"emailLabel": "Email",
+		"passwordLabel": "Mot de passe",
+		"loginButton": "Se connecter"
+	  }
 }

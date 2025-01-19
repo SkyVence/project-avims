@@ -1,0 +1,32 @@
+{
+	"dashboardUI": {
+		"stats-totalItems": "Nombre d'items total",
+		"stats-totalPackages": "Nombre de packages total",
+		"stats-totalOperationPackages": "Nombre de operation packages total",
+		"stats-totalInventoryValue": "Valeur total de l'inventaire",
+		"recentItems-title": "Derniers items",
+		"recentItems-addedOn": "Ajouté le",
+		"recentItems-goToItems": "Aller aux items",
+		"inventoryGrowth-title": "Croissance de l'inventaire",
+		"recentActions-title": "Dernières actions",
+		"recentActions-by": "Par",
+		"categoryValueDistribution-title": "Répartition des valeurs par catégorie"
+	},
+	"sidebar": {
+		"header-title": "AVIMS",
+		"header-version": "v0.1.1",
+		"main-title": "Principal",
+		"items-dashboard": "Tableau de bord",
+		"items-items": "Articles",
+		"items-packages": "Packages",
+		"items-packagesOperation": "Packages d'opération",
+		"create-title": "Créer",
+		"items-createItems": "Créer un article",
+		"items-createPackage": "Créer un package",
+		"items-createPackageOperation": "Créer un package d'opération",
+		"footer-settings": "Paramètres",
+		"footer-adminDashboard": "Panneau d'administration",
+		"footer-changeTheme": "Changer de thème",
+		"footer-logout": "Se déconnecter"
+	}
+}

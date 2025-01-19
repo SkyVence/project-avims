@@ -34,5 +34,16 @@
 		"emailLabel": "Email",
 		"passwordLabel": "Mot de passe",
 		"loginButton": "Se connecter"
-	  }
+	},
+	"CreateItem": {
+		"BasicInfoTab": "Information basic",
+		"DetailsTab": "Détail",
+		"CategoriesTab": "Catégorie",
+		"Name": "Nom",
+		"NamePlaceholder": "Nom de l'item",
+		"Brand": "Marque",
+		"BrandPlaceholder": "Marque de l'item",
+		"Value": "Valeur",
+		"ValuePlaceholder": "Valeur de l'item"
+	}
 }

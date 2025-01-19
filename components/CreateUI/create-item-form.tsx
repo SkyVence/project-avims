@@ -3,18 +3,18 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "@/i18n/routing"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm, Controller } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import * as z from "zod"
 import { Button } from "@/components/ui/button"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+import { Form } from "@/components/ui/form"
 import { useToast } from "@/hooks/use-toast"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"
-import { MultiSelect } from "@/components/ui/multi-select"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Loader2 } from "lucide-react"
+import { BasicInfoFields } from "./basic-info-fields"
+import { DetailsFields } from "./details-fields"
+import { CategoriesFields } from "./categories-fields"
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -80,40 +80,7 @@ export function CreateItemForm() {
   const [categories, setCategories] = useState([])
   const [families, setFamilies] = useState([])
   const [subfamilies, setSubfamilies] = useState([])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const [categoriesResponse, familiesResponse, subfamiliesResponse] = await Promise.all([
-        fetch("/api/categories"),
-        fetch("/api/families"),
-        fetch("/api/subfamilies"),
-      ])
-      const [categoriesData, familiesData, subfamiliesData] = await Promise.all([
-        categoriesResponse.json(),
-        familiesResponse.json(),
-        subfamiliesResponse.json(),
-      ])
-      setCategories(
-        categoriesData.map((category: any) => ({
-          value: category.id,
-          label: category.name,
-        })),
-      )
-      setFamilies(
-        familiesData.map((family: any) => ({
-          value: family.id,
-          label: family.name,
-        })),
-      )
-      setSubfamilies(
-        subfamiliesData.map((subfamily: any) => ({
-          value: subfamily.id,
-          label: subfamily.name,
-        })),
-      )
-    }
-    fetchData()
-  }, [])
+  const [error, setError] = useState<string | null>(null)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -139,8 +106,55 @@ export function CreateItemForm() {
     },
   })
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [categoriesResponse, familiesResponse, subfamiliesResponse] = await Promise.all([
+          fetch("/api/categories"),
+          fetch("/api/families"),
+          fetch("/api/subfamilies"),
+        ])
+
+        if (!categoriesResponse.ok || !familiesResponse.ok || !subfamiliesResponse.ok) {
+          throw new Error("Failed to fetch data")
+        }
+
+        const [categoriesData, familiesData, subfamiliesData] = await Promise.all([
+          categoriesResponse.json(),
+          familiesResponse.json(),
+          subfamiliesResponse.json(),
+        ])
+
+        setCategories(
+          categoriesData.map((category: any) => ({
+            value: category.id,
+            label: category.name,
+          })),
+        )
+        setFamilies(
+          familiesData.map((family: any) => ({
+            value: family.id,
+            label: family.name,
+          })),
+        )
+        setSubfamilies(
+          subfamiliesData.map((subfamily: any) => ({
+            value: subfamily.id,
+            label: subfamily.name,
+          })),
+        )
+      } catch (error) {
+        console.error("Error fetching data:", error)
+        setError("Failed to load form data. Please try again later.")
+      }
+    }
+
+    fetchData()
+  }, [])
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true)
+    setError(null)
     try {
       const response = await fetch("/api/items", {
         method: "POST",
@@ -163,6 +177,8 @@ export function CreateItemForm() {
       router.push("/items")
       router.refresh()
     } catch (error) {
+      console.error("Error creating item:", error)
+      setError("There was a problem creating the item. Please try again.")
       toast({
         title: "Error",
         description: "There was a problem creating the item.",
@@ -173,301 +189,51 @@ export function CreateItemForm() {
     }
   }
 
+  if (error) {
+    return (
+      <Card className="w-full h-full max-h-screen flex flex-col">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold">Error</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p>{error}</p>
+        </CardContent>
+      </Card>
+    )
+  }
+
   return (
-    <Card className="w-full max-w-4xl mx-auto">
+    <Card className="w-full h-full max-h-screen flex flex-col">
       <CardHeader>
         <CardTitle className="text-2xl font-bold">Create New Item</CardTitle>
         <CardDescription>Add a new item to your inventory</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex-grow overflow-hidden">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <Tabs defaultValue="basic" className="w-full">
-              <TabsList className="grid w-full grid-cols-3">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="h-full flex flex-col">
+            <Tabs defaultValue="basic" className="w-full h-full flex flex-col">
+              <TabsList className="w-full grid grid-cols-3 mb-4">
                 <TabsTrigger value="basic">Basic Info</TabsTrigger>
                 <TabsTrigger value="details">Details</TabsTrigger>
                 <TabsTrigger value="categories">Categories</TabsTrigger>
               </TabsList>
-              <ScrollArea className="h-[60vh] w-full rounded-md border p-4">
-                <TabsContent value="basic">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <FormField
+              <ScrollArea className="flex-grow">
+                <div className="p-4">
+                  <TabsContent value="basic">
+                    <BasicInfoFields control={form.control} />
+                  </TabsContent>
+                  <TabsContent value="details">
+                    <DetailsFields control={form.control} />
+                  </TabsContent>
+                  <TabsContent value="categories">
+                    <CategoriesFields
                       control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Name</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Item name" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
+                      categories={categories}
+                      families={families}
+                      subfamilies={subfamilies}
                     />
-                    <FormField
-                      control={form.control}
-                      name="brand"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Brand</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Item brand" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="value"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Value</FormLabel>
-                          <FormControl>
-                            <Input type="number" step="0.01" placeholder="Item value" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="quantity"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Quantity</FormLabel>
-                          <FormControl>
-                            <Input type="number" placeholder="Item quantity" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="description"
-                      render={({ field }) => (
-                        <FormItem className="col-span-2">
-                          <FormLabel>Description</FormLabel>
-                          <FormControl>
-                            <Textarea placeholder="Item description" className="h-32" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </TabsContent>
-                <TabsContent value="details">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="location"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Location</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Item location" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="sku"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>SKU</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Item SKU" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="origin"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Origin</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Item origin" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="assuranceValue"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Assurance Value</FormLabel>
-                          <FormControl>
-                            <Input type="number" step="0.01" placeholder="Assurance value" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="dateOfPurchase"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Date of Purchase</FormLabel>
-                          <FormControl>
-                            <Input type="date" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="hsCode"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>HS Code</FormLabel>
-                          <FormControl>
-                            <Input placeholder="HS Code" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="length"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Length</FormLabel>
-                          <FormControl>
-                            <Input type="number" step="0.01" placeholder="Length" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="width"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Width</FormLabel>
-                          <FormControl>
-                            <Input type="number" step="0.01" placeholder="Width" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="height"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Height</FormLabel>
-                          <FormControl>
-                            <Input type="number" step="0.01" placeholder="Height" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="weight"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Weight</FormLabel>
-                          <FormControl>
-                            <Input type="number" step="0.01" placeholder="Weight" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </TabsContent>
-                <TabsContent value="categories">
-                  <div className="grid grid-cols-1 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="categoryIds"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Categories</FormLabel>
-                          <FormControl>
-                            <Controller
-                              name="categoryIds"
-                              control={form.control}
-                              render={({ field }) => (
-                                <MultiSelect
-                                  options={categories}
-                                  selected={field.value}
-                                  onChange={field.onChange}
-                                  placeholder="Select categories"
-                                />
-                              )}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="familyIds"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Families</FormLabel>
-                          <FormControl>
-                            <Controller
-                              name="familyIds"
-                              control={form.control}
-                              render={({ field }) => (
-                                <MultiSelect
-                                  options={families}
-                                  selected={field.value}
-                                  onChange={field.onChange}
-                                  placeholder="Select families"
-                                />
-                              )}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="subfamilyIds"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Subfamilies</FormLabel>
-                          <FormControl>
-                            <Controller
-                              name="subfamilyIds"
-                              control={form.control}
-                              render={({ field }) => (
-                                <MultiSelect
-                                  options={subfamilies}
-                                  selected={field.value}
-                                  onChange={field.onChange}
-                                  placeholder="Select subfamilies"
-                                />
-                              )}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </TabsContent>
+                  </TabsContent>
+                </div>
               </ScrollArea>
             </Tabs>
           </form>

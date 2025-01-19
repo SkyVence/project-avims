@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id             String   @id @default(cuid())
+  name           String
+  email          String   @unique
+  hashedPassword String
+  role           String   @default("user")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  Action         Action[]
+}
+
+model Item {
+  id              String             @id @default(cuid())
+  name            String
+  description     String
+  brand           String
+  value           Float
+  location        String
+  sku             String             @unique
+  quantity        Int                @default(1)
+  origin          String
+  assuranceValue  Float
+  dateOfPurchase  DateTime
+  length          Float              @default(0)
+  width           Float              @default(0)
+  height          Float              @default(0)
+  volume          Float              @default(0)
+  weight          Float              @default(0)
+  hsCode          String
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  packages        Package[]
+  operations      OperationPackage[]
+  category      Category[]
+  families        Family[]
+  subfamilies     SubFamily[]
+}
+
+model Package {
+  id         String   @id @default(cuid())
+  name       String
+  location   String
+  totalValue Float    @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  items      Item[]
+  operations OperationPackage[]
+}
+
+model OperationPackage {
+  id        String    @id @default(cuid())
+  name      String
+  location  String    @default("DefaultLocation")
+  year      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  items     Item[]
+  packages  Package[]
+}
+
+model Action {
+  id        String   @id @default(cuid())
+  type      String
+  details   String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  items     Item[]
+}
+
+model Family {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  items     Item[]
+}
+
+model SubFamily {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  items     Item[]
+}
+

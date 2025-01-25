@@ -15,63 +15,7 @@ import { Loader2 } from "lucide-react"
 import { BasicInfoFields } from "./basic-info-fields"
 import { DetailsFields } from "./details-fields"
 import { CategoriesFields } from "./categories-fields"
-
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  description: z.string().min(10, {
-    message: "Description must be at least 10 characters.",
-  }),
-  brand: z.string().min(2, {
-    message: "Brand must be at least 2 characters.",
-  }),
-  value: z.string().refine((val) => !isNaN(Number.parseFloat(val)) && Number.parseFloat(val) > 0, {
-    message: "Value must be a positive number.",
-  }),
-  location: z.string().min(2, {
-    message: "Location must be at least 2 characters.",
-  }),
-  sku: z.string().min(2, {
-    message: "SKU must be at least 2 characters.",
-  }),
-  quantity: z.string().refine((val) => !isNaN(Number.parseInt(val)) && Number.parseInt(val) > 0, {
-    message: "Quantity must be a positive integer.",
-  }),
-  origin: z.string().min(2, {
-    message: "Origin must be at least 2 characters.",
-  }),
-  assuranceValue: z.string().refine((val) => !isNaN(Number.parseFloat(val)) && Number.parseFloat(val) >= 0, {
-    message: "Assurance value must be a non-negative number.",
-  }),
-  dateOfPurchase: z.string().refine((val) => !isNaN(Date.parse(val)), {
-    message: "Invalid date format.",
-  }),
-  length: z.string().refine((val) => !isNaN(Number.parseFloat(val)) && Number.parseFloat(val) >= 0, {
-    message: "Length must be a non-negative number.",
-  }),
-  width: z.string().refine((val) => !isNaN(Number.parseFloat(val)) && Number.parseFloat(val) >= 0, {
-    message: "Width must be a non-negative number.",
-  }),
-  height: z.string().refine((val) => !isNaN(Number.parseFloat(val)) && Number.parseFloat(val) >= 0, {
-    message: "Height must be a non-negative number.",
-  }),
-  weight: z.string().refine((val) => !isNaN(Number.parseFloat(val)) && Number.parseFloat(val) >= 0, {
-    message: "Weight must be a non-negative number.",
-  }),
-  hsCode: z.string().min(2, {
-    message: "HS Code must be at least 2 characters.",
-  }),
-  categoryIds: z.array(z.string()).min(1, {
-    message: "Please select at least one category.",
-  }),
-  familyIds: z.array(z.string()).min(1, {
-    message: "Please select at least one family.",
-  }),
-  subfamilyIds: z.array(z.string()).min(1, {
-    message: "Please select at least one subfamily.",
-  }),
-})
+import { useTranslations } from "next-intl"
 
 export function CreateItemForm() {
   const router = useRouter()
@@ -81,6 +25,82 @@ export function CreateItemForm() {
   const [families, setFamilies] = useState([])
   const [subfamilies, setSubfamilies] = useState([])
   const [error, setError] = useState<string | null>(null)
+  const t = useTranslations("FormsSchema")
+  const b = useTranslations("CreateUI")
+
+  const formSchema = z.object({
+    name: z.string().min(2, {
+      message: t("MinNameString"),
+    }),
+    description: z.string().min(10, {
+      message: t("MinDescriptionString"),
+
+    }),
+    brand: z.string().min(2, {
+      message: t("MinBrandString"),
+
+    }),
+    value: z.string().refine((val) => !isNaN(Number.parseFloat(val)) && Number.parseFloat(val) > 0, {
+      message: t("MinValueString"),
+
+    }),
+    location: z.string().min(2, {
+      message: t("MinLocationString"),
+
+    }),
+    sku: z.string().min(2, {
+      message: t("MinSKUString"),
+
+    }),
+    quantity: z.string().refine((val) => !isNaN(Number.parseInt(val)) && Number.parseInt(val) > 0, {
+      message: t("MinQuantityString"),
+
+    }),
+    origin: z.string().min(2, {
+      message: t("MinOriginString"),
+
+    }),
+    assuranceValue: z.string().refine((val) => !isNaN(Number.parseFloat(val)) && Number.parseFloat(val) >= 0, {
+      message: t("MinAssuranceValueString"),
+
+    }),
+    dateOfPurchase: z.string().refine((val) => !isNaN(Date.parse(val)), {
+      message: t("MinDateOfPurchaseString"),
+
+    }),
+    length: z.string().refine((val) => !isNaN(Number.parseFloat(val)) && Number.parseFloat(val) >= 0, {
+      message: t("MinLength"),
+
+    }),
+    width: z.string().refine((val) => !isNaN(Number.parseFloat(val)) && Number.parseFloat(val) >= 0, {
+      message: t("MinWidth"),
+
+    }),
+    height: z.string().refine((val) => !isNaN(Number.parseFloat(val)) && Number.parseFloat(val) >= 0, {
+      message:t("MinHeight"),
+
+    }),
+    weight: z.string().refine((val) => !isNaN(Number.parseFloat(val)) && Number.parseFloat(val) >= 0, {
+      message: t("MinWeight"),
+
+    }),
+    hsCode: z.string().min(2, {
+      message: t("MinHsCodeString"),
+
+    }),
+    categoryIds: z.array(z.string()).min(1, {
+      message: t("MinCategoryString"),
+
+    }),
+    familyIds: z.array(z.string()).min(1, {
+      message: t("MinFamilyString"),
+
+    }),
+    subfamilyIds: z.array(z.string()).min(1, {
+      message: t("MinSubfamilyString"),
+
+    }),
+  })
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -205,17 +225,17 @@ export function CreateItemForm() {
   return (
     <Card className="w-full h-full max-h-screen flex flex-col">
       <CardHeader>
-        <CardTitle className="text-2xl font-bold">Create New Item</CardTitle>
-        <CardDescription>Add a new item to your inventory</CardDescription>
+        <CardTitle className="text-2xl font-bold">{b("headerTitle")}</CardTitle>
+        <CardDescription>{b("headerDescription")}</CardDescription>
       </CardHeader>
       <CardContent className="flex-grow overflow-hidden">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="h-full flex flex-col">
             <Tabs defaultValue="basic" className="w-full h-full flex flex-col">
               <TabsList className="w-full grid grid-cols-3 mb-4">
-                <TabsTrigger value="basic">Basic Info</TabsTrigger>
-                <TabsTrigger value="details">Details</TabsTrigger>
-                <TabsTrigger value="categories">Categories</TabsTrigger>
+                <TabsTrigger value="basic">{b("BasicInfoTab")}</TabsTrigger>
+                <TabsTrigger value="details">{b("DetailsTab")}</TabsTrigger>
+                <TabsTrigger value="categories">{b("CategoriesTab")}</TabsTrigger>
               </TabsList>
               <ScrollArea className="flex-grow">
                 <div className="p-4">

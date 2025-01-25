@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { Link } from '@/i18n/routing'
-import { useRouter, usePathname } from 'next/navigation'
+import { useRouter, usePathname } from '@/i18n/routing'
 import { LayoutDashboard, Package, Boxes, Settings, LogOut, User, Moon, Sun, Plus } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { cn } from "@/lib/utils"

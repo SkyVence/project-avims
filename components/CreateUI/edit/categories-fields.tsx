@@ -1,7 +1,22 @@
+import { useTranslations } from "next-intl"
 import { type Control, Controller } from "react-hook-form"
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form"
 import { MultiSelect } from "@/components/ui/multi-select"
-import { useTranslations } from "next-intl"
+
+type Category = {
+  id: string
+  name: string
+}
+
+type Family = {
+  id: string
+  name: string
+}
+
+type Subfamily = {
+  id: string
+  name: string
+}
 
 export function CategoriesFields({
   control,
@@ -10,29 +25,30 @@ export function CategoriesFields({
   subfamilies,
 }: {
   control: Control<any>
-  categories: any[]
-  families: any[]
-  subfamilies: any[]
+  categories: Category[]
+  families: Family[]
+  subfamilies: Subfamily[]
 }) {
-  const t = useTranslations("CreateUI")
+  const t = useTranslations("EditItemUI")
+
   return (
-    <div className="grid grid-cols-1 gap-4">
+    <div className="space-y-4">
       <FormField
         control={control}
         name="categoryIds"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t("CategoriesName")}</FormLabel>
+            <FormLabel>{t("categories")}</FormLabel>
             <FormControl>
               <Controller
                 name="categoryIds"
                 control={control}
                 render={({ field }) => (
                   <MultiSelect
-                    options={categories || []}
-                    selected={field.value || []}
+                    options={categories.map((category) => ({ value: category.id, label: category.name }))}
+                    selected={field.value}
                     onChange={field.onChange}
-                    placeholder={t("CategoriesNamePlaceholder")}
+                    placeholder={t("selectCategories")}
                   />
                 )}
               />
@@ -46,17 +62,17 @@ export function CategoriesFields({
         name="familyIds"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t("FamilliesName")}</FormLabel>
+            <FormLabel>{t("families")}</FormLabel>
             <FormControl>
               <Controller
                 name="familyIds"
                 control={control}
                 render={({ field }) => (
                   <MultiSelect
-                    options={families || []}
-                    selected={field.value || []}
+                    options={families.map((family) => ({ value: family.id, label: family.name }))}
+                    selected={field.value}
                     onChange={field.onChange}
-                    placeholder={t("FamilliesNamePlaceholder")}
+                    placeholder={t("selectFamilies")}
                   />
                 )}
               />
@@ -70,17 +86,17 @@ export function CategoriesFields({
         name="subfamilyIds"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{t('SubFamilliesName')}</FormLabel>
+            <FormLabel>{t("subfamilies")}</FormLabel>
             <FormControl>
               <Controller
                 name="subfamilyIds"
                 control={control}
                 render={({ field }) => (
                   <MultiSelect
-                    options={subfamilies || []}
-                    selected={field.value || []}
+                    options={subfamilies.map((subfamily) => ({ value: subfamily.id, label: subfamily.name }))}
+                    selected={field.value}
                     onChange={field.onChange}
-                    placeholder={t("SubFamilliesNamePlaceholder")}
+                    placeholder={t("selectSubfamilies")}
                   />
                 )}
               />

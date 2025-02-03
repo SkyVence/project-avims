@@ -11,7 +11,7 @@ const authMiddleware = withAuth(
   function middleware(req) {
     const token = req.nextauth.token
     const path = req.nextUrl.pathname
-    
+
     // Allow access to login page
     if (path.endsWith("/login")) {
       if (token) {

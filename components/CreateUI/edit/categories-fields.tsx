@@ -46,7 +46,7 @@ export function CategoriesFields({
                 render={({ field }) => (
                   <MultiSelect
                     options={categories.map((category) => ({ value: category.id, label: category.name }))}
-                    selected={field.value}
+                    selected={field.value || []}
                     onChange={field.onChange}
                     placeholder={t("selectCategories")}
                   />
@@ -70,7 +70,7 @@ export function CategoriesFields({
                 render={({ field }) => (
                   <MultiSelect
                     options={families.map((family) => ({ value: family.id, label: family.name }))}
-                    selected={field.value}
+                    selected={field.value || []}
                     onChange={field.onChange}
                     placeholder={t("selectFamilies")}
                   />
@@ -94,7 +94,7 @@ export function CategoriesFields({
                 render={({ field }) => (
                   <MultiSelect
                     options={subfamilies.map((subfamily) => ({ value: subfamily.id, label: subfamily.name }))}
-                    selected={field.value}
+                    selected={field.value || []}
                     onChange={field.onChange}
                     placeholder={t("selectSubfamilies")}
                   />

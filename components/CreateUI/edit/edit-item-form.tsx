@@ -7,9 +7,9 @@ import { useForm } from "react-hook-form"
 import * as z from "zod"
 import { useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
-import { Form } from "@/components/ui/form"
+import { Form, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@/components/ui/form"
 import { useToast } from "@/hooks/use-toast"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Loader2 } from "lucide-react"
@@ -99,7 +99,7 @@ export function EditItemForm({ id }: { id: string }) {
   const [subfamilies, setSubfamilies] = useState<Subfamily[]>([])
   const [item, setItem] = useState<Item | null>(null)
   const { toast } = useToast()
-  const t= useTranslations("EditItemUI")
+  const t = useTranslations("EditItemUI")
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -218,7 +218,13 @@ export function EditItemForm({ id }: { id: string }) {
       </CardHeader>
       <CardContent className="flex-grow overflow-hidden">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="h-full flex flex-col">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault()
+              form.handleSubmit(onSubmit)(e)
+            }}
+            className="h-full flex flex-col"
+          >
             <Tabs defaultValue="basic" className="w-full h-full flex flex-col">
               <TabsList className="w-full grid grid-cols-3 mb-4">
                 <TabsTrigger value="basic">{t("basicInfo")}</TabsTrigger>
@@ -244,21 +250,21 @@ export function EditItemForm({ id }: { id: string }) {
                 </div>
               </ScrollArea>
             </Tabs>
+            <div className="sticky bottom-0 p-4 bg-background border-t">
+              <Button type="submit" disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    {t("updating")}
+                  </>
+                ) : (
+                  t("updateItem")
+                )}
+              </Button>
+            </div>
           </form>
         </Form>
       </CardContent>
-      <CardFooter className="flex justify-end">
-        <Button type="submit" disabled={isLoading} onClick={form.handleSubmit(onSubmit)}>
-          {isLoading ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              {t("updating")}
-            </>
-          ) : (
-            t("updateItem")
-          )}
-        </Button>
-      </CardFooter>
     </Card>
   )
 }

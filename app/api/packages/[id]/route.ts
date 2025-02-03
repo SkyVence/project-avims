@@ -3,10 +3,7 @@ import { prisma } from "@/lib/prisma"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "../../auth/[...nextauth]/route"
 
-export async function GET(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: Request, { params }: { params: { id: string } }) {
   try {
     const session = await getServerSession(authOptions)
     if (!session) {
@@ -16,14 +13,7 @@ export async function GET(
     const package_ = await prisma.package.findUnique({
       where: { id: params.id },
       include: {
-        items: {
-          select: {
-            id: true,
-            name: true,
-            sku: true,
-            value: true,
-          },
-        },
+        items: true,
       },
     })
 

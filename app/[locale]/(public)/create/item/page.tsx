@@ -2,7 +2,6 @@ import { getServerSession } from "next-auth/next"
 import { redirect } from "next/navigation"
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options"
 import { CreateItemForm } from "@/components/CreateUI/create-item-form"
-import { Box } from "lucide-react"
 import { Metadata } from "next"
 import React from "react"
 

@@ -23,6 +23,8 @@ export async function GET(req: Request) {
       } : undefined,
       include: {
         category: true,
+        families: true,
+        subfamilies: true,
       },
     })
 

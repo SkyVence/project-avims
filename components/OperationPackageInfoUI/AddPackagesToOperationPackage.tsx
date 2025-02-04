@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { useState, useEffect } from "react"
 import { useRouter } from "@/i18n/routing"
 import { toast } from "@/hooks/use-toast"
@@ -28,6 +29,8 @@ export function AddPackagesToOperationPackage({
   operationPackageName,
 }: AddPackagesToOperationPackageProps) {
   const router = useRouter()
+  const t = useTranslations("addPackagesToOperationPackage")
+  const tc = useTranslations("common")
   const [isLoading, setIsLoading] = useState(false)
   const [searchTerm, setSearchTerm] = useState("")
   const [allPackages, setAllPackages] = useState<Package[]>([])
@@ -51,8 +54,8 @@ export function AddPackagesToOperationPackage({
       setFilteredPackages(sortedPackages)
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to fetch packages. Please try again.",
+        title: t("error"),
+        description: t("fetchError"),
         variant: "destructive",
       })
     } finally {
@@ -89,14 +92,14 @@ export function AddPackagesToOperationPackage({
       }
 
       toast({
-        title: "Success",
-        description: "Packages added to operation package successfully",
+        title: t("success"),
+        description: t("successDescription"),
       })
       router.push(`/operation-packages/${operationPackageId}`)
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to add packages to operation package. Please try again.",
+        title: t("error"),
+        description: t("errorDescription"),
         variant: "destructive",
       })
     } finally {
@@ -131,11 +134,11 @@ export function AddPackagesToOperationPackage({
       enableSorting: false,
       enableHiding: false,
     },
-    { accessorKey: "name", header: "Name" },
-    { accessorKey: "location", header: "Location" },
+    { accessorKey: "name", header: tc("name") },
+    { accessorKey: "location", header: t("location") },
     {
       accessorKey: "totalValue",
-      header: "Total Value",
+      header: tc("totalValue"),
       cell: ({ row }) => {
         return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(row.original.totalValue)
       },
@@ -145,13 +148,13 @@ export function AddPackagesToOperationPackage({
   return (
     <Card className="p-6 bg-background">
       <CardHeader>
-        <CardTitle>Add Packages to Operation Package: {operationPackageName}</CardTitle>
+        <CardTitle>{t("title", { operationPackageName })}</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-6">
           <div className="flex items-center space-x-2">
             <Input
-              placeholder="Search packages..."
+              placeholder={t("searchPlaceholder")}
               value={searchTerm}
               onChange={(e) => {
                 setSearchTerm(e.target.value)
@@ -165,12 +168,12 @@ export function AddPackagesToOperationPackage({
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button variant="outline" onClick={() => router.push(`/operation-packages/${operationPackageId}`)}>
-          Cancel
+          {t("cancel")}
         </Button>
         <Button onClick={handleAddPackages} disabled={isLoading || selectedPackages.length === 0}>
           {isLoading
-            ? "Adding..."
-            : `Add ${selectedPackages.length} Package${selectedPackages.length !== 1 ? "s" : ""}`}
+            ? t("adding")
+            : t("add", { count: selectedPackages.length, s: selectedPackages.length !== 1 ? "s" : "" })}
         </Button>
       </CardFooter>
     </Card>

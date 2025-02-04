@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import type { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 import { Link } from "@/i18n/routing"
@@ -31,29 +32,36 @@ export type Item = {
 export const columns: ColumnDef<Item>[] = [
   {
     id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={table.getIsAllPageRowsSelected()}
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
+    header: ({ table }) => {
+      const t = useTranslations("columns")
+      return (
+        <Checkbox
+          checked={table.getIsAllPageRowsSelected()}
+          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+          aria-label={t("select")}
+        />
+      )
+    },
+    cell: ({ row }) => {
+      const t = useTranslations("columns")
+      return (
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => row.toggleSelected(!!value)}
+          aria-label={t("select")}
+        />
+      )
+    },
     enableSorting: false,
     enableHiding: false,
   },
   {
     accessorKey: "name",
     header: ({ column }) => {
+      const t = useTranslations("columns")
       return (
         <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Name
+          {t("name")}
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
@@ -68,11 +76,17 @@ export const columns: ColumnDef<Item>[] = [
   },
   {
     accessorKey: "brand",
-    header: "Brand",
+    header: () => {
+      const t = useTranslations("columns")
+      return t("brand")
+    },
   },
   {
     accessorKey: "families",
-    header: "Family",
+    header: () => {
+      const t = useTranslations("columns")
+      return t("family")
+    },
     cell: ({ row }) => {
       const families = row.original.families || []
       return (
@@ -91,7 +105,10 @@ export const columns: ColumnDef<Item>[] = [
   },
   {
     accessorKey: "subfamilies",
-    header: "Sub Family",
+    header: () => {
+      const t = useTranslations("columns")
+      return t("subFamily")
+    },
     cell: ({ row }) => {
       const subfamilies = row.original.subfamilies || []
       return (
@@ -110,7 +127,10 @@ export const columns: ColumnDef<Item>[] = [
   },
   {
     accessorKey: "category",
-    header: "Categories",
+    header: () => {
+      const t = useTranslations("columns")
+      return t("categories")
+    },
     cell: ({ row }) => {
       const categories = row.original.category || []
       return (
@@ -129,7 +149,10 @@ export const columns: ColumnDef<Item>[] = [
   },
   {
     accessorKey: "value",
-    header: () => <div className="text-right">Value</div>,
+    header: () => {
+      const t = useTranslations("columns")
+      return <div className="text-right">{t("value")}</div>
+    },
     cell: ({ row }) => {
       const amount = Number.parseFloat(row.getValue("value"))
       const formatted = new Intl.NumberFormat("fr-FR", {
@@ -141,7 +164,10 @@ export const columns: ColumnDef<Item>[] = [
   },
   {
     accessorKey: "assuranceValue",
-    header: () => <div className="text-right">Assurance Value</div>,
+    header: () => {
+      const t = useTranslations("columns")
+      return <div className="text-right">{t("assuranceValue")}</div>
+    },
     cell: ({ row }) => {
       const amount = Number.parseFloat(row.getValue("assuranceValue"))
       const formatted = new Intl.NumberFormat("fr-FR", {
@@ -149,19 +175,28 @@ export const columns: ColumnDef<Item>[] = [
         currency: "EUR",
       }).format(amount)
       return <div className="text-right font-medium">{formatted}</div>
-    }
+    },
   },
   {
     accessorKey: "location",
-    header: "Location",
+    header: () => {
+      const t = useTranslations("columns")
+      return t("location")
+    },
   },
   {
     accessorKey: "sku",
-    header: "SKU",
+    header: () => {
+      const t = useTranslations("columns")
+      return t("sku")
+    },
   },
   {
     accessorKey: "quantity",
-    header: () => <div className="text-right">Quantity</div>,
+    header: () => {
+      const t = useTranslations("columns")
+      return <div className="text-right">{t("quantity")}</div>
+    },
     cell: ({ row }) => {
       return <div className="text-right">{row.getValue("quantity")}</div>
     },
@@ -169,24 +204,27 @@ export const columns: ColumnDef<Item>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
+      const t = useTranslations("actions")
       const item = row.original
 
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
+              <span className="sr-only">{t("openMenu")}</span>
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(item.id)}>Copy item ID</DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href={`/items/${item.id}`}>View details</Link>
+            <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
+            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(item.id)}>
+              {t("copyItemId")}
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link href={`/items/${item.id}/edit`}>Edit item</Link>
+              <Link href={`/items/${item.id}`}>{t("viewDetails")}</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href={`/items/${item.id}/edit`}>{t("editItem")}</Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

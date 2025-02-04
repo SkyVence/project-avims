@@ -1,4 +1,5 @@
 "use client"
+import { useTranslations } from "next-intl"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Link } from "@/i18n/routing"
@@ -44,13 +45,15 @@ interface OperationPackageDetailsProps {
 
 export function OperationPackageInfo({ operationPackage }: OperationPackageDetailsProps) {
   const router = useRouter()
+  const t = useTranslations("operationPackageInfo")
+  const tc = useTranslations("common")
 
   const packageColumns = [
-    { accessorKey: "name", header: "Name" },
-    { accessorKey: "location", header: "Location" },
+    { accessorKey: "name", header: tc("name") },
+    { accessorKey: "location", header: t("location") },
     {
       accessorKey: "totalValue",
-      header: "Total Value",
+      header: tc("totalValue"),
       cell: ({ row }) => {
         return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(row.original.totalValue)
       },
@@ -65,22 +68,22 @@ export function OperationPackageInfo({ operationPackage }: OperationPackageDetai
       <CardContent>
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-muted p-4 rounded-lg">
-            <h2 className="text-lg font-semibold mb-4 text-primary">Operation Package Information</h2>
+            <h2 className="text-lg font-semibold mb-4 text-primary">{t("information")}</h2>
             <div className="space-y-2">
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Location:</span>
+                <span className="text-muted-foreground">{t("location")}:</span>
                 <span>{operationPackage.location}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Year:</span>
+                <span className="text-muted-foreground">{t("year")}:</span>
                 <span>{operationPackage.year}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Created At:</span>
+                <span className="text-muted-foreground">{t("createdAt")}:</span>
                 <span>{operationPackage.createdAt.toLocaleDateString()}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-muted-foreground">Updated At:</span>
+                <span className="text-muted-foreground">{t("updatedAt")}:</span>
                 <span>{operationPackage.updatedAt.toLocaleDateString()}</span>
               </div>
             </div>
@@ -90,15 +93,15 @@ export function OperationPackageInfo({ operationPackage }: OperationPackageDetai
         <div className="mt-8">
           <Tabs defaultValue="items">
             <TabsList>
-              <TabsTrigger value="items">Items</TabsTrigger>
-              <TabsTrigger value="packages">Packages</TabsTrigger>
+              <TabsTrigger value="items">{t("items")}</TabsTrigger>
+              <TabsTrigger value="packages">{t("packages")}</TabsTrigger>
             </TabsList>
             <TabsContent value="items">
-              <h2 className="text-lg font-semibold mb-4 text-primary">Items in Operation Package</h2>
+              <h2 className="text-lg font-semibold mb-4 text-primary">{t("itemsInPackage")}</h2>
               <DataTable columns={itemColumns} data={operationPackage.items} />
             </TabsContent>
             <TabsContent value="packages">
-              <h2 className="text-lg font-semibold mb-4 text-primary">Packages in Operation Package</h2>
+              <h2 className="text-lg font-semibold mb-4 text-primary">{t("packagesInPackage")}</h2>
               <DataTable columns={packageColumns} data={operationPackage.packages} />
             </TabsContent>
           </Tabs>
@@ -106,22 +109,22 @@ export function OperationPackageInfo({ operationPackage }: OperationPackageDetai
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button asChild>
-          <Link href={`/operation-packages/${operationPackage.id}/edit`}>Edit Operation Package</Link>
+          <Link href={`/operation-packages/${operationPackage.id}/edit`}>{t("editOperationPackage")}</Link>
         </Button>
         <DeleteButton
           itemId={operationPackage.id}
           itemName={operationPackage.name}
           onSuccess={() => {
             toast({
-              title: "Operation Package Deleted",
-              description: `${operationPackage.name} has been successfully deleted.`,
+              title: t("operationPackageDeleted"),
+              description: t("deleteSuccess", { name: operationPackage.name }),
             })
             router.push("/operation-packages")
           }}
           onError={(error) => {
             toast({
-              title: "Error",
-              description: error || "Failed to delete operation package. Please try again.",
+              title: t("error"),
+              description: error || t("deleteError"),
               variant: "destructive",
             })
           }}

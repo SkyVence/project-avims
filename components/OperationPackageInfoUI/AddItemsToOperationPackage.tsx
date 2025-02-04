@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { useState, useEffect } from "react"
 import { useRouter } from "@/i18n/routing"
 import { toast } from "@/hooks/use-toast"
@@ -35,6 +36,7 @@ export function AddItemsToOperationPackage({
   operationPackageName,
 }: AddItemsToOperationPackageProps) {
   const router = useRouter()
+  const t = useTranslations("addItemsToOperationPackage")
   const [isLoading, setIsLoading] = useState(false)
   const [searchTerm, setSearchTerm] = useState("")
   const [allItems, setAllItems] = useState<Item[]>([])
@@ -58,8 +60,8 @@ export function AddItemsToOperationPackage({
       setFilteredItems(sortedItems)
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to fetch items. Please try again.",
+        title: t("error"),
+        description: t("fetchError"),
         variant: "destructive",
       })
     } finally {
@@ -97,14 +99,14 @@ export function AddItemsToOperationPackage({
       }
 
       toast({
-        title: "Success",
-        description: "Items added to operation package successfully",
+        title: t("success"),
+        description: t("successDescription"),
       })
       router.push(`/operation-packages/${operationPackageId}`)
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to add items to operation package. Please try again.",
+        title: t("error"),
+        description: t("errorDescription"),
         variant: "destructive",
       })
     } finally {
@@ -145,13 +147,13 @@ export function AddItemsToOperationPackage({
   return (
     <Card className="p-6 bg-background">
       <CardHeader>
-        <CardTitle>Add Items to Operation Package: {operationPackageName}</CardTitle>
+        <CardTitle>{t("title", { operationPackageName })}</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-6">
           <div className="flex items-center space-x-2">
             <Input
-              placeholder="Search items..."
+              placeholder={t("searchPlaceholder")}
               value={searchTerm}
               onChange={(e) => {
                 setSearchTerm(e.target.value)
@@ -165,10 +167,12 @@ export function AddItemsToOperationPackage({
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button variant="outline" onClick={() => router.push(`/operation-packages/${operationPackageId}`)}>
-          Cancel
+          {t("cancel")}
         </Button>
         <Button onClick={handleAddItems} disabled={isLoading || selectedItems.length === 0}>
-          {isLoading ? "Adding..." : `Add ${selectedItems.length} Item${selectedItems.length !== 1 ? "s" : ""}`}
+          {isLoading
+            ? t("adding")
+            : t("add", { count: selectedItems.length, s: selectedItems.length !== 1 ? "s" : "" })}
         </Button>
       </CardFooter>
     </Card>

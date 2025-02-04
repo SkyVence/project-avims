@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -23,6 +24,7 @@ interface DeleteButtonProps {
 }
 
 export function DeleteButton({ itemId, itemName, onSuccess, onError }: DeleteButtonProps) {
+  const t = useTranslations("deleteButton")
   const [open, setOpen] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
 
@@ -53,20 +55,18 @@ export function DeleteButton({ itemId, itemName, onSuccess, onError }: DeleteBut
       <AlertDialogTrigger asChild>
         <Button variant="destructive" className="w-full ml-4" disabled={isDeleting}>
           <Trash2 className="mr-2 h-4 w-4" />
-          {isDeleting ? "Deleting..." : `Delete ${itemName}`}
+          {isDeleting ? t("deleting") : t("delete", { itemName })}
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure you want to delete {itemName}?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete {itemName} and remove its data from our servers.
-          </AlertDialogDescription>
+          <AlertDialogTitle>{t("confirmTitle", { itemName })}</AlertDialogTitle>
+          <AlertDialogDescription>{t("confirmDescription", { itemName })}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
           <AlertDialogAction onClick={handleDelete} disabled={isDeleting}>
-            {isDeleting ? "Deleting..." : "Delete"}
+            {isDeleting ? t("deleting") : t("delete")}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

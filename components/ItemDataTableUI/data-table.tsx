@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { useState, useMemo } from "react"
 import {
   type ColumnDef,
@@ -30,6 +31,7 @@ interface DataTableProps<TData, TValue> {
 type FilterableColumns = "families" | "subfamilies" | "category"
 
 export function DataTable<TData, TValue>({ columns, data, enableFilters = true }: DataTableProps<TData, TValue>) {
+  const t = useTranslations("datatable")
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -122,7 +124,7 @@ export function DataTable<TData, TValue>({ columns, data, enableFilters = true }
     <div className="space-y-4">
       <div className="flex items-center gap-2">
         <Input
-          placeholder="Search all columns..."
+          placeholder={t("search")}
           value={globalFilter ?? ""}
           onChange={(event) => setGlobalFilter(event.target.value)}
           className="max-w-sm"
@@ -137,7 +139,9 @@ export function DataTable<TData, TValue>({ columns, data, enableFilters = true }
                   value={(table.getColumn(columnId)?.getFilterValue() as string) || ""}
                 >
                   <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder={`Select ${columnId}`} />
+                    <SelectValue
+                      placeholder={t(`filters.select${columnId.charAt(0).toUpperCase() + columnId.slice(1)}`)}
+                    />
                   </SelectTrigger>
                   <SelectContent>
                     {uniqueValues[columnId].map((value) => (
@@ -194,7 +198,7 @@ export function DataTable<TData, TValue>({ columns, data, enableFilters = true }
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No results.
+                  {t("noResults")}
                 </TableCell>
               </TableRow>
             )}

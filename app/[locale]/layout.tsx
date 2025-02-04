@@ -5,6 +5,12 @@ import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { SessionWrapper } from "@/components/wrapper/SessionWrapper";
 import NextThemeProvider from "@/components/Layout/nextThemeLayout";
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: "AVIMS - Gestion de l'inventaire",
+  "description": "Gestion de l'inventaire Europa Organisation"
+}
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +26,7 @@ export default async function LocaleLayout({
   const { locale } = params;
 
   // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale as any)) {
+  if (!routing.locales.includes(locale)) {
     notFound();
   }
 

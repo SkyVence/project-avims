@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options"
+import { calculatePackageTotalValue } from "@/lib/package-utils"
 
 export async function POST(request: Request, { params }: { params: { id: string } }) {
   try {
@@ -17,32 +18,28 @@ export async function POST(request: Request, { params }: { params: { id: string 
       return NextResponse.json({ error: "Invalid item IDs" }, { status: 400 })
     }
 
-    const updatedPackage = await prisma.package.update({
+    await prisma.package.update({
       where: { id: params.id },
       data: {
         items: {
           disconnect: itemIds.map((id) => ({ id })),
         },
       },
-      include: {
-        items: true,
-      },
     })
 
-    // Recalculate total value
-    const totalValue = updatedPackage.items.reduce((sum, item) => sum + item.value, 0)
+    const newTotalValue = await calculatePackageTotalValue(params.id)
 
-    const finalPackage = await prisma.package.update({
+    const updatedPackage = await prisma.package.update({
       where: { id: params.id },
       data: {
-        totalValue: totalValue,
+        totalValue: newTotalValue,
       },
       include: {
         items: true,
       },
     })
 
-    return NextResponse.json(finalPackage)
+    return NextResponse.json(updatedPackage)
   } catch (error) {
     console.error("Error removing items from package:", error)
     return NextResponse.json({ error: "Failed to remove items from package" }, { status: 500 })

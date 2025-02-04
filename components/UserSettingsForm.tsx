@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -49,6 +50,7 @@ interface UserSettingsFormProps {
 export function UserSettingsForm({ user }: UserSettingsFormProps) {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
+  const t = useTranslations("userSettings")
 
   const profileForm = useForm<z.infer<typeof profileFormSchema>>({
     resolver: zodResolver(profileFormSchema),
@@ -83,14 +85,14 @@ export function UserSettingsForm({ user }: UserSettingsFormProps) {
       }
 
       toast({
-        title: "Profile Updated",
-        description: "Your profile information has been successfully updated.",
+        title: t("toast.profileUpdated.title"),
+        description: t("toast.profileUpdated.description"),
       })
       router.refresh()
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to update profile. Please try again.",
+        title: t("toast.error.title"),
+        description: t("toast.error.profileUpdateFailed"),
         variant: "destructive",
       })
     } finally {
@@ -114,14 +116,14 @@ export function UserSettingsForm({ user }: UserSettingsFormProps) {
       }
 
       toast({
-        title: "Password Changed",
-        description: "Your password has been successfully changed.",
+        title: t("toast.passwordChanged.title"),
+        description: t("toast.passwordChanged.description"),
       })
       passwordForm.reset()
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to change password. Please try again.",
+        title: t("toast.error.title"),
+        description: t("toast.error.passwordChangeFailed"),
         variant: "destructive",
       })
     } finally {
@@ -132,14 +134,14 @@ export function UserSettingsForm({ user }: UserSettingsFormProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>User Settings</CardTitle>
-        <CardDescription>Manage your account settings and change your password</CardDescription>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="profile">
           <TabsList>
-            <TabsTrigger value="profile">Profile</TabsTrigger>
-            <TabsTrigger value="password">Password</TabsTrigger>
+            <TabsTrigger value="profile">{t("tabs.profile")}</TabsTrigger>
+            <TabsTrigger value="password">{t("tabs.password")}</TabsTrigger>
           </TabsList>
           <TabsContent value="profile">
             <Form {...profileForm}>
@@ -149,11 +151,11 @@ export function UserSettingsForm({ user }: UserSettingsFormProps) {
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Name</FormLabel>
+                      <FormLabel>{t("profile.name.label")}</FormLabel>
                       <FormControl>
-                        <Input placeholder="Your name" {...field} />
+                        <Input placeholder={t("profile.name.placeholder")} {...field} />
                       </FormControl>
-                      <FormDescription>This is the name that will be displayed on your profile.</FormDescription>
+                      <FormDescription>{t("profile.name.description")}</FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -163,17 +165,17 @@ export function UserSettingsForm({ user }: UserSettingsFormProps) {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel>{t("profile.email.label")}</FormLabel>
                       <FormControl>
-                        <Input placeholder="Your email" type="email" {...field} />
+                        <Input placeholder={t("profile.email.placeholder")} type="email" {...field} />
                       </FormControl>
-                      <FormDescription>This email will be used for account-related notifications.</FormDescription>
+                      <FormDescription>{t("profile.email.description")}</FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
                 <Button type="submit" disabled={isLoading}>
-                  {isLoading ? "Updating..." : "Update Profile"}
+                  {isLoading ? t("profile.updating") : t("profile.updateProfile")}
                 </Button>
               </form>
             </Form>
@@ -186,9 +188,9 @@ export function UserSettingsForm({ user }: UserSettingsFormProps) {
                   name="currentPassword"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Current Password</FormLabel>
+                      <FormLabel>{t("password.currentPassword.label")}</FormLabel>
                       <FormControl>
-                        <Input placeholder="Current password" type="password" {...field} />
+                        <Input placeholder={t("password.currentPassword.placeholder")} type="password" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -199,9 +201,9 @@ export function UserSettingsForm({ user }: UserSettingsFormProps) {
                   name="newPassword"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>New Password</FormLabel>
+                      <FormLabel>{t("password.newPassword.label")}</FormLabel>
                       <FormControl>
-                        <Input placeholder="New password" type="password" {...field} />
+                        <Input placeholder={t("password.newPassword.placeholder")} type="password" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -212,16 +214,16 @@ export function UserSettingsForm({ user }: UserSettingsFormProps) {
                   name="confirmPassword"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Confirm New Password</FormLabel>
+                      <FormLabel>{t("password.confirmPassword.label")}</FormLabel>
                       <FormControl>
-                        <Input placeholder="Confirm new password" type="password" {...field} />
+                        <Input placeholder={t("password.confirmPassword.placeholder")} type="password" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
                 <Button type="submit" disabled={isLoading}>
-                  {isLoading ? "Changing Password..." : "Change Password"}
+                  {isLoading ? t("password.changingPassword") : t("password.changePassword")}
                 </Button>
               </form>
             </Form>

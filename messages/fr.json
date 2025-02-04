@@ -224,5 +224,276 @@
 		"updating": "Mise à jour en cours...",
 		"updateItem": "Mettre à jour l'article",
 		"loading": "Chargement..."
+	  },
+	  "datatable": {
+		"pagination": {
+		  "rowsSelected": "{0} sur {1} ligne(s) sélectionnée(s).",
+		  "rowsPerPage": "Lignes par page",
+		  "page": "Page {0} sur {1}",
+		  "goToFirstPage": "Aller à la première page",
+		  "goToPreviousPage": "Aller à la page précédente",
+		  "goToNextPage": "Aller à la page suivante",
+		  "goToLastPage": "Aller à la dernière page"
+		},
+		"viewOptions": {
+		  "view": "Affichage",
+		  "toggleColumns": "Afficher/Masquer les colonnes"
+		},
+		"search": "Rechercher dans toutes les colonnes...",
+		"filters": {
+		  "selectFamilies": "Sélectionner une famille",
+		  "selectSubfamilies": "Sélectionner une sous-famille",
+		  "selectCategory": "Sélectionner une catégorie",
+		  "selectLocation": "Sélectionner un emplacement",
+          "selectYear": "Sélectionner une année"
+		},
+		"noResults": "Aucun résultat."
+	  },
+	  "columns": {
+		"select": "Sélectionner",
+		"name": "Nom",
+		"brand": "Marque",
+		"family": "Famille",
+		"families": "Famille",
+		"subFamily": "Sous-famille",
+		"subfamilies": "Sous-famille",
+		"categories": "Catégories",
+		"category": "Catégories",
+		"value": "Valeur",
+		"assuranceValue": "Valeur d'assurance",
+		"location": "Emplacement",
+		"sku": "SKU",
+		"quantity": "Quantité",
+		"actions": "Actions",
+		"year": "Année",
+		"createdAt": "Créé le",
+		"updatedAt": "Mis à jour le",
+		"totalValue": "Valeur totale"
+	  },
+	  "actions": {
+		"openMenu": "Ouvrir le menu",
+		"actions": "Actions",
+		"copyItemId": "Copier l'ID de l'élément",
+		"viewDetails": "Voir les détails",
+		"editItem": "Modifier l'élément",
+		"copyOperationPackageId": "Copier l'ID du package d'opération",
+		"editOperationPackage": "Modifier le package d'opération",
+		"copyPackageId": "Copier l'ID du package"
+	  },
+	  "aria": {
+		"selectAll": "Sélectionner tout",
+		"selectRow": "Sélectionner la ligne"
+	  },
+	  "userSettings": {
+		"title": "Paramètres utilisateur",
+		"description": "Gérez les paramètres de votre compte et changez votre mot de passe",
+		"tabs": {
+		  "profile": "Profil",
+		  "password": "Mot de passe"
+		},
+		"profile": {
+		  "name": {
+			"label": "Nom",
+			"placeholder": "Votre nom",
+			"description": "C'est le nom qui sera affiché sur votre profil."
+		  },
+		  "email": {
+			"label": "Email",
+			"placeholder": "Votre email",
+			"description": "Cet email sera utilisé pour les notifications liées au compte."
+		  },
+		  "updateProfile": "Mettre à jour le profil",
+		  "updating": "Mise à jour..."
+		},
+		"password": {
+		  "currentPassword": {
+			"label": "Mot de passe actuel",
+			"placeholder": "Mot de passe actuel"
+		  },
+		  "newPassword": {
+			"label": "Nouveau mot de passe",
+			"placeholder": "Nouveau mot de passe"
+		  },
+		  "confirmPassword": {
+			"label": "Confirmer le nouveau mot de passe",
+			"placeholder": "Confirmer le nouveau mot de passe"
+		  },
+		  "changePassword": "Changer le mot de passe",
+		  "changingPassword": "Changement du mot de passe..."
+		},
+		"toast": {
+		  "profileUpdated": {
+			"title": "Profil mis à jour",
+			"description": "Vos informations de profil ont été mises à jour avec succès."
+		  },
+		  "passwordChanged": {
+			"title": "Mot de passe changé",
+			"description": "Votre mot de passe a été changé avec succès."
+		  },
+		  "error": {
+			"title": "Erreur",
+			"profileUpdateFailed": "Échec de la mise à jour du profil. Veuillez réessayer.",
+			"passwordChangeFailed": "Échec du changement de mot de passe. Veuillez réessayer."
+		  }
+		}
+	  },
+	  "deleteButton": {
+		"delete": "Supprimer",
+		"deleting": "Suppression en cours...",
+		"confirmTitle": "Êtes-vous sûr de vouloir supprimer {itemName} ?",
+		"confirmDescription": "Cette action ne peut pas être annulée. Cela supprimera définitivement {itemName} et supprimera ses données de nos serveurs.",
+		"cancel": "Annuler"
+	  },
+	  "itemInfo": {
+		"basicInfo": "Informations de base",
+		"dimensionsWeight": "Dimensions et poids",
+		"financialPurchaseInfo": "Informations financières et d'achat",
+		"categoriesClassifications": "Catégories et classifications",
+		"description": "Description",
+		"editItem": "Modifier l'article",
+		"itemDeleted": "Article supprimé",
+		"itemDeletedDescription": "{itemName} a été supprimé avec succès.",
+		"deleteError": "Erreur",
+		"deleteErrorDescription": "Échec de la suppression de l'article. Veuillez réessayer."
+	  },
+	  "itemDetails": {
+		"sku": "SKU",
+		"brand": "Marque",
+		"value": "Valeur",
+		"location": "Emplacement",
+		"quantity": "Quantité",
+		"origin": "Origine",
+		"length": "Longueur",
+		"width": "Largeur",
+		"height": "Hauteur",
+		"volume": "Volume",
+		"weight": "Poids",
+		"assuranceValue": "Valeur d'assurance",
+		"dateOfPurchase": "Date d'achat",
+		"hsCode": "Code HS",
+		"categories": "Catégories",
+		"families": "Familles",
+		"subfamilies": "Sous-familles"
+	  },
+	  "addItemsToOperationPackage": {
+		"title": "Ajouter des articles au package d'opération : {operationPackageName}",
+		"searchPlaceholder": "Rechercher des articles...",
+		"cancel": "Annuler",
+		"add": "Ajouter {count} article{s}",
+		"adding": "Ajout en cours...",
+		"success": "Succès",
+		"successDescription": "Articles ajoutés au package d'opération avec succès",
+		"error": "Erreur",
+		"errorDescription": "Échec de l'ajout des articles au package d'opération. Veuillez réessayer.",
+		"fetchError": "Échec de la récupération des articles. Veuillez réessayer."
+	  },
+	  "operationPackageEditForm": {
+		"title": "Modifier le package d'opération : {name}",
+		"name": "Nom du package d'opération",
+		"namePlaceholder": "Entrez le nom du package d'opération",
+		"location": "Emplacement",
+		"locationPlaceholder": "Entrez l'emplacement",
+		"year": "Année",
+		"yearPlaceholder": "Entrez l'année",
+		"manageItems": "Gérer les articles",
+		"managePackages": "Gérer les packages",
+		"removeSelectedItems": "Supprimer les articles sélectionnés",
+		"addItems": "Ajouter des articles au package d'opération",
+		"removeSelectedPackages": "Supprimer les packages sélectionnés",
+		"addPackages": "Ajouter des packages au package d'opération",
+		"cancel": "Annuler",
+		"saveChanges": "Enregistrer les modifications",
+		"saving": "Enregistrement...",
+		"success": "Succès",
+		"successDescription": "Package d'opération mis à jour avec succès",
+		"error": "Erreur",
+		"errorDescription": "Échec de la mise à jour du package d'opération. Veuillez réessayer.",
+		"removeItemsSuccess": "Articles supprimés du package d'opération avec succès",
+		"removeItemsError": "Échec de la suppression des articles du package d'opération. Veuillez réessayer.",
+		"removePackagesSuccess": "Packages supprimés du package d'opération avec succès",
+		"removePackagesError": "Échec de la suppression des packages du package d'opération. Veuillez réessayer.",
+		"notFound": "Package d'opération non trouvé",
+		"backToOperationPackages": "Retour aux packages d'opération"
+	  },
+	  "addPackagesToOperationPackage": {
+		"title": "Ajouter des packages au package d'opération : {operationPackageName}",
+		"searchPlaceholder": "Rechercher des packages...",
+		"cancel": "Annuler",
+		"add": "Ajouter {count} package{s}",
+		"adding": "Ajout en cours...",
+		"success": "Succès",
+		"successDescription": "Packages ajoutés au package d'opération avec succès",
+		"error": "Erreur",
+		"errorDescription": "Échec de l'ajout des packages au package d'opération. Veuillez réessayer.",
+		"fetchError": "Échec de la récupération des packages. Veuillez réessayer."
+	  },
+	  "operationPackageInfo": {
+		"information": "Informations sur le package d'opération",
+		"location": "Emplacement",
+		"year": "Année",
+		"createdAt": "Créé le",
+		"updatedAt": "Mis à jour le",
+		"items": "Articles",
+		"packages": "Packages",
+		"itemsInPackage": "Articles dans le package d'opération",
+		"packagesInPackage": "Packages dans le package d'opération",
+		"editOperationPackage": "Modifier le package d'opération",
+		"operationPackageDeleted": "Package d'opération supprimé",
+		"deleteSuccess": "{name} a été supprimé avec succès.",
+		"deleteError": "Échec de la suppression du package d'opération. Veuillez réessayer."
+	  },
+	  "common": {
+		"name": "Nom",
+		"totalValue": "Valeur totale"
+	  },
+	  "packageEditForm": {
+		"title": "Modifier le package : {name}",
+		"packageName": "Nom du package",
+		"namePlaceholder": "Entrez le nom du package",
+		"location": "Emplacement",
+		"locationPlaceholder": "Entrez l'emplacement",
+		"packageSummary": "Résumé du package",
+		"totalValue": "Valeur totale",
+		"totalItems": "Nombre total d'articles",
+		"manageItems": "Gérer les articles",
+		"removeSelectedItems": "Supprimer les articles sélectionnés",
+		"addItemsToPackage": "Ajouter des articles au package",
+		"cancel": "Annuler",
+		"saveChanges": "Enregistrer les modifications",
+		"saving": "Enregistrement...",
+		"success": "Succès",
+		"successDescription": "Package mis à jour avec succès",
+		"error": "Erreur",
+		"errorDescription": "Échec de la mise à jour du package. Veuillez réessayer.",
+		"removeItemsSuccess": "Articles supprimés du package avec succès",
+		"removeItemsError": "Échec de la suppression des articles du package. Veuillez réessayer.",
+		"packageNotFound": "Package non trouvé",
+		"backToPackages": "Retour aux packages"
+	  },
+	  "addItemsToPackage": {
+		"title": "Ajouter des articles au package : {packageName}",
+		"searchPlaceholder": "Rechercher des articles...",
+		"cancel": "Annuler",
+		"add": "Ajouter {count} article{s}",
+		"adding": "Ajout en cours...",
+		"success": "Succès",
+		"successDescription": "Articles ajoutés au package avec succès",
+		"error": "Erreur",
+		"errorDescription": "Échec de l'ajout des articles au package. Veuillez réessayer.",
+		"fetchError": "Échec de la récupération des articles. Veuillez réessayer."
+	  },
+	  "packageInfo": {
+		"packageInformation": "Informations sur le package",
+		"location": "Emplacement",
+		"totalValue": "Valeur totale",
+		"createdAt": "Créé le",
+		"updatedAt": "Mis à jour le",
+		"itemsInPackage": "Articles dans le package",
+		"editPackage": "Modifier le package",
+		"packageDeleted": "Package supprimé",
+		"deleteSuccess": "{name} a été supprimé avec succès.",
+		"deleteError": "Échec de la suppression du package. Veuillez réessayer.",
+		"packageNotFound": "Package non trouvé",
+		"backToPackages": "Retour aux packages"
 	  }
 }

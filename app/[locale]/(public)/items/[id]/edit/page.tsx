@@ -1,15 +1,17 @@
+"use client"
 import { EditItemForm } from "@/components/CreateUI/edit/edit-item-form"
 
-interface EditPageProps {
+// Correct type definition for page params
+interface PageProps {
   params: {
     id: string
   }
 }
 
-export default async function EditPage({ params }: EditPageProps) {
-  const { id } = params
+export default function EditPage({ params }: PageProps) {
+  // No need to use the 'use' hook here as params is not a Promise
+  const id = params.id
 
   return <EditItemForm id={id} />
 }
 
- 

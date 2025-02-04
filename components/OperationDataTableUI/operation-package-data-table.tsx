@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { useState, useMemo } from "react"
 import {
   type ColumnDef,
@@ -34,6 +35,7 @@ export function OperationPackageDataTable<TData, TValue>({
   data,
   enableFilters = true,
 }: DataTableProps<TData, TValue>) {
+  const t = useTranslations("datatable")
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -120,7 +122,7 @@ export function OperationPackageDataTable<TData, TValue>({
     <div className="space-y-4">
       <div className="flex items-center gap-2">
         <Input
-          placeholder="Search all columns..."
+          placeholder={t("search")}
           value={globalFilter ?? ""}
           onChange={(event) => setGlobalFilter(event.target.value)}
           className="max-w-sm"
@@ -135,7 +137,9 @@ export function OperationPackageDataTable<TData, TValue>({
                   value={(table.getColumn(columnId)?.getFilterValue() as string) || ""}
                 >
                   <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder={`Select ${columnId}`} />
+                    <SelectValue
+                      placeholder={t(`filters.select${columnId.charAt(0).toUpperCase() + columnId.slice(1)}`)}
+                    />
                   </SelectTrigger>
                   <SelectContent>
                     {uniqueValues[columnId].map((value) => (
@@ -192,7 +196,7 @@ export function OperationPackageDataTable<TData, TValue>({
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No results.
+                  {t("noResults")}
                 </TableCell>
               </TableRow>
             )}

@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { useState, useEffect } from "react"
 import { useRouter } from "@/i18n/routing"
 import { toast } from "@/hooks/use-toast"
@@ -32,6 +33,7 @@ interface AddItemsToPackageProps {
 
 export function AddItemsToPackage({ packageId, packageName }: AddItemsToPackageProps) {
   const router = useRouter()
+  const t = useTranslations("addItemsToPackage")
   const [isLoading, setIsLoading] = useState(false)
   const [searchTerm, setSearchTerm] = useState("")
   const [allItems, setAllItems] = useState<Item[]>([])
@@ -55,8 +57,8 @@ export function AddItemsToPackage({ packageId, packageName }: AddItemsToPackageP
       setFilteredItems(sortedItems)
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to fetch items. Please try again.",
+        title: t("error"),
+        description: t("fetchError"),
         variant: "destructive",
       })
     } finally {
@@ -94,14 +96,14 @@ export function AddItemsToPackage({ packageId, packageName }: AddItemsToPackageP
       }
 
       toast({
-        title: "Success",
-        description: "Items added to package successfully",
+        title: t("success"),
+        description: t("successDescription"),
       })
       router.push(`/packages/${packageId}`)
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to add items to package. Please try again.",
+        title: t("error"),
+        description: t("errorDescription"),
         variant: "destructive",
       })
     } finally {
@@ -142,13 +144,13 @@ export function AddItemsToPackage({ packageId, packageName }: AddItemsToPackageP
   return (
     <Card className="p-6 bg-background">
       <CardHeader>
-        <CardTitle>Add Items to Package: {packageName}</CardTitle>
+        <CardTitle>{t("title", { packageName })}</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-6">
           <div className="flex items-center space-x-2">
             <Input
-              placeholder="Search items..."
+              placeholder={t("searchPlaceholder")}
               value={searchTerm}
               onChange={(e) => {
                 setSearchTerm(e.target.value)
@@ -162,10 +164,12 @@ export function AddItemsToPackage({ packageId, packageName }: AddItemsToPackageP
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button variant="outline" onClick={() => router.push(`/packages/${packageId}`)}>
-          Cancel
+          {t("cancel")}
         </Button>
         <Button onClick={handleAddItems} disabled={isLoading || selectedItems.length === 0}>
-          {isLoading ? "Adding..." : `Add ${selectedItems.length} Item${selectedItems.length !== 1 ? "s" : ""}`}
+          {isLoading
+            ? t("adding")
+            : t("add", { count: selectedItems.length, s: selectedItems.length !== 1 ? "s" : "" })}
         </Button>
       </CardFooter>
     </Card>

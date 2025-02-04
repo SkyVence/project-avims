@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { useRouter } from "@/i18n/routing"
 import { toast } from "@/hooks/use-toast"
@@ -9,8 +10,9 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { DataTable } from "@/components/ItemDataTableUI/data-table"
 import { columns } from "@/components/ItemDataTableUI/ItemColumns"
-import Link from "next/link"
+import { Link } from "@/i18n/routing"
 import { Checkbox } from "@/components/ui/checkbox"
+import type React from "react" // Added import for React
 
 interface PackageEditFormProps {
   package_: {
@@ -37,6 +39,7 @@ interface PackageEditFormProps {
 
 export function PackageEditForm({ package_ }: PackageEditFormProps) {
   const router = useRouter()
+  const t = useTranslations("packageEditForm")
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     name: package_?.name || "",
@@ -49,9 +52,9 @@ export function PackageEditForm({ package_ }: PackageEditFormProps) {
       <Card className="p-6 bg-background">
         <CardContent>
           <div className="flex flex-col items-center justify-center h-[200px]">
-            <h2 className="text-lg font-semibold text-muted-foreground">Package not found</h2>
+            <h2 className="text-lg font-semibold text-muted-foreground">{t("packageNotFound")}</h2>
             <Button asChild className="mt-4">
-              <Link href="/packages">Back to Packages</Link>
+              <Link href="/packages">{t("backToPackages")}</Link>
             </Button>
           </div>
         </CardContent>
@@ -77,14 +80,14 @@ export function PackageEditForm({ package_ }: PackageEditFormProps) {
       }
 
       toast({
-        title: "Success",
-        description: "Package updated successfully",
+        title: t("success"),
+        description: t("successDescription"),
       })
       router.push(`/packages/${package_.id}`)
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to update package. Please try again.",
+        title: t("error"),
+        description: t("errorDescription"),
         variant: "destructive",
       })
     } finally {
@@ -108,8 +111,8 @@ export function PackageEditForm({ package_ }: PackageEditFormProps) {
       }
 
       toast({
-        title: "Success",
-        description: "Items removed from package successfully",
+        title: t("success"),
+        description: t("removeItemsSuccess"),
       })
 
       // Refresh the package data
@@ -123,8 +126,8 @@ export function PackageEditForm({ package_ }: PackageEditFormProps) {
       setSelectedItems([])
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to remove items from package. Please try again.",
+        title: t("error"),
+        description: t("removeItemsError"),
         variant: "destructive",
       })
     } finally {
@@ -136,38 +139,38 @@ export function PackageEditForm({ package_ }: PackageEditFormProps) {
     <form onSubmit={handleSubmit}>
       <Card className="p-6 bg-background">
         <CardHeader>
-          <CardTitle>Edit Package: {package_.name}</CardTitle>
+          <CardTitle>{t("title", { name: package_.name })}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid gap-6">
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Package Name</Label>
+                  <Label htmlFor="name">{t("packageName")}</Label>
                   <Input
                     id="name"
                     value={formData.name}
                     onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
-                    placeholder="Enter package name"
+                    placeholder={t("namePlaceholder")}
                     required
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="location">Location</Label>
+                  <Label htmlFor="location">{t("location")}</Label>
                   <Input
                     id="location"
                     value={formData.location}
                     onChange={(e) => setFormData((prev) => ({ ...prev, location: e.target.value }))}
-                    placeholder="Enter location"
+                    placeholder={t("locationPlaceholder")}
                     required
                   />
                 </div>
               </div>
               <div className="bg-muted p-4 rounded-lg">
-                <h3 className="text-sm font-medium mb-2">Package Summary</h3>
+                <h3 className="text-sm font-medium mb-2">{t("packageSummary")}</h3>
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Total Value:</span>
+                    <span className="text-muted-foreground">{t("totalValue")}:</span>
                     <span>
                       {new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(
                         package_.totalValue,
@@ -175,7 +178,7 @@ export function PackageEditForm({ package_ }: PackageEditFormProps) {
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">Total Items:</span>
+                    <span className="text-muted-foreground">{t("totalItems")}:</span>
                     <span>{package_.items?.length || 0}</span>
                   </div>
                 </div>
@@ -183,7 +186,7 @@ export function PackageEditForm({ package_ }: PackageEditFormProps) {
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-primary">Manage Items</h3>
+              <h3 className="text-lg font-semibold text-primary">{t("manageItems")}</h3>
               <div className="flex justify-between items-center">
                 <Button
                   type="button"
@@ -191,14 +194,14 @@ export function PackageEditForm({ package_ }: PackageEditFormProps) {
                   onClick={handleRemoveItems}
                   disabled={isLoading || selectedItems.length === 0}
                 >
-                  Remove Selected Items
+                  {t("removeSelectedItems")}
                 </Button>
                 <Button
                   type="button"
                   variant="outline"
                   onClick={() => router.push(`/packages/${package_.id}/items/add`)}
                 >
-                  Add Items to Package
+                  {t("addItemsToPackage")}
                 </Button>
               </div>
               <DataTable
@@ -237,10 +240,10 @@ export function PackageEditForm({ package_ }: PackageEditFormProps) {
         </CardContent>
         <CardFooter className="flex justify-between">
           <Button type="button" variant="outline" onClick={() => router.push(`/packages/${package_.id}`)}>
-            Cancel
+            {t("cancel")}
           </Button>
           <Button type="submit" disabled={isLoading}>
-            {isLoading ? "Saving..." : "Save Changes"}
+            {isLoading ? t("saving") : t("saveChanges")}
           </Button>
         </CardFooter>
       </Card>

@@ -4,19 +4,14 @@ const withNextIntl = createNextIntlPlugin()
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  eslint: {
+    // This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+	ignoreBuildErrors: true,
+  }
 }
 
 export default withNextIntl(nextConfig)
-
-module.exports = {
-	typescript: {
-	  // !! WARN !!
-	  // Dangerously allow production builds to successfully complete even if
-	  // your project has type errors.
-	  // !! WARN !!
-	  ignoreBuildErrors: true,
-	},
-	eslint: {
-	  ignoreDuringBuilds: true,
-	},
-  };

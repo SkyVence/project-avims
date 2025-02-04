@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { useRouter } from "@/i18n/routing"
 import { toast } from "@/hooks/use-toast"
@@ -11,8 +12,8 @@ import { DataTable } from "@/components/ItemDataTableUI/data-table"
 import { columns as itemColumns } from "@/components/ItemDataTableUI/ItemColumns"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import {Link} from "@/i18n/routing"
-import type React from "react" // Added import for React
+import { Link } from "@/i18n/routing"
+import type React from "react"
 
 interface OperationPackageEditFormProps {
   operationPackage: {
@@ -47,6 +48,8 @@ interface OperationPackageEditFormProps {
 
 export function OperationPackageEditForm({ operationPackage }: OperationPackageEditFormProps) {
   const router = useRouter()
+  const t = useTranslations("operationPackageEditForm")
+  const tc = useTranslations("common")
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     name: operationPackage?.name || "",
@@ -61,9 +64,9 @@ export function OperationPackageEditForm({ operationPackage }: OperationPackageE
       <Card className="p-6 bg-background">
         <CardContent>
           <div className="flex flex-col items-center justify-center h-[200px]">
-            <h2 className="text-lg font-semibold text-muted-foreground">Operation Package not found</h2>
+            <h2 className="text-lg font-semibold text-muted-foreground">{t("notFound")}</h2>
             <Button asChild className="mt-4">
-              <Link href="/operation-packages">Back to Operation Packages</Link>
+              <Link href="/operation-packages">{t("backToOperationPackages")}</Link>
             </Button>
           </div>
         </CardContent>
@@ -89,14 +92,14 @@ export function OperationPackageEditForm({ operationPackage }: OperationPackageE
       }
 
       toast({
-        title: "Success",
-        description: "Operation Package updated successfully",
+        title: t("success"),
+        description: t("successDescription"),
       })
       router.push(`/operation-packages/${operationPackage.id}`)
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to update operation package. Please try again.",
+        title: t("error"),
+        description: t("errorDescription"),
         variant: "destructive",
       })
     } finally {
@@ -120,8 +123,8 @@ export function OperationPackageEditForm({ operationPackage }: OperationPackageE
       }
 
       toast({
-        title: "Success",
-        description: "Items removed from operation package successfully",
+        title: t("success"),
+        description: t("removeItemsSuccess"),
       })
 
       // Refresh the operation package data
@@ -132,8 +135,8 @@ export function OperationPackageEditForm({ operationPackage }: OperationPackageE
       setSelectedItems([])
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to remove items from operation package. Please try again.",
+        title: t("error"),
+        description: t("removeItemsError"),
         variant: "destructive",
       })
     } finally {
@@ -157,8 +160,8 @@ export function OperationPackageEditForm({ operationPackage }: OperationPackageE
       }
 
       toast({
-        title: "Success",
-        description: "Packages removed from operation package successfully",
+        title: t("success"),
+        description: t("removePackagesSuccess"),
       })
 
       // Refresh the operation package data
@@ -169,8 +172,8 @@ export function OperationPackageEditForm({ operationPackage }: OperationPackageE
       setSelectedPackages([])
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to remove packages from operation package. Please try again.",
+        title: t("error"),
+        description: t("removePackagesError"),
         variant: "destructive",
       })
     } finally {
@@ -203,11 +206,11 @@ export function OperationPackageEditForm({ operationPackage }: OperationPackageE
       enableSorting: false,
       enableHiding: false,
     },
-    { accessorKey: "name", header: "Name" },
-    { accessorKey: "location", header: "Location" },
+    { accessorKey: "name", header: tc("name") },
+    { accessorKey: "location", header: t("location") },
     {
       accessorKey: "totalValue",
-      header: "Total Value",
+      header: tc("totalValue"),
       cell: ({ row }) => {
         return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(row.original.totalValue)
       },
@@ -218,39 +221,39 @@ export function OperationPackageEditForm({ operationPackage }: OperationPackageE
     <form onSubmit={handleSubmit}>
       <Card className="p-6 bg-background">
         <CardHeader>
-          <CardTitle>Edit Operation Package: {operationPackage.name}</CardTitle>
+          <CardTitle>{t("title", { name: operationPackage.name })}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid gap-6">
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Operation Package Name</Label>
+                  <Label htmlFor="name">{t("name")}</Label>
                   <Input
                     id="name"
                     value={formData.name}
                     onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
-                    placeholder="Enter operation package name"
+                    placeholder={t("namePlaceholder")}
                     required
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="location">Location</Label>
+                  <Label htmlFor="location">{t("location")}</Label>
                   <Input
                     id="location"
                     value={formData.location}
                     onChange={(e) => setFormData((prev) => ({ ...prev, location: e.target.value }))}
-                    placeholder="Enter location"
+                    placeholder={t("locationPlaceholder")}
                     required
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="year">Year</Label>
+                  <Label htmlFor="year">{t("year")}</Label>
                   <Input
                     id="year"
                     value={formData.year}
                     onChange={(e) => setFormData((prev) => ({ ...prev, year: e.target.value }))}
-                    placeholder="Enter year"
+                    placeholder={t("yearPlaceholder")}
                     required
                   />
                 </div>
@@ -260,11 +263,11 @@ export function OperationPackageEditForm({ operationPackage }: OperationPackageE
             <div className="space-y-4">
               <Tabs defaultValue="items">
                 <TabsList>
-                  <TabsTrigger value="items">Items</TabsTrigger>
-                  <TabsTrigger value="packages">Packages</TabsTrigger>
+                  <TabsTrigger value="items">{t("manageItems")}</TabsTrigger>
+                  <TabsTrigger value="packages">{t("managePackages")}</TabsTrigger>
                 </TabsList>
                 <TabsContent value="items">
-                  <h3 className="text-lg font-semibold text-primary">Manage Items</h3>
+                  <h3 className="text-lg font-semibold text-primary">{t("manageItems")}</h3>
                   <div className="flex justify-between items-center mb-4">
                     <Button
                       type="button"
@@ -272,14 +275,14 @@ export function OperationPackageEditForm({ operationPackage }: OperationPackageE
                       onClick={handleRemoveItems}
                       disabled={isLoading || selectedItems.length === 0}
                     >
-                      Remove Selected Items
+                      {t("removeSelectedItems")}
                     </Button>
                     <Button
                       type="button"
                       variant="outline"
                       onClick={() => router.push(`/operation-packages/${operationPackage.id}/items/add`)}
                     >
-                      Add Items to Operation Package
+                      {t("addItems")}
                     </Button>
                   </div>
                   <DataTable
@@ -315,7 +318,7 @@ export function OperationPackageEditForm({ operationPackage }: OperationPackageE
                   />
                 </TabsContent>
                 <TabsContent value="packages">
-                  <h3 className="text-lg font-semibold text-primary">Manage Packages</h3>
+                  <h3 className="text-lg font-semibold text-primary">{t("managePackages")}</h3>
                   <div className="flex justify-between items-center mb-4">
                     <Button
                       type="button"
@@ -323,14 +326,14 @@ export function OperationPackageEditForm({ operationPackage }: OperationPackageE
                       onClick={handleRemovePackages}
                       disabled={isLoading || selectedPackages.length === 0}
                     >
-                      Remove Selected Packages
+                      {t("removeSelectedPackages")}
                     </Button>
                     <Button
                       type="button"
                       variant="outline"
                       onClick={() => router.push(`/operation-packages/${operationPackage.id}/packages/add`)}
                     >
-                      Add Packages to Operation Package
+                      {t("addPackages")}
                     </Button>
                   </div>
                   <DataTable columns={packageColumns} data={operationPackage.packages || []} enableFilters={true} />
@@ -345,10 +348,10 @@ export function OperationPackageEditForm({ operationPackage }: OperationPackageE
             variant="outline"
             onClick={() => router.push(`/operation-packages/${operationPackage.id}`)}
           >
-            Cancel
+            {t("cancel")}
           </Button>
           <Button type="submit" disabled={isLoading}>
-            {isLoading ? "Saving..." : "Save Changes"}
+            {isLoading ? t("saving") : t("saveChanges")}
           </Button>
         </CardFooter>
       </Card>

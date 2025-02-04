@@ -1,5 +1,6 @@
 "use client"
 
+import { useTranslations } from "next-intl"
 import type { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -25,29 +26,36 @@ export type OperationPackage = {
 export const columns: ColumnDef<OperationPackage>[] = [
   {
     id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={table.getIsAllPageRowsSelected()}
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
+    header: ({ table }) => {
+      const t = useTranslations("aria")
+      return (
+        <Checkbox
+          checked={table.getIsAllPageRowsSelected()}
+          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+          aria-label={t("selectAll")}
+        />
+      )
+    },
+    cell: ({ row }) => {
+      const t = useTranslations("aria")
+      return (
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => row.toggleSelected(!!value)}
+          aria-label={t("selectRow")}
+        />
+      )
+    },
     enableSorting: false,
     enableHiding: false,
   },
   {
     accessorKey: "name",
     header: ({ column }) => {
+      const t = useTranslations("columns")
       return (
         <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Name
+          {t("name")}
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
@@ -62,25 +70,37 @@ export const columns: ColumnDef<OperationPackage>[] = [
   },
   {
     accessorKey: "location",
-    header: "Location",
+    header: () => {
+      const t = useTranslations("columns")
+      return t("location")
+    },
     filterFn: (row, id, value) => {
       return row.getValue(id) === value
     },
   },
   {
     accessorKey: "year",
-    header: "Year",
+    header: () => {
+      const t = useTranslations("columns")
+      return t("year")
+    },
   },
   {
     accessorKey: "createdAt",
-    header: "Created At",
+    header: () => {
+      const t = useTranslations("columns")
+      return t("createdAt")
+    },
     cell: ({ row }) => {
       return new Date(row.getValue("createdAt")).toLocaleDateString()
     },
   },
   {
     accessorKey: "updatedAt",
-    header: "Updated At",
+    header: () => {
+      const t = useTranslations("columns")
+      return t("updatedAt")
+    },
     cell: ({ row }) => {
       return new Date(row.getValue("updatedAt")).toLocaleDateString()
     },
@@ -88,26 +108,27 @@ export const columns: ColumnDef<OperationPackage>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
+      const t = useTranslations("actions")
       const operationPackage = row.original
 
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
+              <span className="sr-only">{t("openMenu")}</span>
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
             <DropdownMenuItem onClick={() => navigator.clipboard.writeText(operationPackage.id)}>
-              Copy operation package ID
+              {t("copyOperationPackageId")}
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link href={`/operation-packages/${operationPackage.id}`}>View details</Link>
+              <Link href={`/operation-packages/${operationPackage.id}`}>{t("viewDetails")}</Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link href={`/operation-packages/${operationPackage.id}/edit`}>Edit operation package</Link>
+              <Link href={`/operation-packages/${operationPackage.id}/edit`}>{t("editOperationPackage")}</Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

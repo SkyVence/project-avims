@@ -31,7 +31,7 @@ export function DeleteButton({ itemId, itemName, onSuccess, onError }: DeleteBut
   const handleDelete = async () => {
     setIsDeleting(true)
     try {
-      const response = await fetch(`/api/items/${itemId}`, {
+      const response = await fetch(`/api/packages/${itemId}`, {
         method: "DELETE",
       })
 

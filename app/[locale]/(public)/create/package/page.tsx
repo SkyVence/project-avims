@@ -1,21 +1,21 @@
 import { getServerSession } from "next-auth/next"
 import { redirect } from "next/navigation"
 import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options"
-import { Metadata } from "next"
-import React from "react"
+import type { Metadata } from "next"
 import { CreatePackageForm } from "@/components/PackageUI/create-package-form"
 
-export const metadata: Metadata = { title: "AVIMS - Create Item" }
+export const metadata: Metadata = { title: "AVIMS - Create Package" }
 
-export default async function CreateItemPage() {
+export default async function CreatePackagePage() {
   const session = await getServerSession(authOptions)
   if (!session) {
     redirect("/login")
   }
 
   return (
-    <div className="flex justify-center">
-        <CreatePackageForm />
-    </div>
-)}
+    <main className="container mx-auto p-4">
+      <CreatePackageForm />
+    </main>
+  )
+}
 

@@ -1,10 +1,13 @@
+"use client"
+
 import { useTranslations } from "next-intl"
-import type { Control } from "react-hook-form"
+import { useFormContext } from "react-hook-form"
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
-export function BasicInfoFields({ control }: { control: Control<any> }) {
+export function BasicInfoFields() {
   const t = useTranslations("PackageUI")
+  const { control } = useFormContext()
 
   return (
     <div className="space-y-4">

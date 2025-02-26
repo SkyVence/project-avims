@@ -14,9 +14,6 @@ const formSchema = z.object({
   name: z.string().min(2, {
     message: "Subfamily name must be at least 2 characters.",
   }),
-  familyId: z.string().min(1, {
-    message: "Please select a family.",
-  }),
 })
 
 export function SubFamilyForm() {
@@ -27,7 +24,6 @@ export function SubFamilyForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      familyId: "",
     },
   })
 

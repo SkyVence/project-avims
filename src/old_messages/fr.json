@@ -1,0 +1,213 @@
+{
+  "common": {
+    "settings": "Paramètres",
+    "dashboard": "Tableau de bord",
+    "reports": "Rapports",
+    "export": "Exporter",
+    "import": "Importer",
+    "operations": "Opérations",
+    "packages": "Paquets",
+    "items": "Articles",
+    "categories": "Catégories",
+    "profile": "Profil",
+    "admin": "Administration",
+    "signIn": "Se connecter",
+    "signOut": "Se déconnecter"
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Tableau de bord",
+      "welcome": "Bon retour,",
+      "summary": "Voici l'aperçu de votre inventaire",
+      "quickActions": "Actions rapides",
+      "recentTransactions": "Transactions récentes",
+      "inventoryStatus": "État de l'inventaire",
+      "lowStock": "Articles en stock faible",
+      "statistics": "Statistiques",
+      "items": "Articles",
+      "packages": "Paquets",
+      "operations": "Opérations",
+      "inventoryValue": "Valeur de l'inventaire",
+      "totalUnits": "unités totales",
+      "organizedIntoCategories": "Organisé en {count} catégories",
+      "manageDeployments": "Gérer les déploiements et la logistique",
+      "averageItemValue": "~{value} en moyenne par article"
+    },
+    "items": {
+      "title": "Articles d'inventaire",
+      "addNew": "Ajouter un nouvel article",
+      "search": "Rechercher des articles...",
+      "table": {
+        "name": "Nom",
+        "category": "Catégorie",
+        "quantity": "Quantité",
+        "price": "Prix",
+        "status": "Statut",
+        "actions": "Actions"
+      }
+    },
+    "categories": {
+      "title": "Gestion des catégories",
+      "addNew": "Ajouter une nouvelle catégorie",
+      "search": "Rechercher des catégories...",
+      "table": {
+        "name": "Nom de la catégorie",
+        "description": "Description",
+        "itemCount": "Nombre d'articles",
+        "actions": "Actions"
+      }
+    },
+    "operations": {
+      "title": "Gestion des opérations",
+      "addNew": "Nouvelle opération",
+      "search": "Rechercher des opérations...",
+      "table": {
+        "type": "Type d'opération",
+        "date": "Date",
+        "items": "Articles",
+        "status": "Statut",
+        "actions": "Actions"
+      }
+    },
+    "profile": {
+      "title": "Profil utilisateur",
+      "personalInfo": "Informations personnelles",
+      "editProfile": "Modifier le profil",
+      "changePassword": "Changer le mot de passe",
+      "preferences": "Préférences utilisateur"
+    },
+    "settings": {
+      "title": "Paramètres système",
+      "general": "Paramètres généraux",
+      "notifications": "Paramètres de notification",
+      "security": "Paramètres de sécurité",
+      "appearance": "Paramètres d'apparence",
+      "language": "Paramètres de langue"
+    },
+    "import": {
+      "title": "Importer des données",
+      "selectFile": "Sélectionner un fichier",
+      "uploadInstructions": "Téléchargez votre fichier de données",
+      "supportedFormats": "Formats supportés : CSV, Excel"
+    },
+    "export": {
+      "title": "Exporter des données",
+      "selectFormat": "Sélectionner le format",
+      "dateRange": "Plage de dates",
+      "exportOptions": "Options d'exportation"
+    },
+    "reports": {
+      "title": "Centre de rapports",
+      "generateNew": "Générer un nouveau rapport",
+      "customRange": "Plage de dates personnalisée",
+      "reportTypes": "Types de rapports",
+      "downloadReport": "Télécharger le rapport"
+    }
+  },
+  "components": {
+    "sidebar": {
+      "menu": "Menu",
+      "collapse": "Réduire la barre latérale",
+      "expand": "Développer la barre latérale"
+    },
+    "header": {
+      "search": "Rechercher...",
+      "notifications": "Notifications",
+      "userMenu": "Menu utilisateur"
+    },
+    "breadcrumbs": {
+      "home": "Accueil",
+      "back": "Retour"
+    },
+    "table": {
+      "noResults": "Aucun résultat trouvé",
+      "loading": "Chargement des données...",
+      "search": "Rechercher...",
+      "rowsPerPage": "Lignes par page",
+      "of": "sur",
+      "next": "Suivant",
+      "previous": "Précédent"
+    },
+    "forms": {
+      "required": "Obligatoire",
+      "optional": "Optionnel",
+      "submit": "Soumettre",
+      "cancel": "Annuler",
+      "save": "Enregistrer les modifications",
+      "delete": "Supprimer",
+      "edit": "Modifier"
+    }
+  },
+  "modeToggle": {
+    "light": "Clair",
+    "dark": "Sombre",
+    "system": "Système"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "general": "Paramètres généraux",
+    "account": "Paramètres du compte",
+    "notifications": "Notifications",
+    "security": "Sécurité"
+  },
+  "dashboard": {
+    "overview": "Vue d'ensemble",
+    "statistics": "Statistiques",
+    "recentActivity": "Activité récente"
+  },
+  "reports": {
+    "title": "Rapports",
+    "generate": "Générer un rapport",
+    "export": "Exporter le rapport",
+    "period": "Période"
+  },
+  "operations": {
+    "title": "Opérations",
+    "new": "Nouvelle opération",
+    "edit": "Modifier l'opération",
+    "delete": "Supprimer l'opération"
+  },
+  "items": {
+    "title": "Articles",
+    "add": "Ajouter un article",
+    "edit": "Modifier l'article",
+    "delete": "Supprimer l'article",
+    "details": "Détails de l'article"
+  },
+  "categories": {
+    "title": "Catégories",
+    "add": "Ajouter une catégorie",
+    "edit": "Modifier la catégorie",
+    "delete": "Supprimer la catégorie"
+  },
+  "profile": {
+    "title": "Profil",
+    "personalInfo": "Informations personnelles",
+    "preferences": "Préférences",
+    "security": "Paramètres de sécurité"
+  },
+  "auth": {
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "forgotPassword": "Mot de passe oublié",
+    "email": "Email",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe"
+  },
+  "actions": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "create": "Créer",
+    "update": "Mettre à jour",
+    "confirm": "Confirmer",
+    "back": "Retour"
+  },
+  "messages": {
+    "success": "Succès",
+    "error": "Erreur",
+    "loading": "Chargement...",
+    "noData": "Aucune donnée disponible"
+  }
+} 

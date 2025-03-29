@@ -1,0 +1,1654 @@
+{
+  "common": {
+    "appName": "Système d'Inventaire",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "create": "Créer",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "noResults": "Aucun résultat trouvé",
+    "actions": "Actions"
+  },
+  "metadata": {
+    "title": "Système de Gestion d'Inventaire",
+    "description": "Système interne de gestion d'inventaire pour le suivi des articles, paquets et opérations"
+  },
+  "auth": {
+    "signIn": "Se Connecter",
+    "signOut": "Se Déconnecter",
+    "signUp": "S'inscrire",
+    "email": "Email",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "forgotPassword": "Mot de passe oublié ?",
+    "resetPassword": "Réinitialiser le mot de passe",
+    "rememberMe": "Se souvenir de moi",
+    "verifyEmail": "Vérifier l'email",
+    "twoFactor": {
+      "title": "Authentification à Deux Facteurs",
+      "description": "Entrez le code envoyé à votre appareil",
+      "code": "Code d'authentification"
+    },
+    "errors": {
+      "invalidCredentials": "Email ou mot de passe invalide",
+      "emailNotVerified": "Veuillez vérifier votre adresse email",
+      "passwordMismatch": "Les mots de passe ne correspondent pas",
+      "weakPassword": "Le mot de passe est trop faible",
+      "emailInUse": "Cet email est déjà utilisé"
+    },
+    "logOut": "Se déconnecter"
+  },
+  "navigation": {
+    "dashboard": "Tableau de bord",
+    "inventory": "Inventaire",
+    "categories": "Catégories",
+    "items": "Articles",
+    "packages": "Paquets",
+    "operations": "Opérations",
+    "import": "Importer",
+    "export": "Exporter",
+    "reports": "Rapports",
+    "settings": "Paramètres",
+    "profile": "Profil",
+    "admin": "Administration",
+    "home": "Accueil",
+    "breadcrumb": {
+      "home": "Accueil",
+      "separator": "/"
+    }
+  },
+  "theme": {
+    "toggle": "Changer le thème",
+    "light": "Clair",
+    "dark": "Sombre",
+    "system": "Système"
+  },
+  "header": {
+    "search": {
+      "placeholder": "Rechercher...",
+      "label": "Rechercher"
+    }
+  },
+  "notFound": {
+    "title": "404",
+    "heading": "Page Non Trouvée",
+    "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
+    "action": "Retour au Tableau de Bord"
+  },
+  "notificationSettings": {
+    "title": "Notifications",
+    "description": "Configurez la façon dont vous recevez les notifications.",
+    "methods": {
+      "title": "Méthodes de Notification",
+      "email": {
+        "label": "Notifications par Email",
+        "description": "Recevez les notifications par email."
+      },
+      "push": {
+        "label": "Notifications Push",
+        "description": "Recevez les notifications push dans votre navigateur."
+      }
+    },
+    "types": {
+      "title": "Types de Notifications",
+      "inventory": {
+        "label": "Mises à jour d'Inventaire",
+        "description": "Soyez notifié des changements d'inventaire."
+      },
+      "operations": {
+        "label": "Mises à jour des Opérations",
+        "description": "Soyez notifié des changements de statut des opérations."
+      },
+      "system": {
+        "label": "Notifications Système",
+        "description": "Soyez notifié des mises à jour et de la maintenance du système."
+      }
+    },
+    "buttons": {
+      "save": "Enregistrer les modifications",
+      "saving": "Enregistrement..."
+    },
+    "toast": {
+      "success": {
+        "title": "Notifications mises à jour",
+        "description": "Vos paramètres de notification ont été mis à jour."
+      },
+      "error": {
+        "title": "Erreur",
+        "description": "Échec de la mise à jour des paramètres de notification."
+      }
+    }
+  },
+  "profileSettings": {
+    "title": "Profil",
+    "description": "Gérer les informations de votre profil public.",
+    "username": {
+      "label": "Nom d'utilisateur",
+      "placeholder": "Votre nom d'utilisateur",
+      "description": "C'est votre nom d'affichage public.",
+      "error": "Le nom d'utilisateur doit contenir au moins 2 caractères."
+    },
+    "bio": {
+      "label": "Biographie",
+      "placeholder": "Parlez-nous un peu de vous",
+      "description": "Brève description de votre profil. Maximum 160 caractères."
+    },
+    "buttons": {
+      "save": "Enregistrer les modifications",
+      "saving": "Enregistrement..."
+    },
+    "toast": {
+      "success": {
+        "title": "Profil mis à jour",
+        "description": "Votre profil a été mis à jour avec succès."
+      },
+      "error": {
+        "title": "Erreur",
+        "description": "Échec de la mise à jour du profil. Veuillez réessayer."
+      }
+    }
+  },
+  "sidebar": {
+    "collapse": "Réduire le menu",
+    "expand": "Développer le menu",
+    "toggleTheme": "Changer le thème",
+    "mainNavigation": "Navigation Principale",
+    "importExport": "Import / Export",
+    "createSection": "Créer",
+    "appTitle": {
+      "main": "Inventaire",
+      "subtitle": "Système de Gestion"
+    },
+    "items": {
+      "createItem": "Créer des Articles",
+      "createPackage": "Créer un Paquet",
+      "createOperation": "Créer une Opération",
+      "importItems": "Importer des Articles",
+      "exportData": "Exporter les Données",
+      "settings": "Paramètres"
+    },
+    "footer": {
+      "signIn": "Se connecter",
+      "myAccount": "Mon Compte",
+      "profile": "Profil",
+      "settings": "Paramètres",
+      "adminDashboard": "Tableau de Bord Admin",
+      "changeTheme": "Changer le Thème",
+      "logOut": "Se déconnecter"
+    }
+  },
+  "settings": {
+    "title": "Paramètres",
+    "general": "Paramètres généraux",
+    "account": "Paramètres du compte",
+    "notifications": "Notifications",
+    "security": "Sécurité",
+    "appearance": {
+      "title": "Apparence",
+      "description": "Personnalisez l'apparence de l'application",
+      "themes": {
+        "light": "Clair",
+        "dark": "Sombre",
+        "system": "Système"
+      },
+      "buttons": {
+        "save": "Enregistrer les modifications",
+        "saving": "Enregistrement..."
+      },
+      "toast": {
+        "success": {
+          "title": "Apparence mise à jour",
+          "description": "Vos préférences d'apparence ont été enregistrées."
+        },
+        "error": {
+          "title": "Erreur",
+          "description": "Échec de la mise à jour des paramètres d'apparence."
+        }
+      }
+    },
+    "notifications": {
+      "title": "Notifications",
+      "description": "Configurez la réception des notifications",
+      "methods": {
+        "title": "Méthodes de Notification",
+        "email": {
+          "label": "Notifications par email",
+          "description": "Recevoir les notifications par email"
+        },
+        "push": {
+          "label": "Notifications push",
+          "description": "Recevoir les notifications dans votre navigateur"
+        }
+      },
+      "types": {
+        "title": "Types de Notifications",
+        "inventory": {
+          "label": "Mises à jour d'inventaire",
+          "description": "Être notifié des changements d'inventaire"
+        },
+        "operations": {
+          "label": "Mises à jour des opérations",
+          "description": "Être notifié des changements de statut des opérations"
+        },
+        "system": {
+          "label": "Notifications système",
+          "description": "Être notifié des mises à jour et de la maintenance du système"
+        }
+      },
+      "buttons": {
+        "save": "Enregistrer les préférences",
+        "saving": "Enregistrement..."
+      },
+      "toast": {
+        "success": {
+          "title": "Notifications mises à jour",
+          "description": "Vos préférences de notification ont été enregistrées."
+        },
+        "error": {
+          "title": "Erreur",
+          "description": "Échec de la mise à jour des paramètres de notification."
+        }
+      }
+    },
+    "profile": {
+      "title": "Paramètres du Profil",
+      "description": "Mettez à jour vos informations de profil",
+      "username": {
+        "label": "Nom d'utilisateur",
+        "placeholder": "Entrez votre nom d'utilisateur",
+        "description": "C'est votre nom d'affichage public"
+      },
+      "bio": {
+        "label": "Biographie",
+        "placeholder": "Parlez-nous un peu de vous",
+        "description": "Brève description pour votre profil"
+      },
+      "buttons": {
+        "save": "Enregistrer le profil",
+        "saving": "Enregistrement..."
+      },
+      "toast": {
+        "success": {
+          "title": "Profil mis à jour",
+          "description": "Vos informations de profil ont été enregistrées."
+        },
+        "error": {
+          "title": "Erreur",
+          "description": "Échec de la mise à jour du profil."
+        }
+      }
+    },
+    "tabs": {
+      "profile": "Profil",
+      "appearance": "Apparence",
+      "notifications": "Notifications",
+      "language": "Langue"
+    },
+    "language": {
+      "title": "Langue",
+      "description": "Choisissez votre langue préférée pour l'interface de l'application."
+    }
+  },
+  "profile": {
+    "title": "Profil",
+    "personalInfo": "Informations personnelles",
+    "updateProfile": "Mettre à jour le profil",
+    "changePassword": "Changer le mot de passe"
+  },
+  "errors": {
+    "notFound": {
+      "title": "Page Non Trouvée",
+      "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
+      "action": "Retour au Tableau de Bord"
+    },
+    "serverError": {
+      "title": "Erreur Serveur",
+      "description": "Une erreur inattendue s'est produite sur nos serveurs.",
+      "action": "Réessayer"
+    },
+    "unauthorized": {
+      "title": "Accès Non Autorisé",
+      "description": "Vous n'avez pas la permission d'accéder à cette ressource.",
+      "action": "Se Connecter"
+    },
+    "forbidden": {
+      "title": "Accès Interdit",
+      "description": "Vous n'avez pas la permission d'effectuer cette action.",
+      "action": "Retour au Tableau de Bord"
+    },
+    "offline": {
+      "title": "Hors Ligne",
+      "description": "Vous êtes actuellement hors ligne. Veuillez vérifier votre connexion internet.",
+      "action": "Réessayer la Connexion"
+    },
+    "validation": "Erreur de validation"
+  },
+  "notifications": {
+    "success": "Opération effectuée avec succès",
+    "error": "Une erreur est survenue",
+    "warning": "Avertissement",
+    "info": "Information"
+  },
+  "appearanceSettings": {
+    "title": "Apparence",
+    "description": "Personnalisez l'apparence de l'application. Choisissez entre le mode clair et sombre.",
+    "themes": {
+      "light": "Clair",
+      "dark": "Sombre",
+      "system": "Système"
+    },
+    "buttons": {
+      "save": "Enregistrer les modifications",
+      "saving": "Enregistrement..."
+    },
+    "toast": {
+      "success": {
+        "title": "Apparence mise à jour",
+        "description": "Vos paramètres d'apparence ont été mis à jour."
+      },
+      "error": {
+        "title": "Erreur",
+        "description": "Échec de la mise à jour des paramètres d'apparence."
+      }
+    }
+  },
+  "items": {
+    "header": {
+      "title": "Articles",
+      "description": "Gérer vos articles d'inventaire",
+      "buttons": {
+        "add": "Ajouter un article"
+      }
+    },
+    "form": {
+      "title": {
+        "create": "Créer un Article",
+        "edit": "Modifier l'Article"
+      },
+      "fields": {
+        "name": {
+          "label": "Nom",
+          "placeholder": "Entrez le nom de l'article",
+          "description": "Le nom de l'article",
+          "error": "Le nom est requis."
+        },
+        "description": {
+          "label": "Description",
+          "placeholder": "Entrez la description de l'article",
+          "description": "Une brève description de l'article"
+        },
+        "brand": {
+          "label": "Marque",
+          "placeholder": "Entrez le nom de la marque",
+          "description": "La marque ou le fabricant de l'article"
+        },
+        "value": {
+          "label": "Valeur",
+          "placeholder": "Entrez la valeur",
+          "description": "La valeur monétaire de l'article"
+        },
+        "insuranceValue": {
+          "label": "Valeur d'Assurance",
+          "placeholder": "Entrez la valeur d'assurance",
+          "description": "La valeur assurée de l'article"
+        },
+        "hsCode": {
+          "label": "Code SH",
+          "placeholder": "Entrez le code SH",
+          "description": "Code du Système Harmonisé pour les douanes"
+        },
+        "location": {
+          "label": "Emplacement",
+          "placeholder": "Entrez l'emplacement de stockage",
+          "description": "Où l'article est stocké"
+        },
+        "dimensions": {
+          "label": "Dimensions",
+          "length": "Longueur",
+          "width": "Largeur",
+          "height": "Hauteur",
+          "volume": "Volume",
+          "description": "Dimensions physiques de l'article"
+        },
+        "weight": {
+          "label": "Poids",
+          "placeholder": "Entrez le poids",
+          "description": "Poids de l'article"
+        },
+        "category": {
+          "label": "Catégorie",
+          "placeholder": "Sélectionnez une catégorie",
+          "description": "La catégorie principale de l'article"
+        },
+        "family": {
+          "label": "Famille",
+          "placeholder": "Sélectionnez une famille",
+          "description": "La famille dans la catégorie sélectionnée"
+        },
+        "subFamily": {
+          "label": "Sous-famille",
+          "placeholder": "Sélectionnez une sous-famille",
+          "description": "La sous-famille dans la famille sélectionnée"
+        },
+        "quantity": {
+          "label": "Quantité",
+          "placeholder": "Entrez la quantité",
+          "description": "Nombre d'articles"
+        },
+        "images": {
+          "label": "Images",
+          "description": "Téléchargez des images de l'article"
+        }
+      },
+      "buttons": {
+        "save": "Enregistrer",
+        "saving": "Enregistrement...",
+        "cancel": "Annuler"
+      },
+      "toast": {
+        "success": {
+          "create": {
+            "title": "Succès",
+            "description": "Article créé."
+          },
+          "update": {
+            "title": "Succès",
+            "description": "Article mis à jour."
+          }
+        },
+        "error": {
+          "title": "Erreur",
+          "description": "Une erreur est survenue."
+        }
+      }
+    },
+    "table": {
+      "columns": {
+        "name": "Nom",
+        "category": "Catégorie",
+        "quantity": "Quantité",
+        "status": "Statut",
+        "brand": "Marque",
+        "family": "Famille",
+        "subFamily": "Sous-famille",
+        "location": "Emplacement",
+        "actions": "Actions"
+      },
+      "filter": {
+        "nameSearch": "Filtrer par nom...",
+        "byName": "Filtrer par nom...",
+        "columns": "Colonnes"
+      },
+      "status": {
+        "inStock": "En stock",
+        "outOfStock": "En rupture",
+        "lowStock": "Stock faible"
+      },
+      "actions": {
+        "title": "Actions",
+        "viewDetails": "Voir les détails",
+        "view": "Voir",
+        "edit": "Modifier",
+        "delete": "Supprimer"
+      },
+      "columns_dropdown": "Colonnes",
+      "pagination": {
+        "itemCount": {
+          "singular": "1 article",
+          "plural": "{count} articles"
+        },
+        "previous": "Précédent",
+        "next": "Suivant"
+      }
+    }
+  },
+  "import": {
+    "title": "Importer des Articles",
+    "description": "Importez des articles depuis des fichiers CSV ou Excel.",
+    "tabs": {
+      "upload": "Télécharger",
+      "preview": "Aperçu",
+      "result": "Résultat"
+    },
+    "dropzone": {
+      "title": "Télécharger un Fichier",
+      "description": "Glissez et déposez votre fichier ici, ou cliquez pour sélectionner",
+      "acceptedFormats": "Formats acceptés : .xlsx, .csv"
+    },
+    "validation": {
+      "errors": {
+        "title": "Erreurs de Validation",
+        "rowPrefix": "Ligne"
+      },
+      "schema": {
+        "name": {
+          "required": "Le nom est requis"
+        },
+        "brand": {
+          "required": "La marque est requise"
+        },
+        "value": {
+          "positive": "La valeur doit être un nombre positif"
+        },
+        "insuranceValue": {
+          "positive": "La valeur d'assurance doit être un nombre positif"
+        },
+        "hsCode": {
+          "required": "Le code SH est requis"
+        },
+        "location": {
+          "required": "L'emplacement est requis"
+        },
+        "dimensions": {
+          "length": "La longueur doit être un nombre positif",
+          "width": "La largeur doit être un nombre positif",
+          "height": "La hauteur doit être un nombre positif"
+        },
+        "weight": {
+          "positive": "Le poids doit être un nombre positif"
+        },
+        "quantity": {
+          "positive": "La quantité doit être un nombre entier positif"
+        },
+        "category": {
+          "required": "La catégorie est requise",
+          "notFound": "Catégorie non trouvée : {name}"
+        },
+        "family": {
+          "required": "La famille est requise",
+          "notFound": "Famille non trouvée : {name}"
+        },
+        "subfamily": {
+          "required": "La sous-famille est requise",
+          "notFound": "Sous-famille non trouvée : {name}"
+        }
+      }
+    },
+    "progress": {
+      "importing": "Importation des articles...",
+      "success": "{count} articles importés avec succès",
+      "failed": "Échec de l'importation de {count} articles"
+    },
+    "buttons": {
+      "import": "Importer les Articles",
+      "importing": "Importation...",
+      "reset": "Réinitialiser",
+      "close": "Fermer"
+    },
+    "toast": {
+      "success": {
+        "title": "Importation Terminée",
+        "description": "{success} articles importés avec succès. Échec pour {failed} articles."
+      },
+      "error": {
+        "title": "Erreur d'Importation",
+        "description": "Une erreur s'est produite lors de l'importation des articles.",
+        "noData": "Aucune donnée valide à importer",
+        "fileProcessing": "Erreur lors du traitement du fichier. Veuillez vérifier le format et réessayer."
+      }
+    }
+  },
+  "packages": {
+    "header": {
+      "title": "Colis",
+      "description": "Gérer vos colis d'inventaire",
+      "buttons": {
+        "add": "Ajouter un colis"
+      }
+    },
+    "form": {
+      "title": {
+        "create": "Créer un Paquet",
+        "edit": "Modifier le Paquet"
+      },
+      "fields": {
+        "name": {
+          "label": "Nom",
+          "placeholder": "Nom du paquet",
+          "description": "Le nom du paquet",
+          "error": "Le nom est requis."
+        },
+        "description": {
+          "label": "Description",
+          "placeholder": "Description du paquet",
+          "description": "Une brève description du paquet"
+        },
+        "year": {
+          "label": "Année",
+          "placeholder": "AAAA",
+          "description": "L'année du paquet"
+        },
+        "location": {
+          "label": "Emplacement",
+          "placeholder": "Emplacement de stockage",
+          "description": "Où le paquet est stocké"
+        },
+        "active": {
+          "label": "Actif",
+          "description": "Ce paquet est-il actuellement actif ?"
+        },
+        "image": {
+          "label": "Image",
+          "description": "Télécharger une image du paquet"
+        },
+        "items": {
+          "label": "Articles",
+          "description": "Ajouter des articles à ce paquet",
+          "empty": "Aucun article n'a encore été ajouté à ce paquet. Cliquez sur \"Ajouter un Article\" pour commencer.",
+          "quantity": {
+            "label": "Quantité",
+            "description": "Nombre d'articles"
+          }
+        }
+      },
+      "buttons": {
+        "save": "Enregistrer",
+        "saving": "Enregistrement...",
+        "cancel": "Annuler",
+        "addItem": "Ajouter un Article",
+        "update": "Mettre à jour le Paquet",
+        "create": "Créer le Paquet"
+      },
+      "toast": {
+        "success": {
+          "create": {
+            "title": "Succès",
+            "description": "Paquet créé."
+          },
+          "update": {
+            "title": "Succès",
+            "description": "Paquet mis à jour."
+          }
+        },
+        "error": {
+          "title": "Erreur",
+          "description": "Une erreur est survenue."
+        }
+      }
+    },
+    "table": {
+      "columns": {
+        "name": "Nom",
+        "year": "Année",
+        "location": "Emplacement",
+        "status": "Statut"
+      },
+      "filters": {
+        "nameSearch": "Filtrer par nom..."
+      },
+      "status": {
+        "active": "Actif",
+        "inactive": "Inactif"
+      },
+      "actions": {
+        "title": "Actions",
+        "viewDetails": "Voir les détails",
+        "edit": "Modifier",
+        "delete": "Supprimer"
+      },
+      "columns_dropdown": "Colonnes"
+    },
+    "toast": {
+      "delete": {
+        "success": {
+          "title": "Succès",
+          "description": "Colis supprimé avec succès."
+        },
+        "error": {
+          "title": "Erreur",
+          "description": "Échec de la suppression du colis."
+        }
+      }
+    }
+  },
+  "operations": {
+    "header": {
+      "title": "Opérations",
+      "description": "Gérer vos opérations d'inventaire",
+      "buttons": {
+        "add": "Ajouter une opération"
+      }
+    },
+    "form": {
+      "title": {
+        "create": "Créer une Opération",
+        "edit": "Modifier l'Opération"
+      },
+      "sections": {
+        "info": {
+          "title": "Informations de l'Opération",
+          "description": "Détails de base sur l'opération"
+        },
+        "components": {
+          "title": "Composants de l'Opération",
+          "description": "Ajouter des articles et des paquets à cette opération",
+          "empty": {
+            "items": "Aucun article ajouté",
+            "packages": "Aucun paquet ajouté",
+            "description": "Cliquez sur le bouton \"Ajouter un Composant\" pour ajouter des {type} à cette opération."
+          }
+        }
+      },
+      "fields": {
+        "name": {
+          "label": "Nom",
+          "placeholder": "Entrez le nom de l'opération",
+          "description": "Le nom de l'opération",
+          "error": "Le nom est requis."
+        },
+        "description": {
+          "label": "Description",
+          "placeholder": "Entrez la description de l'opération",
+          "description": "Une brève description de l'opération"
+        },
+        "year": {
+          "label": "Année",
+          "placeholder": "AAAA",
+          "description": "L'année de l'opération"
+        },
+        "location": {
+          "label": "Emplacement",
+          "placeholder": "Entrez l'emplacement",
+          "description": "Où l'opération a lieu"
+        },
+        "active": {
+          "label": "Statut Actif",
+          "description": "Cette opération est-elle actuellement active ?"
+        },
+        "components": {
+          "tabs": {
+            "items": "Articles",
+            "packages": "Paquets"
+          },
+          "quantity": {
+            "label": "Quantité",
+            "description": "Nombre d'unités"
+          },
+          "item": {
+            "label": "Article",
+            "placeholder": "Sélectionnez un article"
+          },
+          "package": {
+            "label": "Paquet",
+            "placeholder": "Sélectionnez un paquet"
+          }
+        }
+      },
+      "buttons": {
+        "save": "Enregistrer",
+        "saving": "Enregistrement...",
+        "cancel": "Annuler",
+        "addComponent": "Ajouter un Composant",
+        "update": "Mettre à jour l'Opération",
+        "create": "Créer l'Opération"
+      },
+      "tooltips": {
+        "addComponent": "Ajouter des articles ou des paquets à cette opération"
+      },
+      "toast": {
+        "success": {
+          "create": {
+            "title": "Succès",
+            "description": "Opération créée avec succès."
+          },
+          "update": {
+            "title": "Succès",
+            "description": "Opération mise à jour avec succès."
+          },
+          "addItem": {
+            "title": "Article ajouté",
+            "description": "L'article a été ajouté à l'opération."
+          },
+          "addPackage": {
+            "title": "Paquet ajouté",
+            "description": "Le paquet a été ajouté à l'opération."
+          }
+        },
+        "error": {
+          "title": "Erreur",
+          "description": "Une erreur est survenue. Veuillez réessayer.",
+          "noItems": {
+            "title": "Aucun article disponible",
+            "description": "Tous les articles ont été ajoutés à cette opération."
+          },
+          "noPackages": {
+            "title": "Aucun paquet disponible",
+            "description": "Tous les paquets ont été ajoutés à cette opération."
+          }
+        }
+      }
+    },
+    "table": {
+      "columns": {
+        "name": "Nom",
+        "date": "Date",
+        "type": "Type",
+        "status": "Statut"
+      },
+      "filters": {
+        "nameSearch": "Filtrer par nom..."
+      },
+      "status": {
+        "active": "Actif",
+        "inactive": "Inactif",
+        "completed": "Terminé",
+        "pending": "En attente"
+      },
+      "actions": {
+        "title": "Actions",
+        "viewDetails": "Voir les détails",
+        "edit": "Modifier",
+        "delete": "Supprimer"
+      },
+      "columns_dropdown": "Colonnes"
+    },
+    "components": {
+      "title": "Composants de l'Opération",
+      "description": "Ajouter des articles et des paquets à cette opération",
+      "buttons": {
+        "add": "Ajouter un Composant",
+        "tooltip": "Ajouter des articles ou des paquets à cette opération"
+      }
+    },
+    "dialog": {
+      "title": "Ajouter des Composants",
+      "description": "Sélectionner des articles ou des paquets à ajouter à cette opération",
+      "tabs": {
+        "items": "Articles",
+        "packages": "Paquets"
+      },
+      "search": {
+        "items": "Rechercher des articles...",
+        "packages": "Rechercher des paquets..."
+      },
+      "empty": {
+        "items": "Aucun article trouvé",
+        "packages": "Aucun paquet trouvé"
+      },
+      "quantity": {
+        "label": "Quantité",
+        "placeholder": "Entrer la quantité"
+      },
+      "buttons": {
+        "add": "Ajouter la Sélection",
+        "cancel": "Annuler"
+      }
+    },
+    "table": {
+      "columns": {
+        "name": "Nom",
+        "type": "Type",
+        "quantity": "Quantité",
+        "actions": "Actions"
+      },
+      "empty": "Aucun composant ajouté",
+      "types": {
+        "item": "Article",
+        "package": "Paquet"
+      }
+    },
+    "toast": {
+      "success": {
+        "add": {
+          "title": "Composants ajoutés",
+          "description": "Les composants sélectionnés ont été ajoutés à l'opération"
+        },
+        "remove": {
+          "title": "Composant supprimé",
+          "description": "Le composant a été supprimé de l'opération"
+        }
+      },
+      "error": {
+        "add": {
+          "title": "Erreur lors de l'ajout des composants",
+          "description": "Échec de l'ajout des composants à l'opération"
+        },
+        "remove": {
+          "title": "Erreur lors de la suppression du composant",
+          "description": "Échec de la suppression du composant de l'opération"
+        }
+      }
+    }
+  },
+  "categories": {
+    "manager": {
+      "tabs": {
+        "categories": "Catégories",
+        "families": "Familles",
+        "subfamilies": "Sous-Familles",
+        "cards": "Cartes",
+        "tree": "Vue Arborescente"
+      },
+      "search": {
+        "placeholder": "Rechercher des catégories..."
+      },
+      "buttons": {
+        "addCategory": "Ajouter une Catégorie",
+        "addFamily": "Ajouter une Famille",
+        "addSubFamily": "Ajouter une Sous-Famille",
+        "viewDetails": "Voir les Détails"
+      },
+      "categories": {
+        "title": "Catégories",
+        "description": "Gérer les catégories d'articles",
+        "empty": "Aucune catégorie trouvée. Créez-en une pour commencer."
+      },
+      "families": {
+        "title": "Familles",
+        "description": "Gérer les familles d'articles",
+        "single": "Famille",
+        "empty": {
+          "categories": "Aucune catégorie trouvée. Créez d'abord une catégorie.",
+          "families": "Aucune famille trouvée dans cette catégorie."
+        }
+      },
+      "subfamilies": {
+        "title": "Sous-Familles",
+        "description": "Gérer les sous-familles d'articles",
+        "single": "Sous-Famille",
+        "empty": {
+          "categories": "Aucune catégorie trouvée. Créez d'abord une catégorie.",
+          "families": "Aucune famille trouvée dans cette catégorie.",
+          "subfamilies": "Aucune sous-famille trouvée dans cette famille."
+        }
+      }
+    },
+    "dialogs": {
+      "category": {
+        "title": {
+          "create": "Créer une Catégorie",
+          "edit": "Modifier la Catégorie"
+        },
+        "description": {
+          "create": "Ajouter une nouvelle catégorie au système.",
+          "edit": "Mettre à jour les détails de la catégorie."
+        },
+        "fields": {
+          "name": {
+            "label": "Nom",
+            "placeholder": "Nom de la catégorie",
+            "error": "Le nom est requis"
+          }
+        }
+      },
+      "family": {
+        "title": {
+          "create": "Créer une Famille",
+          "edit": "Modifier la Famille"
+        },
+        "description": {
+          "create": "Ajouter une nouvelle famille à la catégorie sélectionnée.",
+          "edit": "Mettre à jour les détails de la famille."
+        },
+        "fields": {
+          "name": {
+            "label": "Nom",
+            "placeholder": "Nom de la famille",
+            "error": "Le nom est requis"
+          },
+          "category": {
+            "label": "Catégorie",
+            "placeholder": "Sélectionnez une catégorie"
+          }
+        }
+      },
+      "subfamily": {
+        "title": {
+          "create": "Créer une Sous-Famille",
+          "edit": "Modifier la Sous-Famille"
+        },
+        "description": {
+          "create": "Ajouter une nouvelle sous-famille à la famille sélectionnée.",
+          "edit": "Mettre à jour les détails de la sous-famille."
+        },
+        "fields": {
+          "name": {
+            "label": "Nom",
+            "placeholder": "Nom de la sous-famille",
+            "error": "Le nom est requis"
+          },
+          "category": {
+            "label": "Catégorie",
+            "placeholder": "Sélectionnez une catégorie"
+          },
+          "family": {
+            "label": "Famille",
+            "placeholder": "Sélectionnez une famille"
+          }
+        }
+      },
+      "delete": {
+        "title": "Confirmer la Suppression",
+        "description": {
+          "category": "Êtes-vous sûr de vouloir supprimer la catégorie \"{name}\" ? Cette action ne peut pas être annulée.",
+          "family": "Êtes-vous sûr de vouloir supprimer la famille \"{name}\" ? Cette action ne peut pas être annulée.",
+          "subfamily": "Êtes-vous sûr de vouloir supprimer la sous-famille \"{name}\" ? Cette action ne peut pas être annulée."
+        },
+        "buttons": {
+          "cancel": "Annuler",
+          "confirm": "Supprimer"
+        }
+      },
+      "buttons": {
+        "save": "Enregistrer",
+        "saving": "Enregistrement...",
+        "cancel": "Annuler",
+        "create": "Créer",
+        "update": "Mettre à jour"
+      },
+      "toast": {
+        "success": {
+          "create": {
+            "title": "Succès",
+            "description": "{type} créé(e) avec succès."
+          },
+          "update": {
+            "title": "Succès",
+            "description": "{type} mis(e) à jour avec succès."
+          },
+          "delete": {
+            "title": "Succès",
+            "description": "{type} supprimé(e) avec succès."
+          }
+        },
+        "error": {
+          "create": {
+            "title": "Erreur",
+            "description": "Échec de la création de {type}."
+          },
+          "update": {
+            "title": "Erreur",
+            "description": "Échec de la mise à jour de {type}."
+          },
+          "delete": {
+            "title": "Erreur",
+            "description": "Échec de la suppression de {type}."
+          }
+        }
+      }
+    }
+  },
+  "export": {
+    "header": {
+      "title": "Exporter les Données",
+      "description": "Exporter les opérations et les paquets vers des fichiers Excel (.xlsx) ou CSV",
+      "buttons": {
+        "viewPackages": "Voir les Paquets",
+        "viewOperations": "Voir les Opérations"
+      }
+    },
+    "tabs": {
+      "operations": "Opérations",
+      "packages": "Paquets"
+    },
+    "options": {
+      "includeItems": "Inclure les articles détaillés",
+      "format": {
+        "label": "Format d'export",
+        "excel": "Excel (.xlsx)",
+        "csv": "CSV (.csv)"
+      }
+    },
+    "buttons": {
+      "export": "Exporter la Sélection",
+      "exporting": "Exportation..."
+    },
+    "table": {
+      "columns": {
+        "name": "Nom",
+        "description": "Description",
+        "location": "Emplacement",
+        "year": "Année",
+        "items": "Articles"
+      },
+      "empty": {
+        "operations": "Aucune opération trouvée",
+        "packages": "Aucun paquet trouvé"
+      },
+      "selectAll": {
+        "operations": "Sélectionner toutes les opérations",
+        "packages": "Sélectionner tous les paquets"
+      },
+      "selectItem": {
+        "operation": "Sélectionner l'opération {name}",
+        "package": "Sélectionner le paquet {name}"
+      }
+    },
+    "summary": {
+      "noSelection": "Aucun élément sélectionné",
+      "selected": {
+        "operations": "{count} opérations sélectionnées",
+        "packages": "{count} paquets sélectionnés"
+      }
+    },
+    "toast": {
+      "success": {
+        "title": "Exportation réussie",
+        "description": "Exportation de {operations} opérations et {packages} paquets"
+      },
+      "error": {
+        "title": "Échec de l'exportation",
+        "description": "Une erreur est survenue lors de l'exportation",
+        "noSelection": {
+          "title": "Aucun élément sélectionné",
+          "description": "Veuillez sélectionner au moins une opération ou un paquet à exporter."
+        }
+      }
+    },
+    "excel": {
+      "sheets": {
+        "summary": {
+          "title": "Résumé de l'Export d'Inventaire",
+          "generatedOn": "Généré le",
+          "operations": "Opérations Exportées",
+          "packages": "Paquets Exportés",
+          "detailedItems": "Inclure les articles détaillés"
+        },
+        "operations": {
+          "title": "Opérations",
+          "columns": {
+            "id": "ID",
+            "name": "Nom",
+            "description": "Description",
+            "location": "Emplacement",
+            "year": "Année",
+            "active": "Actif",
+            "itemsCount": "Nombre d'Articles"
+          }
+        },
+        "operationItems": {
+          "title": "Articles des Opérations",
+          "columns": {
+            "operationId": "ID Opération",
+            "operationName": "Nom de l'Opération",
+            "itemId": "ID Article",
+            "itemName": "Nom de l'Article",
+            "brand": "Marque",
+            "value": "Valeur",
+            "hsCode": "Code SH",
+            "location": "Emplacement",
+            "quantity": "Quantité",
+            "category": "Catégorie",
+            "family": "Famille",
+            "subFamily": "Sous-Famille",
+            "packageId": "ID Paquet",
+            "packageName": "Nom du Paquet",
+            "type": "Type"
+          }
+        },
+        "packages": {
+          "title": "Paquets",
+          "columns": {
+            "id": "ID",
+            "name": "Nom",
+            "description": "Description",
+            "location": "Emplacement",
+            "year": "Année",
+            "active": "Actif",
+            "itemsCount": "Nombre d'Articles"
+          }
+        },
+        "packageItems": {
+          "title": "Articles des Paquets",
+          "columns": {
+            "packageId": "ID Paquet",
+            "packageName": "Nom du Paquet",
+            "itemId": "ID Article",
+            "itemName": "Nom de l'Article",
+            "brand": "Marque",
+            "value": "Valeur",
+            "hsCode": "Code SH",
+            "location": "Emplacement",
+            "quantity": "Quantité",
+            "category": "Catégorie",
+            "family": "Famille",
+            "subFamily": "Sous-Famille"
+          }
+        }
+      }
+    }
+  },
+  "reports": {
+    "metadata": {
+      "title": "Rapports & Analyses | Système de Gestion des Stocks",
+      "description": "Consultez les analyses et les rapports sur les opérations, les colis, les articles et la valeur des stocks"
+    },
+    "header": {
+      "title": "Rapports & Analyses",
+      "description": "Consultez les tendances de croissance, les analyses de distribution et les métriques de valeur des stocks",
+      "exportButton": "Exporter les données"
+    },
+    "timeRange": {
+      "label": "Sélectionner la période",
+      "options": {
+        "1m": "1 Mois",
+        "3m": "3 Mois",
+        "6m": "6 Mois",
+        "1y": "1 An",
+        "all": "Tout"
+      }
+    },
+    "trendAnalysis": {
+      "title": "Analyse des Tendances",
+      "timeRanges": {
+        "1m": "1 Mois",
+        "3m": "3 Mois",
+        "6m": "6 Mois",
+        "1y": "1 An",
+        "all": "Tout"
+      }
+    },
+    "operations": {
+      "title": "Croissance des Opérations",
+      "cardTitle": "Évolution des Opérations dans le Temps",
+      "description": "Tendance des opérations créées et des opérations actives au fil du temps",
+      "total": "Total des Opérations",
+      "active": "Opérations Actives"
+    },
+    "packages": {
+      "title": "Croissance des Colis",
+      "cardTitle": "Évolution des Colis dans le Temps",
+      "description": "Tendance des colis créés et des colis actifs au fil du temps",
+      "total": "Total des Colis",
+      "active": "Colis Actifs"
+    },
+    "inventory": {
+      "totalItems": {
+        "title": "Total des Articles",
+        "description": "Articles uniques dans votre inventaire"
+      },
+      "totalQuantity": {
+        "title": "Quantité Totale",
+        "description": "Unités totales pour tous les articles"
+      },
+      "totalValue": {
+        "title": "Valeur Totale",
+        "description": "Valeur combinée de tous les articles"
+      },
+      "insuranceValue": {
+        "title": "Valeur d'Assurance",
+        "description": "Valeur d'assurance combinée"
+      }
+    },
+    "distribution": {
+      "title": "Distribution des Articles",
+      "byCategory": {
+        "title": "Articles par Catégorie",
+        "description": "Distribution des articles à travers différentes catégories"
+      },
+      "valueByCategory": {
+        "title": "Valeur par Catégorie",
+        "description": "Distribution de la valeur d'inventaire par catégorie"
+      }
+    },
+    "topItems": {
+      "title": "Top 10 des Articles les Plus Précieux",
+      "description": "Les articles de plus grande valeur dans votre inventaire",
+      "table": {
+        "name": "Nom",
+        "brand": "Marque",
+        "category": "Catégorie",
+        "quantity": "Quantité",
+        "valueUnit": "Valeur (Unité)",
+        "totalValue": "Valeur Totale"
+      }
+    },
+    "categoryFamily": {
+      "title": "Détails des Catégories & Familles",
+      "noFamilies": "Aucune famille avec des articles",
+      "itemsCount": "{count, plural, one {# article} other {# articles}}"
+    },
+    "selects": {
+      "timeRange": {
+        "placeholder": "Sélectionner une période"
+      }
+    },
+    "charts": {
+      "tooltips": {
+        "operations": "Opérations",
+        "packages": "Colis",
+        "items": "articles",
+        "count": "Nombre",
+        "value": "Valeur"
+      },
+      "components": {
+        "title": "Composants de l'Opération",
+        "description": "Tous les articles et colis inclus dans cette opération",
+        "tabs": {
+          "all": "Tous",
+          "items": "Articles",
+          "packages": "Colis"
+        },
+        "empty": {
+          "title": "Aucun composant trouvé",
+          "description": "Cette opération n'a pas encore d'articles ou de colis.",
+          "itemsTitle": "Aucun article trouvé",
+          "itemsDescription": "Cette opération n'a pas encore d'articles individuels.",
+          "packagesTitle": "Aucun colis trouvé",
+          "packagesDescription": "Cette opération n'a pas encore de colis.",
+          "addButton": "Ajouter des Composants"
+        }
+      },
+      "itemCard": {
+        "viewDetails": "Voir les Détails de l'Article",
+        "items": "article",
+        "items_plural": "articles"
+      },
+      "packageCard": {
+        "viewDetails": "Voir les Détails du Colis",
+        "package": "Colis"
+      },
+      "buttons": {
+        "editOperation": "Modifier l'Opération",
+        "allOperations": "Toutes les Opérations"
+      },
+      "status": {
+        "active": "Actif",
+        "inactive": "Inactif"
+      }
+    },
+    "package": {
+      "title": "Détails du Colis",
+      "image": "Image du Colis",
+      "basicInfo": {
+        "title": "Détails du Colis",
+        "year": "Année",
+        "location": "Emplacement"
+      },
+      "summary": {
+        "title": "Résumé du Colis",
+        "totalValue": "Valeur Totale",
+        "totalItems": "Total des Articles",
+        "uniqueItems": "Articles Uniques"
+      },
+      "items": {
+        "title": "Articles du Colis",
+        "empty": "Aucun article dans ce colis",
+        "quantity": "Quantité",
+        "value": "Valeur"
+      },
+      "buttons": {
+        "editPackage": "Modifier le Colis",
+        "backToPackages": "Retour aux Colis"
+      },
+      "status": {
+        "active": "Actif",
+        "inactive": "Inactif"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "description": "Aperçu de votre système d'inventaire",
+    "welcome": "Bienvenue",
+    "timeOfDay": {
+      "morning": "Bonjour",
+      "afternoon": "Bon après-midi",
+      "evening": "Bonsoir"
+    },
+    "metrics": {
+      "items": {
+        "title": "Articles",
+        "description": "Nombre d'articles uniques en inventaire",
+        "totalUnits": "{count} unités totales"
+      },
+      "packages": {
+        "title": "Paquets",
+        "description": "Organisés en {count} catégories"
+      },
+      "operations": {
+        "title": "Opérations",
+        "description": "Gérer les déploiements et la logistique"
+      },
+      "value": {
+        "title": "Valeur d'inventaire",
+        "averagePerItem": "~{value} par article en moyenne"
+      }
+    },
+    "recentActivity": {
+      "title": "Activité Récente",
+      "description": "Vos dernières mises à jour et activités d'inventaire",
+      "tabs": {
+        "items": "Articles",
+        "packages": "Paquets",
+        "operations": "Opérations"
+      },
+      "empty": {
+        "items": "Aucun article récent",
+        "packages": "Aucun paquet récent",
+        "operations": "Aucune opération récente"
+      },
+      "viewAll": {
+        "items": "Voir tous les articles",
+        "packages": "Voir tous les paquets",
+        "operations": "Voir toutes les opérations"
+      },
+      "itemCount": "{count} articles",
+      "noDescription": "Aucune description"
+    },
+    "quickActions": {
+      "title": "Actions Rapides",
+      "description": "Commencez avec ces tâches courantes",
+      "buttons": {
+        "newItem": "Nouvel Article",
+        "newPackage": "Nouveau Paquet",
+        "newOperation": "Nouvelle Opération",
+        "import": "Importer",
+        "export": "Exporter",
+        "items": "Articles",
+        "reports": "Rapports"
+      }
+    },
+    "inventorySummary": {
+      "title": "État de l'inventaire",
+      "description": "Distribution de la valeur par catégorie",
+      "noData": "Aucune donnée de catégorie disponible"
+    }
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Tableau de bord | Système de Gestion d'Inventaire",
+      "description": "Tableau de bord pour le système de gestion d'inventaire"
+    },
+    "new": {
+      "item": {
+        "title": "Nouvel Article | Système de Gestion d'Inventaire",
+        "description": "Créer un nouvel article dans le système d'inventaire",
+        "heading": "Créer un Nouvel Article",
+        "subheading": "Ajoutez un nouvel article à votre inventaire"
+      },
+      "package": {
+        "title": "Nouveau Paquet | Système de Gestion d'Inventaire",
+        "description": "Créer un nouveau paquet dans le système d'inventaire",
+        "heading": "Créer un Nouveau Paquet",
+        "subheading": "Ajoutez un nouveau paquet à votre inventaire"
+      },
+      "operation": {
+        "title": "Nouvelle Opération | Système de Gestion d'Inventaire",
+        "description": "Créer une nouvelle opération dans le système d'inventaire",
+        "heading": "Créer une Nouvelle Opération",
+        "subheading": "Ajoutez une nouvelle opération à votre système"
+      }
+    },
+    "items": {
+      "title": "Articles | Système de Gestion d'Inventaire",
+      "description": "Gérer vos articles d'inventaire"
+    },
+    "packages": {
+      "title": "Paquets | Système de Gestion d'Inventaire",
+      "description": "Gérer vos paquets d'inventaire"
+    },
+    "operations": {
+      "title": "Opérations | Système de Gestion d'Inventaire",
+      "description": "Gérer vos opérations d'inventaire"
+    },
+    "categories": {
+      "title": "Catégories | Système de Gestion d'Inventaire",
+      "description": "Parcourir les catégories, familles et sous-familles"
+    },
+    "reports": {
+      "title": "Rapports & Analyses | Système de Gestion d'Inventaire",
+      "description": "Consulter les analyses et rapports concernant les opérations, paquets, articles et valeur d'inventaire"
+    },
+    "settings": {
+      "title": "Paramètres | Système de Gestion d'Inventaire",
+      "description": "Gérer vos paramètres de compte et préférences",
+      "heading": "Paramètres",
+      "subheading": "Gérer vos paramètres de compte et préférences"
+    },
+    "profile": {
+      "title": "Profil | Système de Gestion d'Inventaire",
+      "description": "Voir et gérer votre profil"
+    },
+    "admin": {
+      "title": "Tableau de Bord Admin | Système de Gestion d'Inventaire",
+      "description": "Tableau de bord administrateur pour le système de gestion d'inventaire"
+    },
+    "signIn": {
+      "title": "Bienvenue",
+      "description": "Entrez vos identifiants pour vous connecter à votre compte"
+    }
+  },
+  "details": {
+    "common": {
+      "noImage": "Aucune image disponible",
+      "id": "ID",
+      "description": "Description",
+      "created": "Créé le",
+      "status": "Statut",
+      "actions": {
+        "edit": "Modifier",
+        "back": "Retour"
+      }
+    },
+    "item": {
+      "title": "Détails de l'Article",
+      "image": "Image de l'Article",
+      "basicInfo": {
+        "title": "Détails de l'Article",
+        "brand": "Marque",
+        "location": "Emplacement",
+        "hsCode": "Code SH"
+      },
+      "financial": {
+        "title": "Informations Financières",
+        "value": "Valeur",
+        "insuranceValue": "Valeur d'Assurance",
+        "quantity": "Quantité"
+      },
+      "dimensions": {
+        "title": "Dimensions",
+        "length": "Longueur",
+        "width": "Largeur",
+        "height": "Hauteur",
+        "volume": "Volume",
+        "units": {
+          "length": "cm",
+          "volume": "cm³"
+        }
+      }
+    },
+    "operation": {
+      "title": "Détails de l'Opération",
+      "image": "Image de l'Opération",
+      "basicInfo": {
+        "title": "Détails de l'Opération",
+        "year": "Année",
+        "location": "Emplacement"
+      },
+      "summary": {
+        "title": "Résumé de l'Inventaire",
+        "items": "Articles",
+        "packages": "Paquets",
+        "totalValue": "Valeur Totale"
+      },
+      "components": {
+        "title": "Composants de l'Opération",
+        "description": "Tous les articles et paquets inclus dans cette opération",
+        "tabs": {
+          "all": "Tous",
+          "items": "Articles",
+          "packages": "Paquets"
+        },
+        "empty": {
+          "title": "Aucun composant trouvé",
+          "description": "Cette opération n'a pas encore d'articles ou de paquets.",
+          "itemsTitle": "Aucun article trouvé",
+          "itemsDescription": "Cette opération n'a pas encore d'articles individuels.",
+          "packagesTitle": "Aucun paquet trouvé",
+          "packagesDescription": "Cette opération n'a pas encore de paquets.",
+          "addButton": "Ajouter des Composants"
+        }
+      },
+      "itemCard": {
+        "viewDetails": "Voir les Détails de l'Article",
+        "items": "article",
+        "items_plural": "articles"
+      },
+      "packageCard": {
+        "viewDetails": "Voir les Détails du Paquet",
+        "package": "Paquet"
+      },
+      "buttons": {
+        "editOperation": "Modifier l'Opération",
+        "allOperations": "Toutes les Opérations"
+      },
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive"
+      }
+    },
+    "package": {
+      "title": "Détails du Paquet",
+      "image": "Image du Paquet",
+      "basicInfo": {
+        "title": "Détails du Paquet",
+        "year": "Année",
+        "location": "Emplacement"
+      },
+      "summary": {
+        "title": "Résumé du Paquet",
+        "totalValue": "Valeur Totale",
+        "totalItems": "Total des Articles",
+        "uniqueItems": "Articles Uniques"
+      },
+      "items": {
+        "title": "Articles du Paquet",
+        "empty": "Aucun article dans ce paquet",
+        "quantity": "Quantité",
+        "value": "Valeur"
+      },
+      "buttons": {
+        "editPackage": "Modifier le Paquet",
+        "backToPackages": "Retour aux Paquets"
+      },
+      "status": {
+        "active": "Actif",
+        "inactive": "Inactif"
+      }
+    }
+  },
+  "languageSettings": {
+    "title": "Langue",
+    "description": "Choisissez votre langue préférée pour l'interface de l'application.",
+    "buttons": {
+      "save": "Enregistrer les modifications",
+      "saving": "Enregistrement..."
+    },
+    "toast": {
+      "success": {
+        "title": "Langue mise à jour",
+        "description": "Vos préférences de langue ont été mises à jour."
+      },
+      "error": {
+        "title": "Erreur",
+        "description": "Échec de la mise à jour des préférences de langue."
+      }
+    }
+  }
+}

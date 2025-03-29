@@ -1,0 +1,250 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod"
+import { Button } from "../ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "../ui/dialog"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
+import { Input } from "../ui/input"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
+import { toast } from "@/hooks/use-toast"
+import { createSubFamily, updateSubFamily } from "../../app/actions/admin"
+import { handleError } from "@/lib/error-handler"
+
+const formSchema = z.object({
+  name: z.string().min(1, { message: "Name is required" }),
+  categoryId: z.string().min(1, { message: "Category is required" }),
+  familyId: z.string().min(1, { message: "Family is required" }),
+})
+
+type FormValues = z.infer<typeof formSchema>
+
+type SubFamily = {
+  id: string
+  name: string
+  familyId: string
+}
+
+type Family = {
+  id: string
+  name: string
+  categoryId: string
+  subFamilies: SubFamily[]
+}
+
+type Category = {
+  id: string
+  name: string
+  families: Family[]
+}
+
+interface SubFamilyDialogProps {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  subFamily: SubFamily | null
+  categories: Category[]
+  onSave: (subFamily: SubFamily, isNew: boolean) => void
+}
+
+export function SubFamilyDialog({ open, onOpenChange, subFamily, categories, onSave }: SubFamilyDialogProps) {
+  const [isLoading, setIsLoading] = useState(false)
+  const isEditing = !!subFamily
+  const [availableFamilies, setAvailableFamilies] = useState<Family[]>([])
+
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: subFamily?.name || "",
+      familyId: subFamily?.familyId || "",
+      categoryId: "",
+    },
+  })
+
+  // Get the category ID for the selected family
+  useEffect(() => {
+    if (subFamily?.familyId) {
+      for (const category of categories) {
+        const family = category.families.find((f) => f.id === subFamily.familyId)
+        if (family) {
+          form.setValue("categoryId", category.id)
+          break
+        }
+      }
+    }
+  }, [subFamily, categories, form])
+
+  // Update available families when category changes
+  const selectedCategoryId = form.watch("categoryId")
+  useEffect(() => {
+    if (selectedCategoryId) {
+      const category = categories.find((c) => c.id === selectedCategoryId)
+      setAvailableFamilies(category?.families || [])
+    } else {
+      setAvailableFamilies([])
+    }
+  }, [selectedCategoryId, categories])
+
+  // Reset form when dialog opens/closes or subFamily changes
+  useEffect(() => {
+    if (open) {
+      form.reset({
+        name: subFamily?.name || "",
+        familyId: subFamily?.familyId || "",
+        categoryId: form.getValues("categoryId") || "",
+      })
+    }
+  }, [open, subFamily, form])
+
+  const onSubmit = async (data: FormValues) => {
+    try {
+      setIsLoading(true)
+
+      if (isEditing && subFamily) {
+        // Update existing sub-family
+        const formData = new FormData()
+        formData.append("name", data.name)
+        formData.append("familyId", data.familyId)
+        await updateSubFamily(subFamily.id, formData)
+
+        onSave({ id: subFamily.id, name: data.name, familyId: data.familyId }, false)
+        toast({
+          title: "Success",
+          description: "Sub-family updated successfully.",
+        })
+      } else {
+        // Create new sub-family
+        const formData = new FormData()
+        formData.append("name", data.name)
+        formData.append("familyId", data.familyId)
+        await createSubFamily(formData)
+
+        // In a real app, you'd get the ID from the server response
+        // For now, we'll generate a temporary ID
+        const tempId = Math.random().toString(36).substring(2, 9)
+
+        onSave({ id: tempId, name: data.name, familyId: data.familyId }, true)
+        toast({
+          title: "Success",
+          description: "Sub-family created successfully.",
+        })
+      }
+
+      onOpenChange(false)
+    } catch (error) {
+      handleError(error, {
+        title: "Error",
+        defaultMessage: isEditing ? "Failed to update sub-family." : "Failed to create sub-family."
+      })
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>{isEditing ? "Edit Sub-Family" : "Create Sub-Family"}</DialogTitle>
+          <DialogDescription>
+            {isEditing ? "Update the sub-family details." : "Add a new sub-family to the system."}
+          </DialogDescription>
+        </DialogHeader>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Sub-family name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="categoryId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Category</FormLabel>
+                  <Select
+                    onValueChange={(value) => {
+                      field.onChange(value)
+                      form.setValue("familyId", "")
+                    }}
+                    defaultValue={field.value}
+                    value={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a category" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {categories.map((category) => (
+                        <SelectItem key={category.id} value={category.id}>
+                          {category.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="familyId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Family</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    value={field.value}
+                    disabled={!form.getValues("categoryId")}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a family" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {availableFamilies.map((family) => (
+                        <SelectItem key={family.id} value={family.id}>
+                          {family.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <DialogFooter>
+              <Button type="button" variant="outline" onClick={() => onOpenChange(false)} disabled={isLoading}>
+                Cancel
+              </Button>
+              <Button type="submit" disabled={isLoading}>
+                {isLoading ? "Saving..." : isEditing ? "Update" : "Create"}
+              </Button>
+            </DialogFooter>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
+  )
+}
+

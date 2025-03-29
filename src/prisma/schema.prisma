@@ -1,0 +1,171 @@
+ // This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+model User {
+  id         String      @id @default(uuid())
+  clerkId    String      @unique
+  username   String?
+  email      String      @unique
+  profileImg String?
+  bio        String?
+  role       UserRole    @default(USER)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  items      Item[]
+  packages   Package[]
+  operations Operation[]
+}
+
+model Category {
+  id        String    @id @default(uuid())
+  name      String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  items     Item[]
+  families  Family[]
+}
+
+model Family {
+  id         String      @id @default(uuid())
+  name       String
+  categoryId String
+  category   Category    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  items      Item[]
+  subFamilies SubFamily[]
+
+  @@unique([name, categoryId])
+}
+
+model SubFamily {
+  id        String   @id @default(uuid())
+  name      String
+  familyId  String
+  family    Family   @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  items     Item[]
+
+  @@unique([name, familyId])
+}
+
+model Item {
+  id              String           @id @default(uuid())
+  name            String
+  description     String?
+  brand           String
+  value           Float
+  insuranceValue  Float
+  hsCode          String
+  location        String
+  length          Float
+  width           Float
+  height          Float
+  weight          Float
+  categoryId      String
+  category        Category        @relation(fields: [categoryId], references: [id])
+  familyId        String
+  family          Family          @relation(fields: [familyId], references: [id])
+  subFamilyId     String
+  subFamily       SubFamily       @relation(fields: [subFamilyId], references: [id])
+  quantity        Int              @default(1)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  image           Image?           // One-to-one relation to Image
+  user            User             @relation(fields: [userId], references: [id])
+  userId          String
+  packageItems    PackageItem[]
+  operationItems  OperationItem[]
+}
+
+
+model Package {
+  id             String          @id @default(uuid())
+  name           String
+  description    String?
+  year           Int?
+  location       String?
+  active         Boolean         @default(true)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  image          Image?          // Changed from images Image[] to image Image?
+  user           User            @relation(fields: [userId], references: [id])
+  userId         String
+  packageItems   PackageItem[]
+  operationItems OperationItem[]
+}
+
+model PackageItem {
+  id        String   @id @default(uuid())
+  package   Package  @relation(fields: [packageId], references: [id], onDelete: Cascade)
+  packageId String
+  item      Item     @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  itemId    String
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([packageId, itemId])
+}
+
+model Operation {
+  id             String          @id @default(uuid())
+  name           String
+  description    String?
+  year           Int?
+  location       String?
+  active         Boolean         @default(true)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  image          Image?          // Changed from images Image[] to image Image?
+  user           User            @relation(fields: [userId], references: [id])
+  userId         String
+  operationItems OperationItem[]
+}
+
+model OperationItem {
+  id          String    @id @default(uuid())
+  operation   Operation @relation(fields: [operationId], references: [id], onDelete: Cascade)
+  operationId String
+  item        Item?     @relation(fields: [itemId], references: [id], onDelete: SetNull)
+  itemId      String?
+  package     Package?  @relation(fields: [packageId], references: [id], onDelete: SetNull)
+  packageId   String?
+  quantity    Int       @default(1)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+ // @@check(((itemId IS NULL) AND (packageId IS NOT NULL)) OR ((itemId IS NOT NULL) AND (packageId IS NULL)))
+}
+
+model Image {
+  id          String     @id @default(uuid())
+  url         String
+  key         String     @unique
+  item        Item?      @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  itemId      String?    @unique  // Already unique to enforce one-to-one relation
+  package     Package?   @relation(fields: [packageId], references: [id], onDelete: Cascade)
+  packageId   String?    @unique  // Added @unique to enforce one-to-one relation
+  operation   Operation? @relation(fields: [operationId], references: [id], onDelete: Cascade)
+  operationId String?    @unique  // Added @unique to enforce one-to-one relation
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  //@@check(((itemId IS NULL) AND (packageId IS NULL) AND (operationId IS NOT NULL)) OR ((itemId IS NULL) AND (packageId IS NOT NULL) AND (operationId IS NULL)) OR ((itemId IS NOT NULL) AND (packageId IS NULL) AND (operationId IS NULL)))
+}

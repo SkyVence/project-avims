@@ -1,0 +1,143 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# i18n implementation
+
+## Project Structure
+```
+src/
+├── app/                  # Next.js App Router
+├── components/           # Reusable UI components
+│   ├── ui/               # shadcn components
+│   └── [feature]/        # Feature-specific components
+├── lib/                  # Utility functions
+├── i18n/				  # I18n Configuration files
+├── prisma/               # Prisma schema and migrations
+│   └── schema.prisma
+├── styles/               # Global styles
+├── messages/			  # Translated JSON Files
+└── types/                # TypeScript type definitions
+```
+
+## TypeScript Guidelines
+
+- Use explicit types rather than `any`
+- Prefer interfaces for object shapes, types for unions/complex types
+- Utilize TypeScript's utility types when applicable (`Partial<T>`, `Pick<T>`)
+- Define shared types in dedicated files under `src/types/`
+
+
+## I18n Guidelines
+
+- Do not modify the implementation if not asked to. 
+- Do not modify the i18n folder if not asked to.
+- Do not modify the middleware if not asked to.
+- If asked create a file in the messages directory with the correct locale name.
+- When asked to translate the project you should translate every route from the `src/app` directory aswell as the components linked to it. 
+- When asked to translate the project you should translate the components excluding the `src/components/ui`.
+
+## Implementation example 
+
+- Import use :
+```Typescript
+import { getTranslations } from "next-intl/server"
+import { useTranslations } from "next-intl"
+```
+
+- Static Translations Object : 
+```Typescript
+const STATIC_TRANSLATIONS = {
+  getWelcomeMessage: (t: any) => t('welcome.message'),
+  getErrorCount: (t: any, count: number) => t('errors.count', { count }),
+}; 
+```
+
+- Basic Translation : 
+```Typescript
+const simpleText = t('basic.hello');
+```
+
+- Translation with Variable :
+```Typescript
+const welcomeText = t('welcome.user', { name: username });
+```
+
+- Translation with Plurals :
+```Typescript
+const itemText = t('items.count', { count: itemCount });
+```
+
+- Translation in Arrays :
+```Typescript
+const menuItems = [
+  { label: t('menu.home'), path: '/' },
+  { label: t('menu.about'), path: '/about' },
+];
+```
+
+- Translation in object :
+```Typescript
+const errorMessages = {
+  notFound: t('errors.notFound'),
+  serverError: t('errors.server'),
+};
+```
+
+- Template literals :
+```Typescript
+const combinedMessage = `${t('status.prefix')}: ${t('status.message')}`;
+```
+
+- Translation in callbacks :
+```Typescript
+const handleError = () => {
+  const errorMessage = t('errors.generic', { 
+    errorCode: '404',
+    context: 'page-load' 
+  });
+};
+```
+
+## Translation files 
+
+- Should be in the src/messages/
+
+## Example translation file :
+```JSON
+{
+  "basic": {
+    "hello": "Hello"
+  },
+  "welcome": {
+    "user": "Welcome, {{name}}!",
+    "message": "Welcome to our site"
+  },
+  "items": {
+    "count": "{{count}} item",
+    "count_plural": "{{count}} items"
+  },
+  "menu": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "errors": {
+    "notFound": "Not found",
+    "server": "Server error",
+    "validation": "Validation error",
+    "generic": "Error {{errorCode}} occurred during {{context}}"
+  },
+  "status": {
+    "prefix": "Current status",
+    "message": "Active"
+  },
+  "complex": {
+    "welcome": "Welcome <bold>{{name}}</bold> to our site!"
+  },
+  "buttons": {
+    "triggerError": "Trigger Error"
+  }
+}
+```

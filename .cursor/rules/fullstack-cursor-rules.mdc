@@ -1,0 +1,146 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Fullstack TypeScript Development Guidelines
+
+## Project Structure
+
+```
+src/
+├── app/                  # Next.js App Router
+├── components/           # Reusable UI components
+│   ├── ui/               # shadcn components
+│   └── [feature]/        # Feature-specific components
+├── lib/                  # Utility functions
+├── prisma/               # Prisma schema and migrations
+│   └── schema.prisma
+├── styles/               # Global styles
+└── types/                # TypeScript type definitions
+```
+
+## Naming Conventions
+
+- **Files & Folders**: Use kebab-case (`user-profile.tsx`)
+- **Components**: Use PascalCase (`UserProfile.tsx`)
+- **Functions & Variables**: Use camelCase (`getUserData()`)
+- **Types & Interfaces**: Use PascalCase (`UserData`)
+- **Constants**: Use UPPER_SNAKE_CASE (`API_ENDPOINT`)
+- **Database Models**: Use PascalCase singular nouns (`User`, not `Users`)
+
+## TypeScript Guidelines
+
+- Use explicit types rather than `any`
+- Prefer interfaces for object shapes, types for unions/complex types
+- Utilize TypeScript's utility types when applicable (`Partial<T>`, `Pick<T>`)
+- Define shared types in dedicated files under `src/types/`
+
+## Function Documentation
+
+All functions must be documented using JSDoc/TSDoc comments to provide clear information in VSCode IntelliSense:
+
+```typescript
+/**
+ * Fetches user data from the API
+ *
+ * @param userId - The unique identifier of the user
+ * @param options - Optional configuration for the request
+ * @returns The user data object or null if not found
+ * @throws Will throw an error if the request fails
+ *
+ * @example
+ * ```ts
+ * // Get user with default options
+ * const user = await fetchUserData('123')
+ * 
+ * // Get user with custom options
+ * const user = await fetchUserData('123', { includeOrders: true })
+ * ```
+ */
+async function fetchUserData(
+  userId: string, 
+  options?: FetchOptions
+): Promise<UserData | null> {
+  // Function implementation
+}
+```
+
+### Documentation Requirements:
+
+- **Description**: Begin with a clear, concise description of what the function does
+- **@param**: Document each parameter with type and description
+- **@returns**: Describe the return value and its type
+- **@throws**: Document potential errors that might be thrown
+- **@example**: Provide usage examples for complex functions
+- **@deprecated**: Mark deprecated functions, providing alternative solutions
+- **@see**: Reference related functions or documentation when applicable
+
+### Component Props Documentation:
+
+```typescript
+/**
+ * Button component with various visual styles and behaviors
+ *
+ * @param props - Component properties
+ * @param props.variant - Visual style of the button
+ * @param props.size - Size of the button
+ * @param props.onClick - Function called when button is clicked
+ * @param props.disabled - Whether the button is disabled
+ * @param props.children - Button content
+ */
+function Button({
+  variant = "primary",
+  size = "medium",
+  onClick,
+  disabled = false,
+  children,
+}: ButtonProps) {
+  // Component implementation
+}
+```
+
+## Next.js Best Practices
+
+- Use App Router for new projects
+- Implement server components by default, client components as needed
+- Utilize data fetching patterns appropriate for each route
+- Follow Next.js's file-based routing conventions
+
+## Prisma Implementation
+
+- Define models in PascalCase singular form
+- Include comprehensive relations between models
+- Use meaningful field names that match frontend usage
+- Add appropriate indexes for frequently queried fields
+- Implement middleware for common operations (e.g., timestamps)
+
+## UI Component Guidelines
+
+- Use shadcn/ui components as the foundation
+- Extend with custom Radix UI components when needed
+- Follow component composition pattern (smaller, focused components)
+- Create variants using cva for component variations
+
+## Tailwind CSS Usage
+
+- Use Tailwind's utility classes directly in JSX
+- Create reusable classes with `@apply` only when necessary
+- Follow mobile-first responsive design
+- Utilize Tailwind's theme extension for project-specific values
+
+## API Development
+
+- Create API routes using Next.js API handlers or route handlers
+- Return consistent response formats
+- Implement proper error handling and status codes
+- Use zod for request validation
+
+## Performance Considerations
+
+- Implement proper code-splitting and lazy loading
+- Optimize images with Next.js Image component
+- Use React.memo and useMemo for expensive operations
+- Implement proper caching strategies
+
+This guide ensures consistent development practices across the fullstack application while leveraging the strengths of TypeScript, Next.js, Prisma, shadcn, Tailwind CSS, and Radix UI.

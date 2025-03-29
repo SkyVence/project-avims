@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+	"dev": "next dev",
+	"start": "next start",
+	"prebuild": "npm run prisma:generate",
+	"postinstall": "prisma generate",
+	"prisma:generate": "prisma generate",
+	"prisma:migrate": "prisma migrate deploy",
+	"build": "npm run prisma:generate && next build",
+	"vercel-build": "npm run prisma:migrate && npm run build"
   },
   "dependencies": {
     "@clerk/nextjs": "latest",

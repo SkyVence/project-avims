@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import * as XLSX from "xlsx"
+import * as XLSX from "@e965/xlsx"
 import { getAuthenticatedUser } from "@/lib/auth"
 import { prisma } from "@/lib/db"
 

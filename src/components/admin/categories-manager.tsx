@@ -22,6 +22,7 @@ import {
   AlertDialogTitle,
 } from "../ui/alert-dialog"
 import { handleError } from "@/lib/error-handler"
+import { useTranslations } from "next-intl"
 
 type SubFamily = {
   id: string
@@ -49,6 +50,7 @@ interface CategoriesManagerProps {
 export function CategoriesManager({ initialCategories }: CategoriesManagerProps) {
   const [categories, setCategories] = useState<Category[]>(initialCategories)
   const [isLoading, setIsLoading] = useState(false)
+  const t = useTranslations()
 
   // Dialog states
   const [categoryDialogOpen, setCategoryDialogOpen] = useState(false)
@@ -158,13 +160,13 @@ export function CategoriesManager({ initialCategories }: CategoriesManagerProps)
       }
 
       toast({
-        title: "Success",
-        description: `${deleteType} deleted successfully.`,
+        title: t('admin.categories.toast.success.title'),
+        description: t('admin.categories.toast.success.deleted', { type: t(`admin.categories.types.${deleteType}`) }),
       })
     } catch (error) {
       handleError(error, {
-        title: "Error",
-        defaultMessage: `Failed to delete ${deleteType}.`
+        title: t('admin.categories.toast.error.title'),
+        defaultMessage: t('admin.categories.toast.error.delete', { type: t(`admin.categories.types.${deleteType}`) })
       })
     } finally {
       setIsLoading(false)
@@ -177,9 +179,9 @@ export function CategoriesManager({ initialCategories }: CategoriesManagerProps)
       <Tabs defaultValue="categories">
         <div className="flex items-center justify-between">
           <TabsList>
-            <TabsTrigger value="categories">Categories</TabsTrigger>
-            <TabsTrigger value="families">Families</TabsTrigger>
-            <TabsTrigger value="subfamilies">Sub-Families</TabsTrigger>
+            <TabsTrigger value="categories">{t('admin.categories.tabs.categories')}</TabsTrigger>
+            <TabsTrigger value="families">{t('admin.categories.tabs.families')}</TabsTrigger>
+            <TabsTrigger value="subfamilies">{t('admin.categories.tabs.subfamilies')}</TabsTrigger>
           </TabsList>
           <div className="space-x-2">
             <Button
@@ -189,7 +191,7 @@ export function CategoriesManager({ initialCategories }: CategoriesManagerProps)
               }}
             >
               <Plus className="mr-2 h-4 w-4" />
-              Add Category
+              {t('admin.categories.buttons.addCategory')}
             </Button>
             <Button
               onClick={() => {
@@ -198,7 +200,7 @@ export function CategoriesManager({ initialCategories }: CategoriesManagerProps)
               }}
             >
               <Plus className="mr-2 h-4 w-4" />
-              Add Family
+              {t('admin.categories.buttons.addFamily')}
             </Button>
             <Button
               onClick={() => {
@@ -207,7 +209,7 @@ export function CategoriesManager({ initialCategories }: CategoriesManagerProps)
               }}
             >
               <Plus className="mr-2 h-4 w-4" />
-              Add Sub-Family
+              {t('admin.categories.buttons.addSubfamily')}
             </Button>
           </div>
         </div>
@@ -215,13 +217,13 @@ export function CategoriesManager({ initialCategories }: CategoriesManagerProps)
         <TabsContent value="categories" className="mt-4">
           <Card>
             <CardHeader>
-              <CardTitle>Categories</CardTitle>
-              <CardDescription>Manage item categories</CardDescription>
+              <CardTitle>{t('admin.categories.cards.categories.title')}</CardTitle>
+              <CardDescription>{t('admin.categories.cards.categories.description')}</CardDescription>
             </CardHeader>
             <CardContent>
               {categories.length === 0 ? (
                 <div className="text-center py-4 text-muted-foreground">
-                  No categories found. Create one to get started.
+                  {t('admin.categories.cards.categories.empty')}
                 </div>
               ) : (
                 <div className="space-y-2">
@@ -426,17 +428,18 @@ export function CategoriesManager({ initialCategories }: CategoriesManagerProps)
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogTitle>{t('admin.categories.deleteDialog.title')}</AlertDialogTitle>
             <AlertDialogDescription>
-              This will permanently delete the {deleteType} "{deleteName}".
-              {deleteType === "category" && " All families and sub-families in this category will also be deleted."}
-              {deleteType === "family" && " All sub-families in this family will also be deleted."}
+              {t('admin.categories.deleteDialog.description', { 
+                type: t(`admin.categories.types.${deleteType}`), 
+                name: deleteName 
+              })}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel disabled={isLoading}>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDelete} disabled={isLoading}>
-              {isLoading ? "Deleting..." : "Delete"}
+            <AlertDialogCancel disabled={isLoading}>{t('admin.categories.deleteDialog.buttons.cancel')}</AlertDialogCancel>
+            <AlertDialogAction disabled={isLoading} onClick={handleDelete}>
+              {isLoading ? t('admin.categories.deleteDialog.buttons.deleting') : t('admin.categories.deleteDialog.buttons.delete')}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

@@ -11,6 +11,7 @@ import { Button } from "../ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { Input } from "../ui/input"
 import { useToast } from "@/hooks/use-toast"
+import { useTranslations } from "next-intl"
 
 const formSchema = z.object({
   firstName: z.string().min(2, {
@@ -34,6 +35,7 @@ export function SignUpForm({ invitationToken }: { invitationToken: string }) {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
   const { toast } = useToast()
+  const t = useTranslations()
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -67,16 +69,16 @@ export function SignUpForm({ invitationToken }: { invitationToken: string }) {
         router.push(process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL || "/")
       } else {
         toast({
-          title: "Error",
-          description: "There was an error creating your account. Please try again.",
+          title: t('auth.signup.toast.error.title'),
+          description: t('auth.signup.toast.error.description'),
           variant: "destructive",
         })
       }
     } catch (error) {
       console.error("Error during sign-up:", error)
       toast({
-        title: "Error",
-        description: "There was an error creating your account. Please try again.",
+        title: t('auth.signup.toast.error.title'),
+        description: t('auth.signup.toast.error.description'),
         variant: "destructive",
       })
     } finally {
@@ -93,9 +95,9 @@ export function SignUpForm({ invitationToken }: { invitationToken: string }) {
             name="firstName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>First name</FormLabel>
+                <FormLabel>{t('auth.signup.fields.firstName.label')}</FormLabel>
                 <FormControl>
-                  <Input placeholder="John" {...field} disabled={isLoading} />
+                  <Input placeholder={t('auth.signup.fields.firstName.placeholder')} {...field} disabled={isLoading} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -106,9 +108,9 @@ export function SignUpForm({ invitationToken }: { invitationToken: string }) {
             name="lastName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Last name</FormLabel>
+                <FormLabel>{t('auth.signup.fields.lastName.label')}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Doe" {...field} disabled={isLoading} />
+                  <Input placeholder={t('auth.signup.fields.lastName.placeholder')} {...field} disabled={isLoading} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -121,9 +123,9 @@ export function SignUpForm({ invitationToken }: { invitationToken: string }) {
           name="username"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>{t('auth.signup.fields.username.label')}</FormLabel>
               <FormControl>
-                <Input placeholder="johndoe" {...field} disabled={isLoading} />
+                <Input placeholder={t('auth.signup.fields.username.placeholder')} {...field} disabled={isLoading} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -135,9 +137,9 @@ export function SignUpForm({ invitationToken }: { invitationToken: string }) {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>{t('auth.signup.fields.password.label')}</FormLabel>
               <FormControl>
-                <Input type="password" {...field} disabled={isLoading} />
+                <Input type="password" placeholder={t('auth.signup.fields.password.placeholder')} {...field} disabled={isLoading} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -147,7 +149,7 @@ export function SignUpForm({ invitationToken }: { invitationToken: string }) {
         <div id="clerk-captcha" className="my-4"></div>
 
         <Button type="submit" className="w-full" disabled={isLoading}>
-          {isLoading ? "Creating account..." : "Create account"}
+          {isLoading ? t('auth.signup.buttons.creating') : t('auth.signup.buttons.createAccount')}
         </Button>
       </form>
     </Form>

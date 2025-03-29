@@ -19,6 +19,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { toast } from "@/hooks/use-toast"
 import { createFamily, updateFamily } from "../../app/actions/admin"
 import { handleError } from "@/lib/error-handler"
+import { useTranslations } from "next-intl"
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
@@ -56,6 +57,7 @@ interface FamilyDialogProps {
 export function FamilyDialog({ open, onOpenChange, family, categories, onSave }: FamilyDialogProps) {
   const [isLoading, setIsLoading] = useState(false)
   const isEditing = !!family
+  const t = useTranslations()
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -88,8 +90,8 @@ export function FamilyDialog({ open, onOpenChange, family, categories, onSave }:
 
         onSave({ id: family.id, name: data.name, categoryId: data.categoryId, subFamilies: family.subFamilies }, false)
         toast({
-          title: "Success",
-          description: "Family updated successfully.",
+          title: t('admin.categories.familyDialog.toast.success.title'),
+          description: t('admin.categories.familyDialog.toast.success.updated'),
         })
       } else {
         // Create new family
@@ -104,16 +106,18 @@ export function FamilyDialog({ open, onOpenChange, family, categories, onSave }:
 
         onSave({ id: tempId, name: data.name, categoryId: data.categoryId, subFamilies: [] }, true)
         toast({
-          title: "Success",
-          description: "Family created successfully.",
+          title: t('admin.categories.familyDialog.toast.success.title'),
+          description: t('admin.categories.familyDialog.toast.success.created'),
         })
       }
 
       onOpenChange(false)
     } catch (error) {
       handleError(error, {
-        title: "Error",
-        defaultMessage: isEditing ? "Failed to update family." : "Failed to create family."
+        title: t('admin.categories.familyDialog.toast.error.title'),
+        defaultMessage: isEditing 
+          ? t('admin.categories.familyDialog.toast.error.update') 
+          : t('admin.categories.familyDialog.toast.error.create')
       })
     } finally {
       setIsLoading(false)
@@ -124,9 +128,15 @@ export function FamilyDialog({ open, onOpenChange, family, categories, onSave }:
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>{isEditing ? "Edit Family" : "Create Family"}</DialogTitle>
+          <DialogTitle>
+            {isEditing 
+              ? t('admin.categories.familyDialog.title.edit') 
+              : t('admin.categories.familyDialog.title.create')}
+          </DialogTitle>
           <DialogDescription>
-            {isEditing ? "Update the family details." : "Add a new family to the system."}
+            {isEditing 
+              ? t('admin.categories.familyDialog.description.edit') 
+              : t('admin.categories.familyDialog.description.create')}
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -136,9 +146,9 @@ export function FamilyDialog({ open, onOpenChange, family, categories, onSave }:
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>{t('admin.categories.familyDialog.fields.name.label')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Family name" {...field} />
+                    <Input placeholder={t('admin.categories.familyDialog.fields.name.placeholder')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -149,11 +159,11 @@ export function FamilyDialog({ open, onOpenChange, family, categories, onSave }:
               name="categoryId"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Category</FormLabel>
+                  <FormLabel>{t('admin.categories.familyDialog.fields.category.label')}</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value} value={field.value}>
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a category" />
+                        <SelectValue placeholder={t('admin.categories.familyDialog.fields.category.placeholder')} />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -170,10 +180,14 @@ export function FamilyDialog({ open, onOpenChange, family, categories, onSave }:
             />
             <DialogFooter>
               <Button type="button" variant="outline" onClick={() => onOpenChange(false)} disabled={isLoading}>
-                Cancel
+                {t('admin.categories.familyDialog.buttons.cancel')}
               </Button>
               <Button type="submit" disabled={isLoading}>
-                {isLoading ? "Saving..." : isEditing ? "Update" : "Create"}
+                {isLoading 
+                  ? t('admin.categories.familyDialog.buttons.saving') 
+                  : isEditing 
+                    ? t('admin.categories.familyDialog.buttons.update') 
+                    : t('admin.categories.familyDialog.buttons.create')}
               </Button>
             </DialogFooter>
           </form>

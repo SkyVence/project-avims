@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Icons } from "@/components/icons"
 import { handleError } from "@/lib/error-handler"
+import { useTranslations } from "next-intl"
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
   isSignUp?: boolean
@@ -32,6 +33,7 @@ export function UserAuthForm({ isSignUp = false, ...props }: UserAuthFormProps) 
   const { isLoaded: isSignUpLoaded, signUp } = useSignUp()
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const [error, setError] = React.useState<string | null>(null)
+  const t = useTranslations()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -80,13 +82,13 @@ export function UserAuthForm({ isSignUp = false, ...props }: UserAuthFormProps) 
       }
     } catch (error) {
       handleError(error, {
-        title: isSignUp ? "Sign up failed" : "Sign in failed",
-        defaultMessage: "Something went wrong. Please try again."
+        title: isSignUp ? t('auth.signup.error.title') : t('auth.signin.error.title'),
+        defaultMessage: t('auth.common.error.message')
       })
       if (error instanceof Error) {
-        setError(error.message || "Something went wrong. Please try again.")
+        setError(error.message || t('auth.common.error.message'))
       } else {
-        setError("Something went wrong. Please try again.")
+        setError(t('auth.common.error.message'))
       }
     } finally {
       setIsLoading(false)
@@ -102,10 +104,10 @@ export function UserAuthForm({ isSignUp = false, ...props }: UserAuthFormProps) 
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>{t('auth.common.fields.email.label')}</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="name@example.com"
+                    placeholder={t('auth.common.fields.email.placeholder')}
                     type="email"
                     autoCapitalize="none"
                     autoComplete="email"
@@ -123,10 +125,10 @@ export function UserAuthForm({ isSignUp = false, ...props }: UserAuthFormProps) 
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>{t('auth.common.fields.password.label')}</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="••••••••"
+                    placeholder={t('auth.common.fields.password.placeholder')}
                     type="password"
                     autoCapitalize="none"
                     autoComplete={isSignUp ? "new-password" : "current-password"}
@@ -143,7 +145,7 @@ export function UserAuthForm({ isSignUp = false, ...props }: UserAuthFormProps) 
           {error && <div className="text-sm text-destructive">{error}</div>}
           <Button type="submit" className="w-full" disabled={isLoading}>
             {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
-            {isSignUp ? "Sign Up" : "Sign In"}
+            {isSignUp ? t('auth.signup.buttons.submit') : t('auth.signin.buttons.submit')}
           </Button>
         </form>
       </Form>

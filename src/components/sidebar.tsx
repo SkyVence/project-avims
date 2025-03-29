@@ -10,6 +10,7 @@ import { ScrollArea } from "./ui/scroll-area"
 import { Package, Box, Truck, LayoutDashboard, Settings, Menu, X } from "lucide-react"
 import { useState } from "react"
 import { useMobile } from "@/hooks/use-mobile"
+import { useTranslations } from "next-intl"
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -17,6 +18,7 @@ export function Sidebar({ className }: SidebarProps) {
   const pathname = usePathname()
   const isMobile = useMobile()
   const [isOpen, setIsOpen] = useState(false)
+  const t = useTranslations()
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen)
@@ -24,27 +26,27 @@ export function Sidebar({ className }: SidebarProps) {
 
   const sidebarItems = [
     {
-      title: "Dashboard",
+      title: t('sidebar.dashboard'),
       href: "/",
       icon: <LayoutDashboard className="h-5 w-5" />,
     },
     {
-      title: "Items",
+      title: t('sidebar.items'),
       href: "/items",
       icon: <Box className="h-5 w-5" />,
     },
     {
-      title: "Packages",
+      title: t('sidebar.packages'),
       href: "/packages",
       icon: <Package className="h-5 w-5" />,
     },
     {
-      title: "Operations",
+      title: t('sidebar.operations'),
       href: "/operations",
       icon: <Truck className="h-5 w-5" />,
     },
     {
-      title: "Settings",
+      title: t('sidebar.settings'),
       href: "/settings",
       icon: <Settings className="h-5 w-5" />,
     },
@@ -55,7 +57,7 @@ export function Sidebar({ className }: SidebarProps) {
       <div className="flex h-14 items-center px-4 border-b">
         <Link href="/" className="flex items-center font-semibold">
           <Package className="h-6 w-6 mr-2" />
-          <span>Inventory System</span>
+          <span>{t('sidebar.navHeader')}</span>
         </Link>
         {isMobile && (
           <Button variant="ghost" size="icon" className="ml-auto" onClick={toggleSidebar}>
@@ -87,7 +89,13 @@ export function Sidebar({ className }: SidebarProps) {
   return (
     <>
       {isMobile && (
-        <Button variant="ghost" size="icon" className="fixed top-3 left-3 z-50" onClick={toggleSidebar}>
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="fixed top-3 left-3 z-50" 
+          onClick={toggleSidebar}
+          aria-label={t('sidebar.expand')}
+        >
           <Menu className="h-5 w-5" />
         </Button>
       )}

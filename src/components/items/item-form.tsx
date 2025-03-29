@@ -26,6 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { useTranslations } from "next-intl";
 
 export const itemFormSchema = z.object({
   name: z.string().min(1, {
@@ -95,6 +96,7 @@ export function ItemForm({
   const [availableSubFamilies, setAvailableSubFamilies] = useState<SubFamily[]>(
     []
   );
+  const t = useTranslations();
 
   const form = useForm<ItemFormValues>({
     resolver: zodResolver(itemFormSchema),
@@ -168,16 +170,16 @@ export function ItemForm({
       setIsLoading(true);
       await onSubmit(data);
       toast({
-        title: "Success",
-        description: initialData ? "Item updated." : "Item created.",
+        title: t('items.form.toast.success.' + (initialData ? 'update.title' : 'create.title')),
+        description: t('items.form.toast.success.' + (initialData ? 'update.description' : 'create.description')),
       });
       router.push("/items");
       router.refresh();
     } catch (error) {
       console.error(error);
       toast({
-        title: "Error",
-        description: "Something went wrong.",
+        title: t('items.form.toast.error.title'),
+        description: t('items.form.toast.error.description'),
         variant: "destructive",
       });
     } finally {
@@ -201,10 +203,11 @@ export function ItemForm({
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>{t('items.form.fields.name.label')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Item name" {...field} />
+                    <Input placeholder={t('items.form.fields.name.placeholder')} {...field} />
                   </FormControl>
+                  <FormDescription>{t('items.form.fields.name.description')}</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -214,10 +217,11 @@ export function ItemForm({
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>{t('items.form.fields.description.label')}</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="Item description" {...field} />
+                    <Textarea placeholder={t('items.form.fields.description.placeholder')} {...field} />
                   </FormControl>
+                  <FormDescription>{t('items.form.fields.description.description')}</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -227,10 +231,11 @@ export function ItemForm({
               name="brand"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Brand</FormLabel>
+                  <FormLabel>{t('items.form.fields.brand.label')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Brand name" {...field} />
+                    <Input placeholder={t('items.form.fields.brand.placeholder')} {...field} />
                   </FormControl>
+                  <FormDescription>{t('items.form.fields.brand.description')}</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -241,15 +246,16 @@ export function ItemForm({
                 name="value"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Value</FormLabel>
+                    <FormLabel>{t('items.form.fields.value.label')}</FormLabel>
                     <FormControl>
                       <Input
                         type="number"
                         step="0.01"
-                        placeholder="0.00"
+                        placeholder={t('items.form.fields.value.placeholder')}
                         {...field}
                       />
                     </FormControl>
+                    <FormDescription>{t('items.form.fields.value.description')}</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -259,15 +265,16 @@ export function ItemForm({
                 name="insuranceValue"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Insurance Value</FormLabel>
+                    <FormLabel>{t('items.form.fields.insuranceValue.label')}</FormLabel>
                     <FormControl>
                       <Input
                         type="number"
                         step="0.01"
-                        placeholder="0.00"
+                        placeholder={t('items.form.fields.insuranceValue.placeholder')}
                         {...field}
                       />
                     </FormControl>
+                    <FormDescription>{t('items.form.fields.insuranceValue.description')}</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -525,7 +532,7 @@ export function ItemForm({
             Cancel
           </Button>
           <Button type="submit" disabled={isLoading}>
-            {initialData ? "Update Item" : "Create Item"}
+            {isLoading ? t('items.form.buttons.saving') : t('items.form.buttons.save')}
           </Button>
         </div>
       </form>

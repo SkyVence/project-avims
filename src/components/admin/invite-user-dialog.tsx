@@ -17,6 +17,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "../ui/input"
 import { toast } from "@/hooks/use-toast"
 import { inviteUser } from "../../app/actions/admin"
+import { useTranslations } from "next-intl"
 
 const inviteFormSchema = z.object({
   email: z.string().email({
@@ -33,6 +34,7 @@ interface InviteUserDialogProps {
 
 export function InviteUserDialog({ open, onOpenChange }: InviteUserDialogProps) {
   const [isLoading, setIsLoading] = useState(false)
+  const t = useTranslations()
 
   const form = useForm<InviteFormValues>({
     resolver: zodResolver(inviteFormSchema),
@@ -46,16 +48,16 @@ export function InviteUserDialog({ open, onOpenChange }: InviteUserDialogProps) 
       setIsLoading(true)
       await inviteUser(data.email)
       toast({
-        title: "Invitation sent",
-        description: `An invitation has been sent to ${data.email}`,
+        title: t('admin.users.inviteDialog.toast.success.title'),
+        description: t('admin.users.inviteDialog.toast.success.description'),
       })
       form.reset()
       onOpenChange(false)
     } catch (error) {
       console.error(error)
       toast({
-        title: "Error",
-        description: "Failed to send invitation. Please try again.",
+        title: t('admin.users.inviteDialog.toast.error.title'),
+        description: t('admin.users.inviteDialog.toast.error.description'),
         variant: "destructive",
       })
     } finally {
@@ -67,8 +69,8 @@ export function InviteUserDialog({ open, onOpenChange }: InviteUserDialogProps) 
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Invite User</DialogTitle>
-          <DialogDescription>Send an invitation email to a new user.</DialogDescription>
+          <DialogTitle>{t('admin.users.inviteDialog.title')}</DialogTitle>
+          <DialogDescription>{t('admin.users.inviteDialog.description')}</DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -77,9 +79,9 @@ export function InviteUserDialog({ open, onOpenChange }: InviteUserDialogProps) 
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>{t('admin.users.inviteDialog.fields.email.label')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="user@example.com" {...field} />
+                    <Input placeholder={t('admin.users.inviteDialog.fields.email.placeholder')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -87,10 +89,10 @@ export function InviteUserDialog({ open, onOpenChange }: InviteUserDialogProps) 
             />
             <DialogFooter>
               <Button type="button" variant="outline" onClick={() => onOpenChange(false)} disabled={isLoading}>
-                Cancel
+                {t('admin.users.inviteDialog.buttons.cancel')}
               </Button>
               <Button type="submit" disabled={isLoading}>
-                {isLoading ? "Sending..." : "Send Invitation"}
+                {isLoading ? t('admin.users.inviteDialog.buttons.sending') : t('admin.users.inviteDialog.buttons.send')}
               </Button>
             </DialogFooter>
           </form>

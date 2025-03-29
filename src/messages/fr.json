@@ -41,7 +41,54 @@
       "weakPassword": "Le mot de passe est trop faible",
       "emailInUse": "Cet email est déjà utilisé"
     },
-    "logOut": "Se déconnecter"
+    "logOut": "Se déconnecter",
+    "signUpForm": {
+      "title": "Créer un compte",
+      "description": "Entrez vos informations pour créer un nouveau compte",
+      "name": {
+        "label": "Nom",
+        "placeholder": "Votre nom complet"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "votre.email@exemple.com"
+      },
+      "password": {
+        "label": "Mot de passe",
+        "placeholder": "Créer un mot de passe",
+        "requirements": "Le mot de passe doit contenir au moins 8 caractères"
+      },
+      "confirmPassword": {
+        "label": "Confirmer le mot de passe",
+        "placeholder": "Répétez votre mot de passe"
+      },
+      "buttons": {
+        "submit": "S'inscrire",
+        "submitting": "Inscription en cours..."
+      },
+      "haveAccount": "Vous avez déjà un compte ?",
+      "signIn": "Se connecter"
+    },
+    "signInForm": {
+      "title": "Bienvenue",
+      "description": "Entrez vos identifiants pour vous connecter à votre compte",
+      "email": {
+        "label": "Email",
+        "placeholder": "votre.email@exemple.com"
+      },
+      "password": {
+        "label": "Mot de passe",
+        "placeholder": "Votre mot de passe"
+      },
+      "rememberMe": "Se souvenir de moi",
+      "forgotPassword": "Mot de passe oublié ?",
+      "buttons": {
+        "submit": "Se connecter",
+        "submitting": "Connexion en cours..."
+      },
+      "noAccount": "Vous n'avez pas de compte ?",
+      "signUp": "S'inscrire"
+    }
   },
   "navigation": {
     "dashboard": "Tableau de bord",
@@ -165,12 +212,16 @@
       "subtitle": "Système de Gestion"
     },
     "items": {
-      "createItem": "Créer des Articles",
+      "dashboard": "Tableau de bord",
+      "items": "Articles",
+      "packages": "Paquets",
+      "operations": "Opérations",
+      "settings": "Paramètres",
+      "createItem": "Créer un Article",
       "createPackage": "Créer un Paquet",
       "createOperation": "Créer une Opération",
       "importItems": "Importer des Articles",
-      "exportData": "Exporter les Données",
-      "settings": "Paramètres"
+      "exportData": "Exporter les Données"
     },
     "footer": {
       "signIn": "Se connecter",
@@ -180,7 +231,9 @@
       "adminDashboard": "Tableau de Bord Admin",
       "changeTheme": "Changer le Thème",
       "logOut": "Se déconnecter"
-    }
+    },
+    "dashboard": "Tableau de bord",
+    "navHeader": "Système d'Inventaire"
   },
   "settings": {
     "title": "Paramètres",
@@ -298,7 +351,43 @@
     "title": "Profil",
     "personalInfo": "Informations personnelles",
     "updateProfile": "Mettre à jour le profil",
-    "changePassword": "Changer le mot de passe"
+    "changePassword": "Changer le mot de passe",
+    "activity": {
+      "title": "Activité Récente",
+      "description": "Vos actions et mises à jour récentes",
+      "itemsCreated": "Articles Créés",
+      "packagesCreated": "Paquets Créés",
+      "operationsCreated": "Opérations Créées",
+      "noActivity": "Aucune activité récente",
+      "viewAll": "Voir toute l'activité",
+      "timestamp": {
+        "now": "À l'instant",
+        "minutes": "Il y a {minutes}m",
+        "hours": "Il y a {hours}h",
+        "days": "Il y a {days}j"
+      },
+      "actions": {
+        "created": "Créé",
+        "updated": "Mis à jour",
+        "deleted": "Supprimé",
+        "imported": "Importé",
+        "exported": "Exporté"
+      }
+    },
+    "stats": {
+      "title": "Vos Statistiques",
+      "description": "Aperçu de vos contributions à l'inventaire",
+      "itemsManaged": "Articles Gérés",
+      "packagesCreated": "Paquets Créés",
+      "operationsLed": "Opérations Dirigées",
+      "totalValue": "Valeur Totale Gérée",
+      "activity": {
+        "today": "Aujourd'hui",
+        "week": "Cette Semaine",
+        "month": "Ce Mois",
+        "year": "Cette Année"
+      }
+    }
   },
   "errors": {
     "notFound": {
@@ -578,7 +667,9 @@
       "import": "Importer les Articles",
       "importing": "Importation...",
       "reset": "Réinitialiser",
-      "close": "Fermer"
+      "close": "Fermer",
+      "downloadTemplate": "Télécharger le Modèle",
+      "viewItems": "Voir les Articles"
     },
     "toast": {
       "success": {
@@ -931,7 +1022,8 @@
         "addCategory": "Ajouter une Catégorie",
         "addFamily": "Ajouter une Famille",
         "addSubFamily": "Ajouter une Sous-Famille",
-        "viewDetails": "Voir les Détails"
+        "viewDetails": "Voir les Détails",
+        "hideDetails": "Masquer les Détails"
       },
       "categories": {
         "title": "Catégories",
@@ -1071,6 +1163,161 @@
           }
         }
       }
+    },
+    "deleteDialog": {
+      "title": "Êtes-vous sûr ?",
+      "description": "Cette action va supprimer définitivement {type} \"{name}\".",
+      "buttons": {
+        "cancel": "Annuler",
+        "delete": "Supprimer",
+        "deleting": "Suppression en cours..."
+      }
+    },
+    "toast": {
+      "success": {
+        "title": "Succès",
+        "deleted": "{type} supprimé avec succès."
+      },
+      "error": {
+        "title": "Erreur",
+        "delete": "Échec de la suppression de {type}."
+      }
+    },
+    "tabs": {
+      "categories": "Catégories",
+      "families": "Familles",
+      "subfamilies": "Sous-familles"
+    },
+    "buttons": {
+      "addCategory": "Ajouter une Catégorie",
+      "addFamily": "Ajouter une Famille",
+      "addSubfamily": "Ajouter une Sous-famille"
+    },
+    "cards": {
+      "categories": {
+        "title": "Catégories",
+        "description": "Gérer les catégories d'articles",
+        "empty": "Aucune catégorie trouvée. Créez-en une pour commencer."
+      }
+    },
+    "categoryDialog": {
+      "title": {
+        "create": "Créer une Catégorie",
+        "edit": "Modifier la Catégorie"
+      },
+      "description": {
+        "create": "Ajouter une nouvelle catégorie au système.",
+        "edit": "Mettre à jour les détails de la catégorie."
+      },
+      "fields": {
+        "name": {
+          "label": "Nom",
+          "placeholder": "Nom de la catégorie"
+        }
+      },
+      "buttons": {
+        "cancel": "Annuler",
+        "create": "Créer",
+        "update": "Mettre à jour",
+        "saving": "Enregistrement..."
+      },
+      "toast": {
+        "success": {
+          "title": "Succès",
+          "created": "Catégorie créée avec succès.",
+          "updated": "Catégorie mise à jour avec succès."
+        },
+        "error": {
+          "title": "Erreur",
+          "create": "Échec de la création de la catégorie.",
+          "update": "Échec de la mise à jour de la catégorie."
+        }
+      }
+    },
+    "familyDialog": {
+      "title": {
+        "create": "Créer une Famille",
+        "edit": "Modifier la Famille"
+      },
+      "description": {
+        "create": "Ajouter une nouvelle famille à la catégorie sélectionnée.",
+        "edit": "Mettre à jour les détails de la famille."
+      },
+      "fields": {
+        "name": {
+          "label": "Nom",
+          "placeholder": "Nom de la famille"
+        },
+        "category": {
+          "label": "Catégorie",
+          "placeholder": "Sélectionner une catégorie"
+        }
+      },
+      "buttons": {
+        "cancel": "Annuler",
+        "create": "Créer",
+        "update": "Mettre à jour",
+        "saving": "Enregistrement..."
+      },
+      "toast": {
+        "success": {
+          "title": "Succès",
+          "created": "Famille créée avec succès.",
+          "updated": "Famille mise à jour avec succès."
+        },
+        "error": {
+          "title": "Erreur",
+          "create": "Échec de la création de la famille.",
+          "update": "Échec de la mise à jour de la famille."
+        }
+      }
+    },
+    "subfamilyDialog": {
+      "title": {
+        "create": "Créer une Sous-famille",
+        "edit": "Modifier la Sous-famille"
+      },
+      "description": {
+        "create": "Ajouter une nouvelle sous-famille à la famille sélectionnée.",
+        "edit": "Mettre à jour les détails de la sous-famille."
+      },
+      "fields": {
+        "name": {
+          "label": "Nom",
+          "placeholder": "Nom de la sous-famille"
+        },
+        "category": {
+          "label": "Catégorie",
+          "placeholder": "Sélectionner une catégorie"
+        },
+        "family": {
+          "label": "Famille",
+          "placeholder": "Sélectionner une famille"
+        }
+      },
+      "buttons": {
+        "cancel": "Annuler",
+        "create": "Créer",
+        "update": "Mettre à jour",
+        "saving": "Enregistrement..."
+      },
+      "toast": {
+        "success": {
+          "title": "Succès",
+          "created": "Sous-famille créée avec succès.",
+          "updated": "Sous-famille mise à jour avec succès."
+        },
+        "error": {
+          "title": "Erreur",
+          "create": "Échec de la création de la sous-famille.",
+          "update": "Échec de la mise à jour de la sous-famille."
+        }
+      }
+    },
+    "types": {
+      "category": "catégorie",
+      "family": "famille",
+      "subfamily": "sous-famille"
     }
   },
   "export": {
@@ -1210,6 +1457,22 @@
             "subFamily": "Sous-Famille"
           }
         }
+      }
+    },
+    "client": {
+      "title": "Exporter les Données",
+      "description": "Exporter vos données d'inventaire dans différents formats",
+      "selectionTitle": "Sélectionnez ce que vous souhaitez exporter",
+      "noItems": "Aucun élément sélectionné pour l'exportation",
+      "selectedCount": "{count} éléments sélectionnés pour l'exportation",
+      "processing": "Traitement de la demande d'exportation...",
+      "downloadReady": "Votre exportation est prête à être téléchargée",
+      "downloadButton": "Télécharger le Fichier",
+      "newExport": "Créer une Nouvelle Exportation",
+      "sections": {
+        "items": "Articles",
+        "packages": "Paquets",
+        "operations": "Opérations"
       }
     }
   },
@@ -1648,6 +1911,267 @@
       "error": {
         "title": "Erreur",
         "description": "Échec de la mise à jour des préférences de langue."
+      }
+    }
+  },
+  "admin": {
+    "sidebar": {
+      "title": "Admin",
+      "subtitle": "Système d'Inventaire",
+      "navigation": "Navigation Admin",
+      "items": {
+        "dashboard": "Tableau de bord",
+        "users": "Utilisateurs",
+        "categories": "Catégories",
+        "settings": "Paramètres",
+        "backToApp": "Retour à l'Application"
+      }
+    },
+    "users": {
+      "title": "Gestion des Utilisateurs",
+      "description": "Gérer les comptes utilisateurs et les permissions",
+      "header": {
+        "title": "Utilisateurs",
+        "description": "Gérer les utilisateurs et leurs rôles",
+        "buttons": {
+          "invite": "Inviter un Utilisateur",
+          "export": "Exporter les Utilisateurs"
+        }
+      },
+      "table": {
+        "columns": {
+          "name": "Nom",
+          "email": "Email",
+          "role": "Rôle",
+          "status": "Statut",
+          "lastActive": "Dernière Activité",
+          "actions": "Actions"
+        },
+        "roles": {
+          "admin": "Administrateur",
+          "manager": "Gestionnaire",
+          "user": "Utilisateur",
+          "viewer": "Observateur"
+        },
+        "status": {
+          "active": "Actif",
+          "inactive": "Inactif",
+          "pending": "En attente"
+        },
+        "actions": {
+          "edit": "Modifier l'Utilisateur",
+          "delete": "Supprimer l'Utilisateur",
+          "resetPassword": "Réinitialiser le Mot de Passe",
+          "deactivate": "Désactiver",
+          "activate": "Activer",
+          "makeAdmin": "Rendre Administrateur",
+          "removeAdmin": "Retirer les droits d'Admin"
+        },
+        "search": "Rechercher des utilisateurs...",
+        "empty": "Aucun utilisateur trouvé",
+        "deleteConfirmation": "Êtes-vous sûr de vouloir supprimer cet utilisateur ? Cette action est définitive."
+      },
+      "inviteDialog": {
+        "title": "Inviter un Utilisateur",
+        "description": "Envoyer une invitation à rejoindre votre organisation",
+        "fields": {
+          "email": {
+            "label": "Adresse Email",
+            "placeholder": "utilisateur@exemple.com",
+            "description": "Entrez l'adresse email à laquelle envoyer l'invitation"
+          },
+          "role": {
+            "label": "Rôle",
+            "placeholder": "Sélectionnez un rôle",
+            "description": "Attribuer des permissions pour le nouvel utilisateur"
+          },
+          "message": {
+            "label": "Message Personnel",
+            "placeholder": "Message optionnel à inclure dans l'invitation",
+            "description": "Ajoutez une note personnelle à l'email d'invitation"
+          }
+        },
+        "buttons": {
+          "send": "Envoyer l'Invitation",
+          "sending": "Envoi en cours...",
+          "cancel": "Annuler"
+        },
+        "toast": {
+          "success": {
+            "title": "Invitation Envoyée",
+            "description": "L'invitation utilisateur a été envoyée avec succès."
+          },
+          "error": {
+            "title": "Erreur",
+            "description": "Échec de l'envoi de l'invitation. Veuillez réessayer."
+          }
+        }
+      },
+      "sidebar": {
+        "title": "Admin",
+        "dashboard": "Tableau de Bord Admin",
+        "users": "Gestion des Utilisateurs",
+        "categories": "Gestion des Catégories",
+        "settings": "Paramètres Système",
+        "logs": "Journaux Système",
+        "backToApp": "Retour à l'Application"
+      }
+    },
+    "categories": {
+      "tabs": {
+        "categories": "Catégories",
+        "families": "Familles",
+        "subfamilies": "Sous-familles"
+      },
+      "buttons": {
+        "addCategory": "Ajouter une Catégorie",
+        "addFamily": "Ajouter une Famille",
+        "addSubfamily": "Ajouter une Sous-famille"
+      },
+      "cards": {
+        "categories": {
+          "title": "Catégories",
+          "description": "Gérer les catégories d'articles",
+          "empty": "Aucune catégorie trouvée. Créez-en une pour commencer."
+        }
+      },
+      "deleteDialog": {
+        "title": "Êtes-vous sûr ?",
+        "description": "Cette action va supprimer définitivement {type} \"{name}\".",
+        "buttons": {
+          "cancel": "Annuler",
+          "delete": "Supprimer",
+          "deleting": "Suppression en cours..."
+        }
+      },
+      "types": {
+        "category": "catégorie",
+        "family": "famille",
+        "subfamily": "sous-famille"
+      },
+      "toast": {
+        "success": {
+          "title": "Succès",
+          "deleted": "{type} supprimé avec succès."
+        },
+        "error": {
+          "title": "Erreur",
+          "delete": "Échec de la suppression de {type}."
+        }
+      },
+      "categoryDialog": {
+        "title": {
+          "create": "Créer une Catégorie",
+          "edit": "Modifier la Catégorie"
+        },
+        "description": {
+          "create": "Ajouter une nouvelle catégorie au système.",
+          "edit": "Mettre à jour les détails de la catégorie."
+        },
+        "fields": {
+          "name": {
+            "label": "Nom",
+            "placeholder": "Nom de la catégorie"
+          }
+        },
+        "buttons": {
+          "cancel": "Annuler",
+          "create": "Créer",
+          "update": "Mettre à jour",
+          "saving": "Enregistrement..."
+        },
+        "toast": {
+          "success": {
+            "title": "Succès",
+            "created": "Catégorie créée avec succès.",
+            "updated": "Catégorie mise à jour avec succès."
+          },
+          "error": {
+            "title": "Erreur",
+            "create": "Échec de la création de la catégorie.",
+            "update": "Échec de la mise à jour de la catégorie."
+          }
+        }
+      },
+      "familyDialog": {
+        "title": {
+          "create": "Créer une Famille",
+          "edit": "Modifier la Famille"
+        },
+        "description": {
+          "create": "Ajouter une nouvelle famille à la catégorie sélectionnée.",
+          "edit": "Mettre à jour les détails de la famille."
+        },
+        "fields": {
+          "name": {
+            "label": "Nom",
+            "placeholder": "Nom de la famille"
+          },
+          "category": {
+            "label": "Catégorie",
+            "placeholder": "Sélectionner une catégorie"
+          }
+        },
+        "buttons": {
+          "cancel": "Annuler",
+          "create": "Créer",
+          "update": "Mettre à jour",
+          "saving": "Enregistrement..."
+        },
+        "toast": {
+          "success": {
+            "title": "Succès",
+            "created": "Famille créée avec succès.",
+            "updated": "Famille mise à jour avec succès."
+          },
+          "error": {
+            "title": "Erreur",
+            "create": "Échec de la création de la famille.",
+            "update": "Échec de la mise à jour de la famille."
+          }
+        }
+      },
+      "subfamilyDialog": {
+        "title": {
+          "create": "Créer une Sous-famille",
+          "edit": "Modifier la Sous-famille"
+        },
+        "description": {
+          "create": "Ajouter une nouvelle sous-famille à la famille sélectionnée.",
+          "edit": "Mettre à jour les détails de la sous-famille."
+        },
+        "fields": {
+          "name": {
+            "label": "Nom",
+            "placeholder": "Nom de la sous-famille"
+          },
+          "category": {
+            "label": "Catégorie",
+            "placeholder": "Sélectionner une catégorie"
+          },
+          "family": {
+            "label": "Famille",
+            "placeholder": "Sélectionner une famille"
+          }
+        },
+        "buttons": {
+          "cancel": "Annuler",
+          "create": "Créer",
+          "update": "Mettre à jour",
+          "saving": "Enregistrement..."
+        },
+        "toast": {
+          "success": {
+            "title": "Succès",
+            "created": "Sous-famille créée avec succès.",
+            "updated": "Sous-famille mise à jour avec succès."
+          },
+          "error": {
+            "title": "Erreur",
+            "create": "Échec de la création de la sous-famille.",
+            "update": "Échec de la mise à jour de la sous-famille."
+          }
+        }
       }
     }
   }

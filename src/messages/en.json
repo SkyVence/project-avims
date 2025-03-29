@@ -41,7 +41,54 @@
       "weakPassword": "Password is too weak",
       "emailInUse": "Email is already in use"
     },
-    "logOut": "Log out"
+    "logOut": "Log out",
+    "signUpForm": {
+      "title": "Create an account",
+      "description": "Enter your details to create a new account",
+      "name": {
+        "label": "Name",
+        "placeholder": "Your full name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "your.email@example.com"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Create a password",
+        "requirements": "Password must be at least 8 characters"
+      },
+      "confirmPassword": {
+        "label": "Confirm Password",
+        "placeholder": "Repeat your password"
+      },
+      "buttons": {
+        "submit": "Sign Up",
+        "submitting": "Signing up..."
+      },
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign in"
+    },
+    "signInForm": {
+      "title": "Welcome back",
+      "description": "Enter your credentials to sign in to your account",
+      "email": {
+        "label": "Email",
+        "placeholder": "your.email@example.com"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Your password"
+      },
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password?",
+      "buttons": {
+        "submit": "Sign In",
+        "submitting": "Signing in..."
+      },
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up"
+    }
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -180,7 +227,13 @@
       "adminDashboard": "Admin Dashboard",
       "changeTheme": "Change Theme",
       "logOut": "Log out"
-    }
+    },
+    "dashboard": "Dashboard",
+    "items": "Items",
+    "packages": "Packages",
+    "operations": "Operations",
+    "settings": "Settings",
+    "navHeader": "Inventory System"
   },
   "settings": {
     "title": "Settings",
@@ -297,7 +350,43 @@
     "title": "Profile",
     "personalInfo": "Personal Information",
     "updateProfile": "Update Profile",
-    "changePassword": "Change Password"
+    "changePassword": "Change Password",
+    "activity": {
+      "title": "Recent Activity",
+      "description": "Your recent actions and updates",
+      "itemsCreated": "Items Created",
+      "packagesCreated": "Packages Created",
+      "operationsCreated": "Operations Created",
+      "noActivity": "No recent activity",
+      "viewAll": "View all activity",
+      "timestamp": {
+        "now": "Just now",
+        "minutes": "{minutes}m ago",
+        "hours": "{hours}h ago",
+        "days": "{days}d ago"
+      },
+      "actions": {
+        "created": "Created",
+        "updated": "Updated",
+        "deleted": "Deleted",
+        "imported": "Imported",
+        "exported": "Exported"
+      }
+    },
+    "stats": {
+      "title": "Your Stats",
+      "description": "Overview of your inventory contributions",
+      "itemsManaged": "Items Managed",
+      "packagesCreated": "Packages Created",
+      "operationsLed": "Operations Led",
+      "totalValue": "Total Value Managed",
+      "activity": {
+        "today": "Today",
+        "week": "This Week",
+        "month": "This Month",
+        "year": "This Year"
+      }
+    }
   },
   "errors": {
     "notFound": {
@@ -576,7 +665,9 @@
       "import": "Import Items",
       "importing": "Importing...",
       "reset": "Reset",
-      "close": "Close"
+      "close": "Close",
+      "downloadTemplate": "Download Template",
+      "viewItems": "View Items"
     },
     "toast": {
       "success": {
@@ -1209,6 +1300,22 @@
           }
         }
       }
+    },
+    "client": {
+      "title": "Export Data",
+      "description": "Export your inventory data to various formats",
+      "selectionTitle": "Select what to export",
+      "noItems": "No items selected for export",
+      "selectedCount": "{count} items selected for export",
+      "processing": "Processing export request...",
+      "downloadReady": "Your export is ready for download",
+      "downloadButton": "Download File",
+      "newExport": "Create New Export",
+      "sections": {
+        "items": "Items",
+        "packages": "Packages",
+        "operations": "Operations"
+      }
     }
   },
   "reports": {
@@ -1640,6 +1747,99 @@
         "title": "Error",
         "description": "Failed to update language preferences."
       }
+    }
+  },
+  "admin": {
+    "users": {
+      "title": "User Management",
+      "description": "Manage user accounts and permissions",
+      "header": {
+        "title": "Users",
+        "description": "Manage users and their roles",
+        "buttons": {
+          "invite": "Invite User",
+          "export": "Export Users"
+        }
+      },
+      "table": {
+        "columns": {
+          "name": "Name",
+          "email": "Email",
+          "role": "Role",
+          "status": "Status",
+          "lastActive": "Last Active",
+          "actions": "Actions"
+        },
+        "roles": {
+          "admin": "Admin",
+          "manager": "Manager",
+          "user": "User",
+          "viewer": "Viewer"
+        },
+        "status": {
+          "active": "Active",
+          "inactive": "Inactive",
+          "pending": "Pending"
+        },
+        "actions": {
+          "edit": "Edit User",
+          "delete": "Delete User",
+          "resetPassword": "Reset Password",
+          "deactivate": "Deactivate",
+          "activate": "Activate"
+        },
+        "search": "Search users...",
+        "empty": "No users found"
+      },
+      "inviteDialog": {
+        "title": "Invite User",
+        "description": "Send an invitation to join your organization",
+        "fields": {
+          "email": {
+            "label": "Email Address",
+            "placeholder": "user@example.com",
+            "description": "Enter the email address to send the invitation to"
+          },
+          "role": {
+            "label": "Role",
+            "placeholder": "Select a role",
+            "description": "Assign permissions for the new user"
+          },
+          "message": {
+            "label": "Personal Message",
+            "placeholder": "Optional message to include in the invitation",
+            "description": "Add a personal note to the invitation email"
+          }
+        },
+        "buttons": {
+          "send": "Send Invitation",
+          "sending": "Sending...",
+          "cancel": "Cancel"
+        },
+        "toast": {
+          "success": {
+            "title": "Invitation Sent",
+            "description": "User invitation has been sent successfully."
+          },
+          "error": {
+            "title": "Error",
+            "description": "Failed to send invitation. Please try again."
+          }
+        }
+      },
+      "sidebar": {
+        "title": "Admin",
+        "dashboard": "Admin Dashboard",
+        "users": "User Management",
+        "categories": "Categories Management",
+        "settings": "System Settings",
+        "logs": "System Logs",
+        "backToApp": "Back to App"
+      }
+    },
+    "categoriesManager": {
+      "title": "Categories Management",
+      "description": "Manage categories, families, and sub-families structure"
     }
   }
 }

@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui
 import { ChevronRight, ChevronDown, Folder, Tag } from "lucide-react"
 import { Badge } from "../ui/badge"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 
 type SubFamily = {
   id: string
@@ -30,6 +31,7 @@ interface CategoriesTreeProps {
 export function CategoriesTree({ categories }: CategoriesTreeProps) {
   const [expandedCategories, setExpandedCategories] = useState<string[]>([])
   const [expandedFamilies, setExpandedFamilies] = useState<string[]>([])
+  const t = useTranslations()
 
   const toggleCategory = (categoryId: string) => {
     setExpandedCategories((prev) =>
@@ -46,15 +48,15 @@ export function CategoriesTree({ categories }: CategoriesTreeProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Categories Hierarchy</CardTitle>
-        <CardDescription>Browse the complete category structure</CardDescription>
+        <CardTitle>{t('categories.manager.tabs.tree')}</CardTitle>
+        <CardDescription>{t('categories.manager.search.placeholder')}</CardDescription>
       </CardHeader>
       <CardContent>
         {categories.length === 0 ? (
           <div className="text-center py-8">
             <Tag className="mx-auto h-12 w-12 text-muted-foreground opacity-50" />
-            <p className="mt-2 text-lg font-medium">No categories found</p>
-            <p className="text-sm text-muted-foreground">No categories have been created yet</p>
+            <p className="mt-2 text-lg font-medium">{t('categories.manager.categories.empty')}</p>
+            <p className="text-sm text-muted-foreground">{t('categories.manager.categories.description')}</p>
           </div>
         ) : (
           <div className="space-y-2">
@@ -80,14 +82,17 @@ export function CategoriesTree({ categories }: CategoriesTreeProps) {
                     </Link>
                   </div>
                   <Badge variant="outline">
-                    {category.families.length} {category.families.length === 1 ? "family" : "families"}
+                    {category.families.length}{" "}
+                    {t('categories.manager.families.single', { count: category.families.length })}
                   </Badge>
                 </div>
 
                 {expandedCategories.includes(category.id) && (
                   <div className="pl-8 pr-2 pb-2 space-y-1">
                     {category.families.length === 0 ? (
-                      <p className="text-sm text-muted-foreground py-1">No families in this category</p>
+                      <p className="text-sm text-muted-foreground py-1">
+                        {t('categories.manager.families.empty.families')}
+                      </p>
                     ) : (
                       category.families.map((family) => (
                         <div key={family.id} className="rounded-md border">
@@ -106,14 +111,16 @@ export function CategoriesTree({ categories }: CategoriesTreeProps) {
                             </div>
                             <Badge variant="outline">
                               {family.subFamilies.length}{" "}
-                              {family.subFamilies.length === 1 ? "sub-family" : "sub-families"}
+                              {t('categories.manager.subfamilies.single', { count: family.subFamilies.length })}
                             </Badge>
                           </div>
 
                           {expandedFamilies.includes(family.id) && (
                             <div className="pl-8 pr-2 pb-2">
                               {family.subFamilies.length === 0 ? (
-                                <p className="text-sm text-muted-foreground py-1">No sub-families in this family</p>
+                                <p className="text-sm text-muted-foreground py-1">
+                                  {t('categories.manager.subfamilies.empty.subfamilies')}
+                                </p>
                               ) : (
                                 <div className="space-y-1">
                                   {family.subFamilies.map((subFamily) => (

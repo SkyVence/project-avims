@@ -19,6 +19,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { toast } from "@/hooks/use-toast"
 import { createSubFamily, updateSubFamily } from "../../app/actions/admin"
 import { handleError } from "@/lib/error-handler"
+import { useTranslations } from "next-intl"
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
@@ -59,6 +60,7 @@ export function SubFamilyDialog({ open, onOpenChange, subFamily, categories, onS
   const [isLoading, setIsLoading] = useState(false)
   const isEditing = !!subFamily
   const [availableFamilies, setAvailableFamilies] = useState<Family[]>([])
+  const t = useTranslations()
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -117,8 +119,8 @@ export function SubFamilyDialog({ open, onOpenChange, subFamily, categories, onS
 
         onSave({ id: subFamily.id, name: data.name, familyId: data.familyId }, false)
         toast({
-          title: "Success",
-          description: "Sub-family updated successfully.",
+          title: t('admin.categories.subfamilyDialog.toast.success.title'),
+          description: t('admin.categories.subfamilyDialog.toast.success.updated'),
         })
       } else {
         // Create new sub-family
@@ -133,16 +135,18 @@ export function SubFamilyDialog({ open, onOpenChange, subFamily, categories, onS
 
         onSave({ id: tempId, name: data.name, familyId: data.familyId }, true)
         toast({
-          title: "Success",
-          description: "Sub-family created successfully.",
+          title: t('admin.categories.subfamilyDialog.toast.success.title'),
+          description: t('admin.categories.subfamilyDialog.toast.success.created'),
         })
       }
 
       onOpenChange(false)
     } catch (error) {
       handleError(error, {
-        title: "Error",
-        defaultMessage: isEditing ? "Failed to update sub-family." : "Failed to create sub-family."
+        title: t('admin.categories.subfamilyDialog.toast.error.title'),
+        defaultMessage: isEditing 
+          ? t('admin.categories.subfamilyDialog.toast.error.update') 
+          : t('admin.categories.subfamilyDialog.toast.error.create')
       })
     } finally {
       setIsLoading(false)
@@ -153,9 +157,15 @@ export function SubFamilyDialog({ open, onOpenChange, subFamily, categories, onS
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>{isEditing ? "Edit Sub-Family" : "Create Sub-Family"}</DialogTitle>
+          <DialogTitle>
+            {isEditing 
+              ? t('admin.categories.subfamilyDialog.title.edit') 
+              : t('admin.categories.subfamilyDialog.title.create')}
+          </DialogTitle>
           <DialogDescription>
-            {isEditing ? "Update the sub-family details." : "Add a new sub-family to the system."}
+            {isEditing 
+              ? t('admin.categories.subfamilyDialog.description.edit') 
+              : t('admin.categories.subfamilyDialog.description.create')}
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -165,9 +175,9 @@ export function SubFamilyDialog({ open, onOpenChange, subFamily, categories, onS
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>{t('admin.categories.subfamilyDialog.fields.name.label')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Sub-family name" {...field} />
+                    <Input placeholder={t('admin.categories.subfamilyDialog.fields.name.placeholder')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -178,7 +188,7 @@ export function SubFamilyDialog({ open, onOpenChange, subFamily, categories, onS
               name="categoryId"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Category</FormLabel>
+                  <FormLabel>{t('admin.categories.subfamilyDialog.fields.category.label')}</FormLabel>
                   <Select
                     onValueChange={(value) => {
                       field.onChange(value)
@@ -189,7 +199,7 @@ export function SubFamilyDialog({ open, onOpenChange, subFamily, categories, onS
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a category" />
+                        <SelectValue placeholder={t('admin.categories.subfamilyDialog.fields.category.placeholder')} />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -209,7 +219,7 @@ export function SubFamilyDialog({ open, onOpenChange, subFamily, categories, onS
               name="familyId"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Family</FormLabel>
+                  <FormLabel>{t('admin.categories.subfamilyDialog.fields.family.label')}</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -218,7 +228,7 @@ export function SubFamilyDialog({ open, onOpenChange, subFamily, categories, onS
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a family" />
+                        <SelectValue placeholder={t('admin.categories.subfamilyDialog.fields.family.placeholder')} />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -235,10 +245,14 @@ export function SubFamilyDialog({ open, onOpenChange, subFamily, categories, onS
             />
             <DialogFooter>
               <Button type="button" variant="outline" onClick={() => onOpenChange(false)} disabled={isLoading}>
-                Cancel
+                {t('admin.categories.subfamilyDialog.buttons.cancel')}
               </Button>
               <Button type="submit" disabled={isLoading}>
-                {isLoading ? "Saving..." : isEditing ? "Update" : "Create"}
+                {isLoading 
+                  ? t('admin.categories.subfamilyDialog.buttons.saving') 
+                  : isEditing 
+                    ? t('admin.categories.subfamilyDialog.buttons.update') 
+                    : t('admin.categories.subfamilyDialog.buttons.create')}
               </Button>
             </DialogFooter>
           </form>

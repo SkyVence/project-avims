@@ -1,5 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card"
 import { Box, Package, Truck } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 interface ProfileStatsProps {
   itemCount: number
@@ -8,11 +9,13 @@ interface ProfileStatsProps {
 }
 
 export function ProfileStats({ itemCount, packageCount, operationCount }: ProfileStatsProps) {
+  const t = useTranslations()
+  
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Statistics</CardTitle>
-        <CardDescription>Your inventory management statistics</CardDescription>
+        <CardTitle>{t('profile.stats.title')}</CardTitle>
+        <CardDescription>{t('profile.stats.description')}</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="grid gap-4 md:grid-cols-3">
@@ -21,7 +24,7 @@ export function ProfileStats({ itemCount, packageCount, operationCount }: Profil
               <Box className="h-6 w-6 text-primary" />
             </div>
             <h3 className="text-xl font-bold">{itemCount}</h3>
-            <p className="text-sm text-muted-foreground">Items Created</p>
+            <p className="text-sm text-muted-foreground">{t('profile.stats.itemsManaged')}</p>
           </div>
 
           <div className="flex flex-col items-center justify-center space-y-2 rounded-lg border p-4">
@@ -29,7 +32,7 @@ export function ProfileStats({ itemCount, packageCount, operationCount }: Profil
               <Package className="h-6 w-6 text-primary" />
             </div>
             <h3 className="text-xl font-bold">{packageCount}</h3>
-            <p className="text-sm text-muted-foreground">Packages Created</p>
+            <p className="text-sm text-muted-foreground">{t('profile.stats.packagesCreated')}</p>
           </div>
 
           <div className="flex flex-col items-center justify-center space-y-2 rounded-lg border p-4">
@@ -37,7 +40,7 @@ export function ProfileStats({ itemCount, packageCount, operationCount }: Profil
               <Truck className="h-6 w-6 text-primary" />
             </div>
             <h3 className="text-xl font-bold">{operationCount}</h3>
-            <p className="text-sm text-muted-foreground">Operations Created</p>
+            <p className="text-sm text-muted-foreground">{t('profile.stats.operationsLed')}</p>
           </div>
         </div>
       </CardContent>

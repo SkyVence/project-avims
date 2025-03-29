@@ -13,7 +13,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
 import { ArrowUpDown, ChevronDown, MoreHorizontal, Shield, User, Search, X } from "lucide-react"
-
+import { useTranslations } from "next-intl"
 import { Button } from "../ui/button"
 import {
   DropdownMenu,
@@ -66,6 +66,7 @@ export function UsersTable({ initialUsers }: UsersTableProps) {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
   const [userToDelete, setUserToDelete] = useState<UserType | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
+  const t = useTranslations()
 
   const handleDeleteUser = async (user: UserType) => {
     setUserToDelete(user)
@@ -80,14 +81,14 @@ export function UsersTable({ initialUsers }: UsersTableProps) {
       await deleteUser(userToDelete.id)
       setUsers(users.filter((user) => user.id !== userToDelete.id))
       toast({
-        title: "User deleted",
-        description: "User has been deleted successfully.",
+        title: t('admin.users.table.actions.delete') + " " + t('common.success'),
+        description: t('admin.users.toast.delete.success.description'),
       })
     } catch (error) {
       console.error(error)
       toast({
-        title: "Error",
-        description: "Failed to delete user.",
+        title: t('common.error'),
+        description: t('admin.users.toast.delete.error.description'),
         variant: "destructive",
       })
     } finally {
@@ -106,14 +107,14 @@ export function UsersTable({ initialUsers }: UsersTableProps) {
       setUsers(users.map((user) => (user.id === id ? { ...user, role: newRole } : user)))
 
       toast({
-        title: "Role updated",
-        description: `User role updated to ${newRole}.`,
+        title: t('admin.users.toast.role.success.title'),
+        description: t('admin.users.toast.role.success.description', { role: newRole.toLowerCase() }),
       })
     } catch (error) {
       console.error(error)
       toast({
-        title: "Error",
-        description: "Failed to update user role.",
+        title: t('common.error'),
+        description: t('admin.users.toast.role.error.description'),
         variant: "destructive",
       })
     } finally {
@@ -127,7 +128,7 @@ export function UsersTable({ initialUsers }: UsersTableProps) {
       header: ({ column }) => {
         return (
           <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-            User
+            {t('admin.users.table.columns.name')}
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         )
@@ -143,7 +144,7 @@ export function UsersTable({ initialUsers }: UsersTableProps) {
               </AvatarFallback>
             </Avatar>
             <div className="flex flex-col">
-              <span className="font-medium">{user.username || "No username"}</span>
+              <span className="font-medium">{user.username || t('admin.users.table.noUsername')}</span>
               <span className="text-xs text-muted-foreground">{user.email}</span>
             </div>
           </div>
@@ -152,13 +153,13 @@ export function UsersTable({ initialUsers }: UsersTableProps) {
     },
     {
       accessorKey: "role",
-      header: "Role",
+      header: t('admin.users.table.columns.role'),
       cell: ({ row }) => {
         const role = row.getValue("role") as UserRole
         return (
           <Badge variant={role === UserRole.ADMIN ? "default" : "outline"} className="capitalize">
             {role === UserRole.ADMIN ? <Shield className="mr-1 h-3 w-3" /> : <User className="mr-1 h-3 w-3" />}
-            {role.toLowerCase()}
+            {t(`admin.users.table.roles.${role.toLowerCase()}`)}
           </Badge>
         )
       },
@@ -168,7 +169,7 @@ export function UsersTable({ initialUsers }: UsersTableProps) {
       header: ({ column }) => {
         return (
           <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-            Joined
+            {t('admin.users.table.columns.lastActive')}
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         )
@@ -187,33 +188,32 @@ export function UsersTable({ initialUsers }: UsersTableProps) {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
+                <span className="sr-only">{t('common.actions')}</span>
                 <MoreHorizontal className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuLabel>{t('common.actions')}</DropdownMenuLabel>
               <DropdownMenuItem onClick={() => handleToggleRole(user.id, user.role)} disabled={isLoading}>
                 {user.role === UserRole.ADMIN ? (
                   <>
                     <User className="mr-2 h-4 w-4" />
-                    <span>Remove admin rights</span>
+                    <span>{t('admin.users.table.actions.removeAdmin')}</span>
                   </>
                 ) : (
                   <>
                     <Shield className="mr-2 h-4 w-4" />
-                    <span>Make admin</span>
+                    <span>{t('admin.users.table.actions.makeAdmin')}</span>
                   </>
                 )}
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                className="text-destructive"
                 onClick={() => handleDeleteUser(user)}
                 disabled={isLoading}
+                className="text-destructive focus:text-destructive"
               >
-                <X className="mr-2 h-4 w-4" />
-                <span>Delete user</span>
+                {t('admin.users.table.actions.delete')}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -247,124 +247,89 @@ export function UsersTable({ initialUsers }: UsersTableProps) {
     : users
 
   return (
-    <Card>
-      <CardHeader className="pb-3">
-        <CardTitle>Users</CardTitle>
-        <CardDescription>Manage user accounts and permissions</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <div className="relative flex-1">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Search users..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-8 w-full"
-              />
-            </div>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline">
-                  Columns <ChevronDown className="ml-2 h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                {table
-                  .getAllColumns()
-                  .filter((column) => column.getCanHide())
-                  .map((column) => {
-                    return (
-                      <DropdownMenuCheckboxItem
-                        key={column.id}
-                        className="capitalize"
-                        checked={column.getIsVisible()}
-                        onCheckedChange={(value) => column.toggleVisibility(!!value)}
-                      >
-                        {column.id}
-                      </DropdownMenuCheckboxItem>
-                    )
-                  })}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-          <div className="rounded-md border">
-            <Table>
-              <TableHeader>
-                {table.getHeaderGroups().map((headerGroup) => (
-                  <TableRow key={headerGroup.id}>
-                    {headerGroup.headers.map((header) => {
-                      return (
-                        <TableHead key={header.id}>
-                          {header.isPlaceholder
-                            ? null
-                            : flexRender(header.column.columnDef.header, header.getContext())}
-                        </TableHead>
-                      )
-                    })}
-                  </TableRow>
-                ))}
-              </TableHeader>
-              <TableBody>
-                {table.getRowModel().rows?.length ? (
-                  table.getRowModel().rows.map((row) => (
-                    <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
-                      {row.getVisibleCells().map((cell) => (
-                        <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-                      ))}
-                    </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={columns.length} className="h-24 text-center">
-                      No users found.
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </div>
-          <div className="flex items-center justify-end space-x-2">
-            <div className="flex-1 text-sm text-muted-foreground">
-              {table.getFilteredRowModel().rows.length} user{table.getFilteredRowModel().rows.length === 1 ? "" : "s"}
-            </div>
-            <div className="space-x-2">
+    <Card className="w-full">
+      <CardHeader>
+        <CardTitle>{t('admin.users.title')}</CardTitle>
+        <CardDescription>{t('admin.users.description')}</CardDescription>
+        <div className="flex items-center gap-2 pt-4">
+          <div className="relative w-full">
+            <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder={t('admin.users.table.search')}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-8"
+            />
+            {searchQuery && (
               <Button
-                variant="outline"
+                variant="ghost"
                 size="sm"
-                onClick={() => table.previousPage()}
-                disabled={!table.getCanPreviousPage()}
+                className="absolute right-0 top-0 h-full px-3"
+                onClick={() => setSearchQuery("")}
               >
-                Previous
+                <X className="h-4 w-4" />
               </Button>
-              <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-                Next
-              </Button>
-            </div>
+            )}
           </div>
         </div>
+      </CardHeader>
+      <CardContent>
+        <div className="rounded-md border">
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(header.column.columnDef.header, header.getContext())}
+                      </TableHead>
+                    )
+                  })}
+                </TableRow>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={columns.length} className="h-24 text-center">
+                    {t('admin.users.table.empty')}
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
       </CardContent>
-
-      {/* Delete Confirmation Dialog */}
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogTitle>{t('admin.users.table.actions.delete')}</AlertDialogTitle>
             <AlertDialogDescription>
-              This will permanently delete the user account for{" "}
-              <span className="font-medium">{userToDelete?.username || userToDelete?.email}</span>. This action cannot
-              be undone.
+              {t('admin.users.table.deleteConfirmation', { name: userToDelete?.username || userToDelete?.email || '' })}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel disabled={isLoading}>Cancel</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={confirmDelete}
+            <AlertDialogCancel disabled={isLoading}>{t('common.cancel')}</AlertDialogCancel>
+            <AlertDialogAction 
+              onClick={(e) => {
+                e.preventDefault()
+                confirmDelete()
+              }}
               disabled={isLoading}
-              className="bg-destructive text-destructive-foreground"
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
-              {isLoading ? "Deleting..." : "Delete"}
+              {isLoading ? t('common.loading') : t('admin.users.table.actions.delete')}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

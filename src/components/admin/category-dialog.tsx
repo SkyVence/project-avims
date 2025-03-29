@@ -17,6 +17,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "../ui/input"
 import { toast } from "@/hooks/use-toast"
 import { createCategory, updateCategory } from "../../app/actions/admin"
+import { useTranslations } from "next-intl"
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
@@ -53,6 +54,7 @@ interface CategoryDialogProps {
 export function CategoryDialog({ open, onOpenChange, category, onSave }: CategoryDialogProps) {
   const [isLoading, setIsLoading] = useState(false)
   const isEditing = !!category
+  const t = useTranslations()
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -82,8 +84,8 @@ export function CategoryDialog({ open, onOpenChange, category, onSave }: Categor
 
         onSave({ id: category.id, name: data.name, families: category.families }, false)
         toast({
-          title: "Success",
-          description: "Category updated successfully.",
+          title: t('admin.categories.categoryDialog.toast.success.title'),
+          description: t('admin.categories.categoryDialog.toast.success.updated'),
         })
       } else {
         // Create new category
@@ -97,8 +99,8 @@ export function CategoryDialog({ open, onOpenChange, category, onSave }: Categor
 
         onSave({ id: tempId, name: data.name, families: [] }, true)
         toast({
-          title: "Success",
-          description: "Category created successfully.",
+          title: t('admin.categories.categoryDialog.toast.success.title'),
+          description: t('admin.categories.categoryDialog.toast.success.created'),
         })
       }
 
@@ -106,8 +108,10 @@ export function CategoryDialog({ open, onOpenChange, category, onSave }: Categor
     } catch (error) {
       console.error(error)
       toast({
-        title: "Error",
-        description: isEditing ? "Failed to update category." : "Failed to create category.",
+        title: t('admin.categories.categoryDialog.toast.error.title'),
+        description: isEditing 
+          ? t('admin.categories.categoryDialog.toast.error.update') 
+          : t('admin.categories.categoryDialog.toast.error.create'),
         variant: "destructive",
       })
     } finally {
@@ -119,9 +123,15 @@ export function CategoryDialog({ open, onOpenChange, category, onSave }: Categor
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>{isEditing ? "Edit Category" : "Create Category"}</DialogTitle>
+          <DialogTitle>
+            {isEditing 
+              ? t('admin.categories.categoryDialog.title.edit') 
+              : t('admin.categories.categoryDialog.title.create')}
+          </DialogTitle>
           <DialogDescription>
-            {isEditing ? "Update the category details." : "Add a new category to the system."}
+            {isEditing 
+              ? t('admin.categories.categoryDialog.description.edit') 
+              : t('admin.categories.categoryDialog.description.create')}
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -131,9 +141,9 @@ export function CategoryDialog({ open, onOpenChange, category, onSave }: Categor
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>{t('admin.categories.categoryDialog.fields.name.label')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Category name" {...field} />
+                    <Input placeholder={t('admin.categories.categoryDialog.fields.name.placeholder')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -141,10 +151,14 @@ export function CategoryDialog({ open, onOpenChange, category, onSave }: Categor
             />
             <DialogFooter>
               <Button type="button" variant="outline" onClick={() => onOpenChange(false)} disabled={isLoading}>
-                Cancel
+                {t('admin.categories.categoryDialog.buttons.cancel')}
               </Button>
               <Button type="submit" disabled={isLoading}>
-                {isLoading ? "Saving..." : isEditing ? "Update" : "Create"}
+                {isLoading 
+                  ? t('admin.categories.categoryDialog.buttons.saving') 
+                  : isEditing 
+                    ? t('admin.categories.categoryDialog.buttons.update') 
+                    : t('admin.categories.categoryDialog.buttons.create')}
               </Button>
             </DialogFooter>
           </form>

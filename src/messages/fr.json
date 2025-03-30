@@ -42,6 +42,37 @@
       "emailInUse": "Cet email est déjà utilisé"
     },
     "logOut": "Se déconnecter",
+    "common": {
+      "error": {
+        "message": "Une erreur s'est produite. Veuillez réessayer."
+      },
+      "fields": {
+        "email": {
+          "label": "Email",
+          "placeholder": "votre.email@exemple.com"
+        },
+        "password": {
+          "label": "Mot de passe",
+          "placeholder": "Votre mot de passe"
+        }
+      }
+    },
+    "signin": {
+      "error": {
+        "title": "Erreur de connexion"
+      },
+      "buttons": {
+        "submit": "Se connecter"
+      }
+    },
+    "signup": {
+      "error": {
+        "title": "Erreur d'inscription"
+      },
+      "buttons": {
+        "submit": "S'inscrire"
+      }
+    },
     "signUpForm": {
       "title": "Créer un compte",
       "description": "Entrez vos informations pour créer un nouveau compte",

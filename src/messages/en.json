@@ -42,6 +42,37 @@
       "emailInUse": "Email is already in use"
     },
     "logOut": "Log out",
+    "common": {
+      "error": {
+        "message": "An error occurred. Please try again."
+      },
+      "fields": {
+        "email": {
+          "label": "Email",
+          "placeholder": "your.email@example.com"
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "Your password"
+        }
+      }
+    },
+    "signin": {
+      "error": {
+        "title": "Sign-in Error"
+      },
+      "buttons": {
+        "submit": "Sign In"
+      }
+    },
+    "signup": {
+      "error": {
+        "title": "Sign-up Error"
+      },
+      "buttons": {
+        "submit": "Sign Up"
+      }
+    },
     "signUpForm": {
       "title": "Create an account",
       "description": "Enter your details to create a new account",

@@ -39,9 +39,9 @@
       "emailNotVerified": "Please verify your email address",
       "passwordMismatch": "Passwords do not match",
       "weakPassword": "Password is too weak",
-      "emailInUse": "Email is already in use"
+      "emailInUse": "This email is already in use"
     },
-    "logOut": "Log out",
+    "logOut": "Log Out",
     "common": {
       "error": {
         "message": "An error occurred. Please try again."
@@ -59,7 +59,7 @@
     },
     "signin": {
       "error": {
-        "title": "Sign-in Error"
+        "title": "Sign In Error"
       },
       "buttons": {
         "submit": "Sign In"
@@ -67,15 +67,15 @@
     },
     "signup": {
       "error": {
-        "title": "Sign-up Error"
+        "title": "Sign Up Error"
       },
       "buttons": {
         "submit": "Sign Up"
       }
     },
     "signUpForm": {
-      "title": "Create an account",
-      "description": "Enter your details to create a new account",
+      "title": "Create an Account",
+      "description": "Enter your information to create a new account",
       "name": {
         "label": "Name",
         "placeholder": "Your full name"
@@ -87,7 +87,7 @@
       "password": {
         "label": "Password",
         "placeholder": "Create a password",
-        "requirements": "Password must be at least 8 characters"
+        "requirements": "Password must be at least 8 characters long"
       },
       "confirmPassword": {
         "label": "Confirm Password",
@@ -95,14 +95,14 @@
       },
       "buttons": {
         "submit": "Sign Up",
-        "submitting": "Signing up..."
+        "submitting": "Signing Up..."
       },
       "haveAccount": "Already have an account?",
-      "signIn": "Sign in"
+      "signIn": "Sign In"
     },
     "signInForm": {
-      "title": "Welcome back",
-      "description": "Enter your credentials to sign in to your account",
+      "title": "Welcome",
+      "description": "Enter your credentials to log in to your account",
       "email": {
         "label": "Email",
         "placeholder": "your.email@example.com"
@@ -111,14 +111,14 @@
         "label": "Password",
         "placeholder": "Your password"
       },
-      "rememberMe": "Remember me",
-      "forgotPassword": "Forgot password?",
+      "rememberMe": "Remember Me",
+      "forgotPassword": "Forgot Password?",
       "buttons": {
         "submit": "Sign In",
-        "submitting": "Signing in..."
+        "submitting": "Signing In..."
       },
       "noAccount": "Don't have an account?",
-      "signUp": "Sign up"
+      "signUp": "Sign Up"
     }
   },
   "navigation": {
@@ -141,7 +141,7 @@
     }
   },
   "theme": {
-    "toggle": "Toggle theme",
+    "toggle": "Change Theme",
     "light": "Light",
     "dark": "Dark",
     "system": "System"
@@ -155,7 +155,7 @@
   "notFound": {
     "title": "404",
     "heading": "Page Not Found",
-    "description": "The page you are looking for doesn't exist or has been moved.",
+    "description": "The page you are looking for does not exist or has been moved.",
     "action": "Return to Dashboard"
   },
   "notificationSettings": {
@@ -176,24 +176,24 @@
       "title": "Notification Types",
       "inventory": {
         "label": "Inventory Updates",
-        "description": "Get notified about inventory changes."
+        "description": "Be notified of inventory changes."
       },
       "operations": {
         "label": "Operations Updates",
-        "description": "Get notified about operation status changes."
+        "description": "Be notified of changes in operation status."
       },
       "system": {
         "label": "System Notifications",
-        "description": "Get notified about system updates and maintenance."
+        "description": "Be notified of updates and system maintenance."
       }
     },
     "buttons": {
-      "save": "Save changes",
+      "save": "Save Changes",
       "saving": "Saving..."
     },
     "toast": {
       "success": {
-        "title": "Notifications updated",
+        "title": "Notifications Updated",
         "description": "Your notification settings have been updated."
       },
       "error": {
@@ -209,21 +209,21 @@
       "label": "Username",
       "placeholder": "Your username",
       "description": "This is your public display name.",
-      "error": "Username must be at least 2 characters."
+      "error": "Username must be at least 2 characters long."
     },
     "bio": {
       "label": "Bio",
-      "placeholder": "Tell us a little bit about yourself",
-      "description": "Brief description for your profile. Max 160 characters."
+      "placeholder": "Tell us a bit about yourself",
+      "description": "Brief description of your profile. Maximum 160 characters."
     },
     "buttons": {
-      "save": "Save changes",
+      "save": "Save Changes",
       "saving": "Saving..."
     },
     "toast": {
       "success": {
-        "title": "Profile updated",
-        "description": "Your profile has been updated successfully."
+        "title": "Profile Updated",
+        "description": "Your profile has been successfully updated."
       },
       "error": {
         "title": "Error",
@@ -232,9 +232,9 @@
     }
   },
   "sidebar": {
-    "collapse": "Collapse Sidebar",
-    "expand": "Expand Sidebar",
-    "toggleTheme": "Toggle Theme",
+    "collapse": "Collapse Menu",
+    "expand": "Expand Menu",
+    "toggleTheme": "Change Theme",
     "mainNavigation": "Main Navigation",
     "importExport": "Import / Export",
     "createSection": "Create",
@@ -243,77 +243,34 @@
       "subtitle": "Management System"
     },
     "items": {
-      "createItem": "Create Items",
-      "createPackage": "Create Package",
-      "createOperation": "Create Operation",
+      "dashboard": "Dashboard",
+      "items": "Items",
+      "packages": "Packages",
+      "operations": "Operations",
+      "settings": "Settings",
+      "createItem": "Create an Item",
+      "createPackage": "Create a Package",
+      "createOperation": "Create an Operation",
       "importItems": "Import Items",
-      "exportData": "Export Data",
-      "settings": "Settings"
+      "exportData": "Export Data"
     },
     "footer": {
-      "signIn": "Sign in",
+      "signIn": "Sign In",
       "myAccount": "My Account",
       "profile": "Profile",
       "settings": "Settings",
       "adminDashboard": "Admin Dashboard",
       "changeTheme": "Change Theme",
-      "logOut": "Log out"
+      "logOut": "Log Out"
     },
     "dashboard": "Dashboard",
-    "items": "Items",
-    "packages": "Packages",
-    "operations": "Operations",
-    "settings": "Settings",
     "navHeader": "Inventory System"
   },
   "settings": {
     "title": "Settings",
     "general": "General Settings",
     "account": "Account Settings",
-    "notifications": {
-      "title": "Notifications",
-      "description": "Configure how you receive notifications",
-      "methods": {
-        "title": "Notification Methods",
-        "email": {
-          "label": "Email notifications",
-          "description": "Receive notifications via email"
-        },
-        "push": {
-          "label": "Push notifications",
-          "description": "Receive notifications in your browser"
-        }
-      },
-      "types": {
-        "title": "Notification Types",
-        "inventory": {
-          "label": "Inventory updates",
-          "description": "Get notified about inventory changes"
-        },
-        "operations": {
-          "label": "Operation updates",
-          "description": "Get notified about operation status changes"
-        },
-        "system": {
-          "label": "System notifications",
-          "description": "Get notified about system updates and maintenance"
-        }
-      },
-      "buttons": {
-        "save": "Save preferences",
-        "saving": "Saving..."
-      },
-      "toast": {
-        "success": {
-          "title": "Notifications updated",
-          "description": "Your notification preferences have been saved."
-        },
-        "error": {
-          "title": "Error",
-          "description": "Failed to update notification settings."
-        }
-      }
-    },
+    "notifications": "Notifications",
     "security": "Security",
     "appearance": {
       "title": "Appearance",
@@ -324,17 +281,61 @@
         "system": "System"
       },
       "buttons": {
-        "save": "Save changes",
+        "save": "Save Changes",
         "saving": "Saving..."
       },
       "toast": {
         "success": {
-          "title": "Appearance updated",
+          "title": "Appearance Updated",
           "description": "Your appearance preferences have been saved."
         },
         "error": {
           "title": "Error",
           "description": "Failed to update appearance settings."
+        }
+      }
+    },
+    "notifications": {
+      "title": "Notifications",
+      "description": "Configure how you receive notifications",
+      "methods": {
+        "title": "Notification Methods",
+        "email": {
+          "label": "Email Notifications",
+          "description": "Receive notifications via email"
+        },
+        "push": {
+          "label": "Push Notifications",
+          "description": "Receive notifications in your browser"
+        }
+      },
+      "types": {
+        "title": "Notification Types",
+        "inventory": {
+          "label": "Inventory Updates",
+          "description": "Be notified of inventory changes"
+        },
+        "operations": {
+          "label": "Operations Updates",
+          "description": "Be notified of changes in operation status"
+        },
+        "system": {
+          "label": "System Notifications",
+          "description": "Be notified of updates and system maintenance"
+        }
+      },
+      "buttons": {
+        "save": "Save Preferences",
+        "saving": "Saving..."
+      },
+      "toast": {
+        "success": {
+          "title": "Notifications Updated",
+          "description": "Your notification preferences have been saved."
+        },
+        "error": {
+          "title": "Error",
+          "description": "Failed to update notification preferences."
         }
       }
     },
@@ -348,16 +349,16 @@
       },
       "bio": {
         "label": "Bio",
-        "placeholder": "Tell us a little bit about yourself",
+        "placeholder": "Tell us a bit about yourself",
         "description": "Brief description for your profile"
       },
       "buttons": {
-        "save": "Save profile",
+        "save": "Save Profile",
         "saving": "Saving..."
       },
       "toast": {
         "success": {
-          "title": "Profile updated",
+          "title": "Profile Updated",
           "description": "Your profile information has been saved."
         },
         "error": {
@@ -389,12 +390,12 @@
       "packagesCreated": "Packages Created",
       "operationsCreated": "Operations Created",
       "noActivity": "No recent activity",
-      "viewAll": "View all activity",
+      "viewAll": "View All Activity",
       "timestamp": {
-        "now": "Just now",
-        "minutes": "{minutes}m ago",
-        "hours": "{hours}h ago",
-        "days": "{days}d ago"
+        "now": "Just Now",
+        "minutes": "Minutes Ago",
+        "hours": "Hours Ago",
+        "days": "Days Ago"
       },
       "actions": {
         "created": "Created",
@@ -406,7 +407,7 @@
     },
     "stats": {
       "title": "Your Stats",
-      "description": "Overview of your inventory contributions",
+      "description": "Overview of your contributions to the inventory",
       "itemsManaged": "Items Managed",
       "packagesCreated": "Packages Created",
       "operationsLed": "Operations Led",
@@ -422,7 +423,7 @@
   "errors": {
     "notFound": {
       "title": "Page Not Found",
-      "description": "The page you are looking for doesn't exist or has been moved.",
+      "description": "The page you are looking for does not exist or has been moved.",
       "action": "Return to Dashboard"
     },
     "serverError": {
@@ -432,12 +433,12 @@
     },
     "unauthorized": {
       "title": "Unauthorized Access",
-      "description": "You don't have permission to access this resource.",
-      "action": "Sign In"
+      "description": "You do not have permission to access this resource.",
+      "action": "Log In"
     },
     "forbidden": {
-      "title": "Access Forbidden",
-      "description": "You don't have permission to perform this action.",
+      "title": "Forbidden Access",
+      "description": "You do not have permission to perform this action.",
       "action": "Return to Dashboard"
     },
     "offline": {
@@ -445,7 +446,7 @@
       "description": "You are currently offline. Please check your internet connection.",
       "action": "Retry Connection"
     },
-    "validation": "Validation error"
+    "validation": "Validation Error"
   },
   "notifications": {
     "success": "Operation completed successfully",
@@ -462,12 +463,12 @@
       "system": "System"
     },
     "buttons": {
-      "save": "Save changes",
+      "save": "Save Changes",
       "saving": "Saving..."
     },
     "toast": {
       "success": {
-        "title": "Appearance updated",
+        "title": "Appearance Updated",
         "description": "Your appearance settings have been updated."
       },
       "error": {
@@ -481,49 +482,49 @@
       "title": "Items",
       "description": "Manage your inventory items",
       "buttons": {
-        "add": "Add Item"
+        "add": "Add an Item"
       }
     },
     "form": {
       "title": {
-        "create": "Create Item",
+        "create": "Create an Item",
         "edit": "Edit Item"
       },
       "fields": {
         "name": {
           "label": "Name",
-          "placeholder": "Enter item name",
+          "placeholder": "Enter the item name",
           "description": "The name of the item",
           "error": "Name is required."
         },
         "description": {
           "label": "Description",
-          "placeholder": "Enter item description",
+          "placeholder": "Enter the item description",
           "description": "A brief description of the item"
         },
         "brand": {
           "label": "Brand",
-          "placeholder": "Enter brand name",
+          "placeholder": "Enter the brand name",
           "description": "The brand or manufacturer of the item"
         },
         "value": {
           "label": "Value",
-          "placeholder": "Enter value",
+          "placeholder": "Enter the value",
           "description": "The monetary value of the item"
         },
         "insuranceValue": {
           "label": "Insurance Value",
-          "placeholder": "Enter insurance value",
+          "placeholder": "Enter the insurance value",
           "description": "The insured value of the item"
         },
         "hsCode": {
           "label": "HS Code",
-          "placeholder": "Enter HS code",
+          "placeholder": "Enter the HS code",
           "description": "Harmonized System code for customs"
         },
         "location": {
           "label": "Location",
-          "placeholder": "Enter storage location",
+          "placeholder": "Enter the storage location",
           "description": "Where the item is stored"
         },
         "dimensions": {
@@ -536,7 +537,7 @@
         },
         "weight": {
           "label": "Weight",
-          "placeholder": "Enter weight",
+          "placeholder": "Enter the weight",
           "description": "Weight of the item"
         },
         "category": {
@@ -550,13 +551,13 @@
           "description": "The family within the selected category"
         },
         "subFamily": {
-          "label": "Sub Family",
-          "placeholder": "Select a sub family",
+          "label": "Sub-family",
+          "placeholder": "Select a sub-family",
           "description": "The sub-family within the selected family"
         },
         "quantity": {
           "label": "Quantity",
-          "placeholder": "Enter quantity",
+          "placeholder": "Enter the quantity",
           "description": "Number of items"
         },
         "images": {
@@ -582,7 +583,7 @@
         },
         "error": {
           "title": "Error",
-          "description": "Something went wrong."
+          "description": "An error occurred."
         }
       }
     },
@@ -594,7 +595,7 @@
         "status": "Status",
         "brand": "Brand",
         "family": "Family",
-        "subFamily": "Subfamily",
+        "subFamily": "Sub-family",
         "location": "Location",
         "actions": "Actions"
       },
@@ -610,7 +611,7 @@
       },
       "actions": {
         "title": "Actions",
-        "viewDetails": "View details",
+        "viewDetails": "View Details",
         "view": "View",
         "edit": "Edit",
         "delete": "Delete"
@@ -631,10 +632,11 @@
     "description": "Import items from CSV or Excel files.",
     "tabs": {
       "upload": "Upload",
-      "preview": "Preview"
+      "preview": "Preview",
+      "result": "Result"
     },
     "dropzone": {
-      "title": "Upload File",
+      "title": "Upload a File",
       "description": "Drag and drop your file here, or click to select",
       "acceptedFormats": "Accepted formats: .xlsx, .csv"
     },
@@ -657,7 +659,7 @@
           "positive": "Insurance value must be a positive number"
         },
         "hsCode": {
-          "required": "HS Code is required"
+          "required": "HS code is required"
         },
         "location": {
           "required": "Location is required"
@@ -682,14 +684,14 @@
           "notFound": "Family not found: {name}"
         },
         "subfamily": {
-          "required": "Subfamily is required",
-          "notFound": "Subfamily not found: {name}"
+          "required": "Sub-family is required",
+          "notFound": "Sub-family not found: {name}"
         }
       }
     },
     "progress": {
       "importing": "Importing items...",
-      "success": "Successfully imported {count} items",
+      "success": "{count} items imported successfully",
       "failed": "Failed to import {count} items"
     },
     "buttons": {
@@ -703,13 +705,13 @@
     "toast": {
       "success": {
         "title": "Import Complete",
-        "description": "Successfully imported {success} items. {failed} items failed."
+        "description": "{success} items imported successfully. Failed for {failed} items."
       },
       "error": {
         "title": "Import Error",
         "description": "An error occurred while importing items.",
         "noData": "No valid data to import",
-        "fileProcessing": "Error processing file. Please check the format and try again."
+        "fileProcessing": "Error processing the file. Please check the format and try again."
       }
     }
   },
@@ -718,12 +720,12 @@
       "title": "Packages",
       "description": "Manage your inventory packages",
       "buttons": {
-        "add": "Add Package"
+        "add": "Add a Package"
       }
     },
     "form": {
       "title": {
-        "create": "Create Package",
+        "create": "Create a Package",
         "edit": "Edit Package"
       },
       "fields": {
@@ -759,7 +761,7 @@
         "items": {
           "label": "Items",
           "description": "Add items to this package",
-          "empty": "No items added to this package yet. Click \"Add Item\" to get started.",
+          "empty": "No items have been added to this package yet. Click 'Add an Item' to get started.",
           "quantity": {
             "label": "Quantity",
             "description": "Number of items"
@@ -770,7 +772,7 @@
         "save": "Save",
         "saving": "Saving...",
         "cancel": "Cancel",
-        "addItem": "Add Item",
+        "addItem": "Add an Item",
         "update": "Update Package",
         "create": "Create Package"
       },
@@ -787,7 +789,7 @@
         },
         "error": {
           "title": "Error",
-          "description": "Something went wrong."
+          "description": "An error occurred."
         }
       }
     },
@@ -807,23 +809,11 @@
       },
       "actions": {
         "title": "Actions",
-        "viewDetails": "View details",
+        "viewDetails": "View Details",
         "edit": "Edit",
         "delete": "Delete"
       },
       "columns_dropdown": "Columns"
-    },
-    "toast": {
-      "delete": {
-        "success": {
-          "title": "Success",
-          "description": "Package deleted successfully."
-        },
-        "error": {
-          "title": "Error",
-          "description": "Failed to delete package."
-        }
-      }
     }
   },
   "operations": {
@@ -831,12 +821,12 @@
       "title": "Operations",
       "description": "Manage your inventory operations",
       "buttons": {
-        "add": "Add Operation"
+        "add": "Add an Operation"
       }
     },
     "form": {
       "title": {
-        "create": "Create Operation",
+        "create": "Create an Operation",
         "edit": "Edit Operation"
       },
       "sections": {
@@ -850,20 +840,20 @@
           "empty": {
             "items": "No items added",
             "packages": "No packages added",
-            "description": "Click the \"Add Component\" button to add {type} to this operation."
+            "description": "Click the 'Add Component' button to add {type} to this operation."
           }
         }
       },
       "fields": {
         "name": {
           "label": "Name",
-          "placeholder": "Enter operation name",
+          "placeholder": "Enter the operation name",
           "description": "The name of the operation",
           "error": "Name is required."
         },
         "description": {
           "label": "Description",
-          "placeholder": "Enter operation description",
+          "placeholder": "Enter the operation description",
           "description": "A brief description of the operation"
         },
         "year": {
@@ -873,7 +863,7 @@
         },
         "location": {
           "label": "Location",
-          "placeholder": "Enter location",
+          "placeholder": "Enter the location",
           "description": "Where the operation takes place"
         },
         "active": {
@@ -891,7 +881,7 @@
           },
           "item": {
             "label": "Item",
-            "placeholder": "Select item"
+            "placeholder": "Select an item"
           },
           "package": {
             "label": "Package",
@@ -903,7 +893,7 @@
         "save": "Save",
         "saving": "Saving...",
         "cancel": "Cancel",
-        "addComponent": "Add Component",
+        "addComponent": "Add a Component",
         "update": "Update Operation",
         "create": "Create Operation"
       },
@@ -921,17 +911,17 @@
             "description": "Operation updated successfully."
           },
           "addItem": {
-            "title": "Item added",
-            "description": "Item has been added to the operation."
+            "title": "Item Added",
+            "description": "The item has been added to the operation."
           },
           "addPackage": {
-            "title": "Package added",
-            "description": "Package has been added to the operation."
+            "title": "Package Added",
+            "description": "The package has been added to the operation."
           }
         },
         "error": {
           "title": "Error",
-          "description": "Something went wrong. Please try again.",
+          "description": "An error occurred. Please try again.",
           "noItems": {
             "title": "No items available",
             "description": "All items have been added to this operation."
@@ -939,73 +929,6 @@
           "noPackages": {
             "title": "No packages available",
             "description": "All packages have been added to this operation."
-          }
-        }
-      },
-      "components": {
-        "title": "Operation Components",
-        "description": "Add items and packages to this operation",
-        "buttons": {
-          "add": "Add Component",
-          "tooltip": "Add items or packages to this operation"
-        }
-      },
-      "dialog": {
-        "title": "Add Components",
-        "description": "Select items or packages to add to this operation",
-        "tabs": {
-          "items": "Items",
-          "packages": "Packages"
-        },
-        "search": {
-          "items": "Search items...",
-          "packages": "Search packages..."
-        },
-        "empty": {
-          "items": "No items found",
-          "packages": "No packages found"
-        },
-        "quantity": {
-          "label": "Quantity",
-          "placeholder": "Enter quantity"
-        },
-        "buttons": {
-          "add": "Add Selected",
-          "cancel": "Cancel"
-        }
-      },
-      "table": {
-        "columns": {
-          "name": "Name",
-          "type": "Type",
-          "quantity": "Quantity",
-          "actions": "Actions"
-        },
-        "empty": "No components added",
-        "types": {
-          "item": "Item",
-          "package": "Package"
-        }
-      },
-      "toast": {
-        "success": {
-          "add": {
-            "title": "Components added",
-            "description": "Selected components have been added to the operation"
-          },
-          "remove": {
-            "title": "Component removed",
-            "description": "Component has been removed from the operation"
-          }
-        },
-        "error": {
-          "add": {
-            "title": "Error adding components",
-            "description": "Failed to add components to the operation"
-          },
-          "remove": {
-            "title": "Error removing component",
-            "description": "Failed to remove component from the operation"
           }
         }
       }
@@ -1028,11 +951,78 @@
       },
       "actions": {
         "title": "Actions",
-        "viewDetails": "View details",
+        "viewDetails": "View Details",
         "edit": "Edit",
         "delete": "Delete"
       },
       "columns_dropdown": "Columns"
+    },
+    "components": {
+      "title": "Operation Components",
+      "description": "Add items and packages to this operation",
+      "buttons": {
+        "add": "Add a Component",
+        "tooltip": "Add items or packages to this operation"
+      }
+    },
+    "dialog": {
+      "title": "Add Components",
+      "description": "Select items or packages to add to this operation",
+      "tabs": {
+        "items": "Items",
+        "packages": "Packages"
+      },
+      "search": {
+        "items": "Search for items...",
+        "packages": "Search for packages..."
+      },
+      "empty": {
+        "items": "No items found",
+        "packages": "No packages found"
+      },
+      "quantity": {
+        "label": "Quantity",
+        "placeholder": "Enter quantity"
+      },
+      "buttons": {
+        "add": "Add Selection",
+        "cancel": "Cancel"
+      }
+    },
+    "table": {
+      "columns": {
+        "name": "Name",
+        "type": "Type",
+        "quantity": "Quantity",
+        "actions": "Actions"
+      },
+      "empty": "No components added",
+      "types": {
+        "item": "Item",
+        "package": "Package"
+      }
+    },
+    "toast": {
+      "success": {
+        "add": {
+          "title": "Components Added",
+          "description": "The selected components have been added to the operation"
+        },
+        "remove": {
+          "title": "Component Removed",
+          "description": "The component has been removed from the operation"
+        }
+      },
+      "error": {
+        "add": {
+          "title": "Error Adding Components",
+          "description": "Failed to add components to the operation"
+        },
+        "remove": {
+          "title": "Error Removing Component",
+          "description": "Failed to remove the component from the operation"
+        }
+      }
     }
   },
   "categories": {
@@ -1040,18 +1030,19 @@
       "tabs": {
         "categories": "Categories",
         "families": "Families",
-        "subfamilies": "Sub-Families",
+        "subfamilies": "Sub-families",
         "cards": "Cards",
         "tree": "Tree View"
       },
       "search": {
-        "placeholder": "Search categories..."
+        "placeholder": "Search for categories..."
       },
       "buttons": {
-        "addCategory": "Add Category",
-        "addFamily": "Add Family",
-        "addSubFamily": "Add Sub-Family",
-        "viewDetails": "View Details"
+        "addCategory": "Add a Category",
+        "addFamily": "Add a Family",
+        "addSubFamily": "Add a Sub-family",
+        "viewDetails": "View Details",
+        "hideDetails": "Hide Details"
       },
       "categories": {
         "title": "Categories",
@@ -1068,9 +1059,9 @@
         }
       },
       "subfamilies": {
-        "title": "Sub-Families",
+        "title": "Sub-families",
         "description": "Manage item sub-families",
-        "single": "Sub-Family",
+        "single": "Sub-family",
         "empty": {
           "categories": "No categories found. Create a category first.",
           "families": "No families found in this category.",
@@ -1081,12 +1072,12 @@
     "dialogs": {
       "category": {
         "title": {
-          "create": "Create Category",
+          "create": "Create a Category",
           "edit": "Edit Category"
         },
         "description": {
           "create": "Add a new category to the system.",
-          "edit": "Update the category details."
+          "edit": "Update the details of the category."
         },
         "fields": {
           "name": {
@@ -1098,12 +1089,12 @@
       },
       "family": {
         "title": {
-          "create": "Create Family",
+          "create": "Create a Family",
           "edit": "Edit Family"
         },
         "description": {
           "create": "Add a new family to the selected category.",
-          "edit": "Update the family details."
+          "edit": "Update the details of the family."
         },
         "fields": {
           "name": {
@@ -1119,12 +1110,12 @@
       },
       "subfamily": {
         "title": {
-          "create": "Create Sub-Family",
-          "edit": "Edit Sub-Family"
+          "create": "Create a Sub-family",
+          "edit": "Edit Sub-family"
         },
         "description": {
           "create": "Add a new sub-family to the selected family.",
-          "edit": "Update the sub-family details."
+          "edit": "Update the details of the sub-family."
         },
         "fields": {
           "name": {
@@ -1191,6 +1182,161 @@
           }
         }
       }
+    },
+    "deleteDialog": {
+      "title": "Are you sure?",
+      "description": "This action will permanently delete {type} \"{name}\".",
+      "buttons": {
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "deleting": "Deleting..."
+      }
+    },
+    "toast": {
+      "success": {
+        "title": "Success",
+        "deleted": "{type} deleted successfully."
+      },
+      "error": {
+        "title": "Error",
+        "delete": "Failed to delete {type}."
+      }
+    },
+    "tabs": {
+      "categories": "Categories",
+      "families": "Families",
+      "subfamilies": "Sub-families"
+    },
+    "buttons": {
+      "addCategory": "Add a Category",
+      "addFamily": "Add a Family",
+      "addSubfamily": "Add a Sub-family"
+    },
+    "cards": {
+      "categories": {
+        "title": "Categories",
+        "description": "Manage item categories",
+        "empty": "No categories found. Create one to get started."
+      }
+    },
+    "categoryDialog": {
+      "title": {
+        "create": "Create a Category",
+        "edit": "Edit Category"
+      },
+      "description": {
+        "create": "Add a new category to the system.",
+        "edit": "Update the details of the category."
+      },
+      "fields": {
+        "name": {
+          "label": "Name",
+          "placeholder": "Category name"
+        }
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "create": "Create",
+        "update": "Update",
+        "saving": "Saving..."
+      },
+      "toast": {
+        "success": {
+          "title": "Success",
+          "created": "Category created successfully.",
+          "updated": "Category updated successfully."
+        },
+        "error": {
+          "title": "Error",
+          "create": "Failed to create the category.",
+          "update": "Failed to update the category."
+        }
+      }
+    },
+    "familyDialog": {
+      "title": {
+        "create": "Create a Family",
+        "edit": "Edit Family"
+      },
+      "description": {
+        "create": "Add a new family to the selected category.",
+        "edit": "Update the details of the family."
+      },
+      "fields": {
+        "name": {
+          "label": "Name",
+          "placeholder": "Family name"
+        },
+        "category": {
+          "label": "Category",
+          "placeholder": "Select a category"
+        }
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "create": "Create",
+        "update": "Update",
+        "saving": "Saving..."
+      },
+      "toast": {
+        "success": {
+          "title": "Success",
+          "created": "Family created successfully.",
+          "updated": "Family updated successfully."
+        },
+        "error": {
+          "title": "Error",
+          "create": "Failed to create the family.",
+          "update": "Failed to update the family."
+        }
+      }
+    },
+    "subfamilyDialog": {
+      "title": {
+        "create": "Create a Sub-family",
+        "edit": "Edit Sub-family"
+      },
+      "description": {
+        "create": "Add a new sub-family to the selected family.",
+        "edit": "Update the details of the sub-family."
+      },
+      "fields": {
+        "name": {
+          "label": "Name",
+          "placeholder": "Sub-family name"
+        },
+        "category": {
+          "label": "Category",
+          "placeholder": "Select a category"
+        },
+        "family": {
+          "label": "Family",
+          "placeholder": "Select a family"
+        }
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "create": "Create",
+        "update": "Update",
+        "saving": "Saving..."
+      },
+      "toast": {
+        "success": {
+          "title": "Success",
+          "created": "Sub-family created successfully.",
+          "updated": "Sub-family updated successfully."
+        },
+        "error": {
+          "title": "Error",
+          "create": "Failed to create the sub-family.",
+          "update": "Failed to update the sub-family."
+        }
+      }
+    },
+    "types": {
+      "category": "category",
+      "family": "family",
+      "subfamily": "sub-family"
     }
   },
   "export": {
@@ -1209,13 +1355,13 @@
     "options": {
       "includeItems": "Include detailed items",
       "format": {
-        "label": "Export format",
+        "label": "Export Format",
         "excel": "Excel (.xlsx)",
         "csv": "CSV (.csv)"
       }
     },
     "buttons": {
-      "export": "Export Selected",
+      "export": "Export Selection",
       "exporting": "Exporting..."
     },
     "table": {
@@ -1248,11 +1394,11 @@
     },
     "toast": {
       "success": {
-        "title": "Export successful",
+        "title": "Export Successful",
         "description": "Exported {operations} operations and {packages} packages"
       },
       "error": {
-        "title": "Export failed",
+        "title": "Export Failed",
         "description": "An error occurred during export",
         "noSelection": {
           "title": "No items selected",
@@ -1278,11 +1424,11 @@
             "location": "Location",
             "year": "Year",
             "active": "Active",
-            "itemsCount": "Items Count"
+            "itemsCount": "Number of Items"
           }
         },
         "operationItems": {
-          "title": "Operation Items",
+          "title": "Items of Operations",
           "columns": {
             "operationId": "Operation ID",
             "operationName": "Operation Name",
@@ -1295,7 +1441,7 @@
             "quantity": "Quantity",
             "category": "Category",
             "family": "Family",
-            "subFamily": "SubFamily",
+            "subFamily": "Sub-family",
             "packageId": "Package ID",
             "packageName": "Package Name",
             "type": "Type"
@@ -1310,11 +1456,11 @@
             "location": "Location",
             "year": "Year",
             "active": "Active",
-            "itemsCount": "Items Count"
+            "itemsCount": "Number of Items"
           }
         },
         "packageItems": {
-          "title": "Package Items",
+          "title": "Items of Packages",
           "columns": {
             "packageId": "Package ID",
             "packageName": "Package Name",
@@ -1327,21 +1473,21 @@
             "quantity": "Quantity",
             "category": "Category",
             "family": "Family",
-            "subFamily": "SubFamily"
+            "subFamily": "Sub-family"
           }
         }
       }
     },
     "client": {
       "title": "Export Data",
-      "description": "Export your inventory data to various formats",
-      "selectionTitle": "Select what to export",
+      "description": "Export your inventory data in different formats",
+      "selectionTitle": "Select what you want to export",
       "noItems": "No items selected for export",
       "selectedCount": "{count} items selected for export",
       "processing": "Processing export request...",
-      "downloadReady": "Your export is ready for download",
+      "downloadReady": "Your export is ready to download",
       "downloadButton": "Download File",
-      "newExport": "Create New Export",
+      "newExport": "Create a New Export",
       "sections": {
         "items": "Items",
         "packages": "Packages",
@@ -1352,12 +1498,22 @@
   "reports": {
     "metadata": {
       "title": "Reports & Analytics | Inventory Management System",
-      "description": "View analytics and reports about operations, packages, items, and inventory value"
+      "description": "View analytics and reports on operations, packages, items, and inventory value"
     },
     "header": {
       "title": "Reports & Analytics",
       "description": "View growth trends, distribution analytics, and inventory value metrics",
       "exportButton": "Export Data"
+    },
+    "timeRange": {
+      "label": "Select Time Range",
+      "options": {
+        "1m": "1 Month",
+        "3m": "3 Months",
+        "6m": "6 Months",
+        "1y": "1 Year",
+        "all": "All"
+      }
     },
     "trendAnalysis": {
       "title": "Trend Analysis",
@@ -1366,20 +1522,20 @@
         "3m": "3 Months",
         "6m": "6 Months",
         "1y": "1 Year",
-        "all": "All Time"
+        "all": "All"
       }
     },
     "operations": {
       "title": "Operations Growth",
-      "cardTitle": "Operations Growth Over Time",
-      "description": "Trend of operations created and active operations over time",
+      "cardTitle": "Operations Over Time",
+      "description": "Trend of created operations and active operations over time",
       "total": "Total Operations",
       "active": "Active Operations"
     },
     "packages": {
       "title": "Packages Growth",
-      "cardTitle": "Packages Growth Over Time",
-      "description": "Trend of packages created and active packages over time",
+      "cardTitle": "Packages Over Time",
+      "description": "Trend of created packages and active packages over time",
       "total": "Total Packages",
       "active": "Active Packages"
     },
@@ -1390,7 +1546,7 @@
       },
       "totalQuantity": {
         "title": "Total Quantity",
-        "description": "Total units across all items"
+        "description": "Total units for all items"
       },
       "totalValue": {
         "title": "Total Value",
@@ -1409,7 +1565,7 @@
       },
       "valueByCategory": {
         "title": "Value by Category",
-        "description": "Distribution of inventory value across categories"
+        "description": "Distribution of inventory value by category"
       }
     },
     "topItems": {
@@ -1427,11 +1583,11 @@
     "categoryFamily": {
       "title": "Category & Family Details",
       "noFamilies": "No families with items",
-      "itemsCount": "{count} items"
+      "itemsCount": "{count, plural, one {# item} other {# items}}"
     },
     "selects": {
       "timeRange": {
-        "placeholder": "Select time range"
+        "placeholder": "Select a time range"
       }
     },
     "charts": {
@@ -1441,17 +1597,81 @@
         "items": "items",
         "count": "Count",
         "value": "Value"
+      },
+      "components": {
+        "title": "Operation Components",
+        "description": "All items and packages included in this operation",
+        "tabs": {
+          "all": "All",
+          "items": "Items",
+          "packages": "Packages"
+        },
+        "empty": {
+          "title": "No components found",
+          "description": "This operation has no items or packages yet.",
+          "itemsTitle": "No items found",
+          "itemsDescription": "This operation has no individual items yet.",
+          "packagesTitle": "No packages found",
+          "packagesDescription": "This operation has no packages yet.",
+          "addButton": "Add Components"
+        }
+      },
+      "itemCard": {
+        "viewDetails": "View Item Details",
+        "items": "item",
+        "items_plural": "items"
+      },
+      "packageCard": {
+        "viewDetails": "View Package Details",
+        "package": "Package"
+      },
+      "buttons": {
+        "editOperation": "Edit Operation",
+        "allOperations": "All Operations"
+      },
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive"
+      }
+    },
+    "package": {
+      "title": "Package Details",
+      "image": "Package Image",
+      "basicInfo": {
+        "title": "Package Details",
+        "year": "Year",
+        "location": "Location"
+      },
+      "summary": {
+        "title": "Package Summary",
+        "totalValue": "Total Value",
+        "totalItems": "Total Items",
+        "uniqueItems": "Unique Items"
+      },
+      "items": {
+        "title": "Items in Package",
+        "empty": "No items in this package",
+        "quantity": "Quantity",
+        "value": "Value"
+      },
+      "buttons": {
+        "editPackage": "Edit Package",
+        "backToPackages": "Back to Packages"
+      },
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive"
       }
     }
   },
   "dashboard": {
     "title": "Dashboard",
     "description": "Overview of your inventory system",
-    "welcome": "Welcome back",
+    "welcome": "Welcome",
     "timeOfDay": {
-      "morning": "Good morning",
-      "afternoon": "Good afternoon",
-      "evening": "Good evening"
+      "morning": "Good Morning",
+      "afternoon": "Good Afternoon",
+      "evening": "Good Evening"
     },
     "metrics": {
       "items": {
@@ -1469,12 +1689,12 @@
       },
       "value": {
         "title": "Inventory Value",
-        "averagePerItem": "~{value} per item average"
+        "averagePerItem": "~{value} per item on average"
       }
     },
     "recentActivity": {
       "title": "Recent Activity",
-      "description": "Your latest inventory updates and activities",
+      "description": "Your latest updates and inventory activities",
       "tabs": {
         "items": "Items",
         "packages": "Packages",
@@ -1508,7 +1728,7 @@
     },
     "inventorySummary": {
       "title": "Inventory Status",
-      "description": "Value distribution by category",
+      "description": "Distribution of value by category",
       "noData": "No category data available"
     }
   },
@@ -1516,6 +1736,26 @@
     "dashboard": {
       "title": "Dashboard | Inventory Management System",
       "description": "Dashboard for the inventory management system"
+    },
+    "new": {
+      "item": {
+        "title": "New Item | Inventory Management System",
+        "description": "Create a new item in the inventory system",
+        "heading": "Create a New Item",
+        "subheading": "Add a new item to your inventory"
+      },
+      "package": {
+        "title": "New Package | Inventory Management System",
+        "description": "Create a new package in the inventory system",
+        "heading": "Create a New Package",
+        "subheading": "Add a new package to your inventory"
+      },
+      "operation": {
+        "title": "New Operation | Inventory Management System",
+        "description": "Create a new operation in the inventory system",
+        "heading": "Create a New Operation",
+        "subheading": "Add a new operation to your system"
+      }
     },
     "items": {
       "title": "Items | Inventory Management System",
@@ -1535,7 +1775,7 @@
     },
     "reports": {
       "title": "Reports & Analytics | Inventory Management System",
-      "description": "View analytics and reports about operations, packages, items, and inventory value"
+      "description": "View analytics and reports regarding operations, packages, items, and inventory value"
     },
     "settings": {
       "title": "Settings | Inventory Management System",
@@ -1552,103 +1792,16 @@
       "description": "Admin dashboard for the inventory management system"
     },
     "signIn": {
-      "title": "Welcome back",
-      "description": "Enter your credentials to sign in to your account"
-    },
-    "error": {
-      "title": "Error | Inventory Management System",
-      "heading": "Something went wrong!",
-      "description": "An error occurred while processing your request",
-      "action": "Try again"
-    },
-    "notFound": {
-      "title": "Not Found | Inventory Management System",
-      "heading": "Page not found",
-      "description": "The page you're looking for doesn't exist or has been moved",
-      "action": "Go back home"
-    },
-    "operationEdit": {
-      "title": "Edit Operation | Inventory Management System",
-      "description": "Edit an existing operation",
-      "notFound": {
-        "title": "Operation Not Found | Inventory Management System",
-        "heading": "Operation not found",
-        "description": "The operation you're looking for doesn't exist or has been deleted"
-      }
-    },
-    "packageEdit": {
-      "title": "Edit Package | Inventory Management System",
-      "description": "Edit an existing package",
-      "notFound": {
-        "title": "Package Not Found | Inventory Management System",
-        "heading": "Package not found",
-        "description": "The package you're looking for doesn't exist or has been deleted"
-      }
-    },
-    "itemEdit": {
-      "title": "Edit Item | Inventory Management System",
-      "description": "Edit an existing item",
-      "notFound": {
-        "title": "Item Not Found | Inventory Management System",
-        "heading": "Item not found",
-        "description": "The item you're looking for doesn't exist or has been deleted"
-      }
-    },
-    "export": {
-      "title": "Export Data | Inventory Management System",
-      "description": "Export your inventory data"
-    },
-    "import": {
-      "title": "Import Data | Inventory Management System",
-      "description": "Import inventory data from external sources"
-    },
-    "new": {
-      "operation": {
-        "title": "New Operation | Inventory Management System",
-        "description": "Create a new operation",
-        "heading": "New Operation",
-        "subheading": "Create a new operation",
-        "toast": {
-          "success": {
-            "title": "Operation created",
-            "description": "The operation has been created successfully."
-          },
-          "error": {
-            "title": "Error",
-            "description": "Failed to create operation. Please try again."
-          }
-        }
-      },
-      "package": {
-        "title": "New Package | Inventory Management System",
-        "description": "Create a new package",
-        "heading": "New Package",
-        "subheading": "Create a new package of items"
-      },
-      "item": {
-        "title": "New Item | Inventory Management System",
-        "description": "Create a new inventory item",
-        "heading": "New Item",
-        "subheading": "Create a new inventory item"
-      }
+      "title": "Welcome",
+      "description": "Enter your credentials to log in to your account"
     }
-  },
-  "loading": {
-    "items": "Loading items...",
-    "packages": "Loading packages...",
-    "operations": "Loading operations...",
-    "categories": "Loading categories...",
-    "export": "Preparing export...",
-    "import": "Processing import...",
-    "saving": "Saving changes...",
-    "deleting": "Deleting..."
   },
   "details": {
     "common": {
       "noImage": "No image available",
       "id": "ID",
       "description": "Description",
-      "created": "Created",
+      "created": "Created on",
       "status": "Status",
       "actions": {
         "edit": "Edit",
@@ -1706,11 +1859,11 @@
         },
         "empty": {
           "title": "No components found",
-          "description": "This operation doesn't have any items or packages yet.",
+          "description": "This operation has no items or packages.",
           "itemsTitle": "No items found",
-          "itemsDescription": "This operation doesn't have any individual items yet.",
+          "itemsDescription": "This operation has no individual items.",
           "packagesTitle": "No packages found",
-          "packagesDescription": "This operation doesn't have any packages yet.",
+          "packagesDescription": "This operation has no packages.",
           "addButton": "Add Components"
         }
       },
@@ -1747,7 +1900,7 @@
         "uniqueItems": "Unique Items"
       },
       "items": {
-        "title": "Package Items",
+        "title": "Items in Package",
         "empty": "No items in this package",
         "quantity": "Quantity",
         "value": "Value"
@@ -1781,6 +1934,18 @@
     }
   },
   "admin": {
+    "sidebar": {
+      "title": "Admin",
+      "subtitle": "Inventory System",
+      "navigation": "Admin Navigation",
+      "items": {
+        "dashboard": "Dashboard",
+        "users": "Users",
+        "categories": "Categories",
+        "settings": "Settings",
+        "backToApp": "Back to Application"
+      }
+    },
     "users": {
       "title": "User Management",
       "description": "Manage user accounts and permissions",
@@ -1788,7 +1953,7 @@
         "title": "Users",
         "description": "Manage users and their roles",
         "buttons": {
-          "invite": "Invite User",
+          "invite": "Invite a User",
           "export": "Export Users"
         }
       },
@@ -1802,7 +1967,7 @@
           "actions": "Actions"
         },
         "roles": {
-          "admin": "Admin",
+          "admin": "Administrator",
           "manager": "Manager",
           "user": "User",
           "viewer": "Viewer"
@@ -1817,19 +1982,22 @@
           "delete": "Delete User",
           "resetPassword": "Reset Password",
           "deactivate": "Deactivate",
-          "activate": "Activate"
+          "activate": "Activate",
+          "makeAdmin": "Make Admin",
+          "removeAdmin": "Remove Admin Rights"
         },
-        "search": "Search users...",
-        "empty": "No users found"
+        "search": "Search for users...",
+        "empty": "No users found",
+        "deleteConfirmation": "Are you sure you want to delete this user? This action is permanent."
       },
       "inviteDialog": {
-        "title": "Invite User",
+        "title": "Invite a User",
         "description": "Send an invitation to join your organization",
         "fields": {
           "email": {
             "label": "Email Address",
             "placeholder": "user@example.com",
-            "description": "Enter the email address to send the invitation to"
+            "description": "Enter the email address to send the invitation"
           },
           "role": {
             "label": "Role",
@@ -1850,11 +2018,11 @@
         "toast": {
           "success": {
             "title": "Invitation Sent",
-            "description": "User invitation has been sent successfully."
+            "description": "The user invitation has been sent successfully."
           },
           "error": {
             "title": "Error",
-            "description": "Failed to send invitation. Please try again."
+            "description": "Failed to send the invitation. Please try again."
           }
         }
       },
@@ -1862,15 +2030,168 @@
         "title": "Admin",
         "dashboard": "Admin Dashboard",
         "users": "User Management",
-        "categories": "Categories Management",
+        "categories": "Category Management",
         "settings": "System Settings",
         "logs": "System Logs",
-        "backToApp": "Back to App"
+        "backToApp": "Back to Application"
       }
     },
-    "categoriesManager": {
-      "title": "Categories Management",
-      "description": "Manage categories, families, and sub-families structure"
+    "categories": {
+      "tabs": {
+        "categories": "Categories",
+        "families": "Families",
+        "subfamilies": "Sub-families"
+      },
+      "buttons": {
+        "addCategory": "Add a Category",
+        "addFamily": "Add a Family",
+        "addSubfamily": "Add a Sub-family"
+      },
+      "cards": {
+        "categories": {
+          "title": "Categories",
+          "description": "Manage item categories",
+          "empty": "No categories found. Create one to get started."
+        }
+      },
+      "deleteDialog": {
+        "title": "Are you sure?",
+        "description": "This action will permanently delete {type} \"{name}\".",
+        "buttons": {
+          "cancel": "Cancel",
+          "delete": "Delete",
+          "deleting": "Deleting..."
+        }
+      },
+      "types": {
+        "category": "category",
+        "family": "family",
+        "subfamily": "sub-family"
+      },
+      "toast": {
+        "success": {
+          "title": "Success",
+          "deleted": "{type} deleted successfully."
+        },
+        "error": {
+          "title": "Error",
+          "delete": "Failed to delete {type}."
+        }
+      },
+      "categoryDialog": {
+        "title": {
+          "create": "Create a Category",
+          "edit": "Edit Category"
+        },
+        "description": {
+          "create": "Add a new category to the system.",
+          "edit": "Update the details of the category."
+        },
+        "fields": {
+          "name": {
+            "label": "Name",
+            "placeholder": "Category name"
+          }
+        },
+        "buttons": {
+          "cancel": "Cancel",
+          "create": "Create",
+          "update": "Update",
+          "saving": "Saving..."
+        },
+        "toast": {
+          "success": {
+            "title": "Success",
+            "created": "Category created successfully.",
+            "updated": "Category updated successfully."
+          },
+          "error": {
+            "title": "Error",
+            "create": "Failed to create the category.",
+            "update": "Failed to update the category."
+          }
+        }
+      },
+      "familyDialog": {
+        "title": {
+          "create": "Create a Family",
+          "edit": "Edit Family"
+        },
+        "description": {
+          "create": "Add a new family to the selected category.",
+          "edit": "Update the details of the family."
+        },
+        "fields": {
+          "name": {
+            "label": "Name",
+            "placeholder": "Family name"
+          },
+          "category": {
+            "label": "Category",
+            "placeholder": "Select a category"
+          }
+        },
+        "buttons": {
+          "cancel": "Cancel",
+          "create": "Create",
+          "update": "Update",
+          "saving": "Saving..."
+        },
+        "toast": {
+          "success": {
+            "title": "Success",
+            "created": "Family created successfully.",
+            "updated": "Family updated successfully."
+          },
+          "error": {
+            "title": "Error",
+            "create": "Failed to create the family.",
+            "update": "Failed to update the family."
+          }
+        }
+      },
+      "subfamilyDialog": {
+        "title": {
+          "create": "Create a Sub-family",
+          "edit": "Edit Sub-family"
+        },
+        "description": {
+          "create": "Add a new sub-family to the selected family.",
+          "edit": "Update the details of the sub-family."
+        },
+        "fields": {
+          "name": {
+            "label": "Name",
+            "placeholder": "Sub-family name"
+          },
+          "category": {
+            "label": "Category",
+            "placeholder": "Select a category"
+          },
+          "family": {
+            "label": "Family",
+            "placeholder": "Select a family"
+          }
+        },
+        "buttons": {
+          "cancel": "Cancel",
+          "create": "Create",
+          "update": "Update",
+          "saving": "Saving..."
+        },
+        "toast": {
+          "success": {
+            "title": "Success",
+            "created": "Sub-family created successfully.",
+            "updated": "Sub-family updated successfully."
+          },
+          "error": {
+            "title": "Error",
+            "create": "Failed to create the sub-family.",
+            "update": "Failed to update the sub-family."
+          }
+        }
+      }
     }
   }
 }

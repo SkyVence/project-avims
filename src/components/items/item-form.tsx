@@ -27,6 +27,8 @@ import {
   SelectValue,
 } from "../ui/select";
 import { useTranslations } from "next-intl";
+import { ImageUpload } from "../upload/img-upload";
+import { useUploadThing } from "@/lib/uploadthing";
 
 export const itemFormSchema = z.object({
   name: z.string().min(1, {
@@ -96,6 +98,8 @@ export function ItemForm({
   const [availableSubFamilies, setAvailableSubFamilies] = useState<SubFamily[]>(
     []
   );
+  const [pendingImageFiles, setPendingImageFiles] = useState<File[]>([]);
+  const { startUpload } = useUploadThing("imageUploader");
   const t = useTranslations();
 
   const form = useForm<ItemFormValues>({
@@ -168,6 +172,26 @@ export function ItemForm({
   const handleSubmit = async (data: ItemFormValues) => {
     try {
       setIsLoading(true);
+      
+      // Upload any pending images first
+      if (pendingImageFiles.length > 0) {
+        const uploadResult = await startUpload(pendingImageFiles);
+        
+        if (uploadResult) {
+          // Map the uploaded images to the expected format
+          const newImages = uploadResult.map(img => ({
+            url: img.ufsUrl,
+            key: img.key
+          }));
+          
+          // Add the new images to the existing ones
+          data.images = [...data.images, ...newImages];
+        }
+        
+        // Clear pending files after upload
+        setPendingImageFiles([]);
+      }
+      
       await onSubmit(data);
       toast({
         title: t('items.form.toast.success.' + (initialData ? 'update.title' : 'create.title')),
@@ -505,17 +529,15 @@ export function ItemForm({
                 <FormItem>
                   <FormLabel>Images</FormLabel>
                   <FormControl>
-                    <FileUpload
+                    <ImageUpload
                       value={field.value}
-                      onChange={(files) => field.onChange(files)}
-                      onRemove={(key) =>
-                        field.onChange(
-                          field.value.filter((file) => file.key !== key)
-                        )}
-                      endpoint="imageUploader"
-                      disabled={false}
+                      onChange={field.onChange}
+                      pendingFiles={pendingImageFiles}
+                      onFilesChange={setPendingImageFiles}
+                      disabled={isLoading}
                     />
                   </FormControl>
+                  <FormDescription>Upload product images (max 4MB per image)</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

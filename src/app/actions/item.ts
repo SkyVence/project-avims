@@ -5,6 +5,11 @@ import { revalidatePath } from "next/cache"
 import { z } from "zod"
 import { getAuthenticatedUser } from "@/lib/auth"
 
+const imageSchema = z.object({
+  url: z.string(),
+  key: z.string(),
+});
+
 const itemSchema = z.object({
   name: z.string().min(1),
   description: z.string().optional(),
@@ -21,12 +26,7 @@ const itemSchema = z.object({
   familyId: z.string(),
   subFamilyId: z.string(),
   quantity: z.coerce.number().int().positive().default(1),
-  image: z
-    .object({
-      url: z.string(),
-      key: z.string(),
-    })
-    .optional(),
+  images: z.array(imageSchema).default([]),
 })
 
 export async function createItem(formData: FormData | z.infer<typeof itemSchema>) {
@@ -37,40 +37,76 @@ export async function createItem(formData: FormData | z.infer<typeof itemSchema>
   const data =
     formData instanceof FormData ? itemSchema.parse(Object.fromEntries(formData)) : itemSchema.parse(formData)
 
-  // Create the item with the image if provided
-  const item = await prisma.item.create({
-    data: {
-      name: data.name,
-      description: data.description,
-      brand: data.brand,
-      value: data.value,
-      insuranceValue: data.insuranceValue,
-      hsCode: data.hsCode,
-      location: data.location,
-      length: data.length,
-      width: data.width,
-      height: data.height,
-      weight: data.weight,
-      categoryId: data.categoryId,
-      familyId: data.familyId,
-      subFamilyId: data.subFamilyId,
-      quantity: data.quantity,
-      userId: user.id,
-      // Create the image if it exists
-      ...(data.image && {
-        image: {
-          create: {
-            url: data.image.url,
-            key: data.image.key,
-          },
-        },
-      }),
-    },
-  })
+  try {
+    // Create the item without images initially
+    const item = await prisma.item.create({
+      data: {
+        name: data.name,
+        description: data.description,
+        brand: data.brand,
+        value: data.value,
+        insuranceValue: data.insuranceValue,
+        hsCode: data.hsCode,
+        location: data.location,
+        length: data.length,
+        width: data.width,
+        height: data.height,
+        weight: data.weight,
+        categoryId: data.categoryId,
+        familyId: data.familyId,
+        subFamilyId: data.subFamilyId,
+        quantity: data.quantity,
+        userId: user.id,
+      },
+    });
 
-  revalidatePath("/items")
-  revalidatePath(`/item/${item.id}`)
-  return item
+    // If we have images, use the first one as the item's image
+    // (since our database model only allows one image per item)
+    if (data.images.length > 0) {
+      const firstImage = data.images[0];
+      
+      // Check if the image with this key already exists
+      const existingImage = await prisma.image.findUnique({
+        where: { key: firstImage.key }
+      });
+      
+      if (existingImage) {
+        // If the image exists but is not linked to any item (itemId is null)
+        if (!existingImage.itemId && !existingImage.packageId && !existingImage.operationId) {
+          // Update the existing image to link it to this item
+          await prisma.image.update({
+            where: { key: firstImage.key },
+            data: { itemId: item.id }
+          });
+        } else {
+          // If image is already linked to another entity, create a new image record with same URL but a modified key
+          await prisma.image.create({
+            data: {
+              url: firstImage.url,
+              key: `${firstImage.key}_${item.id}`, // Make key unique by appending item ID
+              itemId: item.id,
+            },
+          });
+        }
+      } else {
+        // Create a new image if it doesn't exist
+        await prisma.image.create({
+          data: {
+            url: firstImage.url,
+            key: firstImage.key,
+            itemId: item.id,
+          },
+        });
+      }
+    }
+
+    revalidatePath("/items");
+    revalidatePath(`/items/${item.id}`);
+    return item;
+  } catch (error) {
+    console.error("Error creating item:", error);
+    throw error;
+  }
 }
 
 export async function updateItem(id: string, formData: FormData | z.infer<typeof itemSchema>) {
@@ -81,68 +117,101 @@ export async function updateItem(id: string, formData: FormData | z.infer<typeof
   const data =
     formData instanceof FormData ? itemSchema.parse(Object.fromEntries(formData)) : itemSchema.parse(formData)
 
-  // Check if item exists and belongs to user
-  const existingItem = await prisma.item.findFirst({
-    where: {
-      id,
-    },
-    include: {
-      image: true,
-    },
-  })
-
-  if (!existingItem) {
-    throw new Error("Item not found !")
-  }
-
-  // Update the item
-  const item = await prisma.item.update({
-    where: {
-      id,
-    },
-    data: {
-      name: data.name,
-      description: data.description,
-      brand: data.brand,
-      value: data.value,
-      insuranceValue: data.insuranceValue,
-      hsCode: data.hsCode,
-      location: data.location,
-      length: data.length,
-      width: data.width,
-      height: data.height,
-      weight: data.weight,
-      categoryId: data.categoryId,
-      familyId: data.familyId,
-      subFamilyId: data.subFamilyId,
-      quantity: data.quantity,
-    },
-  })
-
-  // Handle the image separately
-  // If there's an existing image, delete it
-  if (existingItem.image) {
-    await prisma.image.delete({
+  try {
+    // Check if item exists and belongs to user
+    const existingItem = await prisma.item.findFirst({
       where: {
-        id: existingItem.image.id,
+        id,
+      },
+      include: {
+        image: true,
       },
     })
-  }
 
-  // If a new image is provided, create it
-  if (data.image) {
-    await prisma.image.create({
+    if (!existingItem) {
+      throw new Error("Item not found !")
+    }
+
+    // Update the item
+    const item = await prisma.item.update({
+      where: {
+        id,
+      },
       data: {
-        url: data.image.url,
-        key: data.image.key,
-        itemId: id,
+        name: data.name,
+        description: data.description,
+        brand: data.brand,
+        value: data.value,
+        insuranceValue: data.insuranceValue,
+        hsCode: data.hsCode,
+        location: data.location,
+        length: data.length,
+        width: data.width,
+        height: data.height,
+        weight: data.weight,
+        categoryId: data.categoryId,
+        familyId: data.familyId,
+        subFamilyId: data.subFamilyId,
+        quantity: data.quantity,
       },
     })
-  }
 
-  revalidatePath("/items")
-  revalidatePath(`/items/${id}`)
-  return item
+    // Handle the image separately
+    // If there's an existing image, delete it
+    if (existingItem.image) {
+      await prisma.image.delete({
+        where: {
+          id: existingItem.image.id,
+        },
+      })
+    }
+
+    // If new images are provided, create the first one as the item's image
+    if (data.images.length > 0) {
+      const firstImage = data.images[0];
+      
+      // Check if the image with this key already exists
+      const existingImage = await prisma.image.findUnique({
+        where: { key: firstImage.key }
+      });
+      
+      if (existingImage) {
+        // If the image exists but is not linked to any item (itemId is null)
+        if (!existingImage.itemId && !existingImage.packageId && !existingImage.operationId) {
+          // Update the existing image to link it to this item
+          await prisma.image.update({
+            where: { key: firstImage.key },
+            data: { itemId: id }
+          });
+        } else {
+          // If image is already linked to another entity, create a new image record with same URL but a modified key
+          await prisma.image.create({
+            data: {
+              url: firstImage.url,
+              key: `${firstImage.key}_${id}`, // Make key unique by appending item ID
+              itemId: id,
+            },
+          });
+        }
+      } else {
+        // Create a new image if it doesn't exist
+        await prisma.image.create({
+          data: {
+            url: firstImage.url,
+            key: firstImage.key,
+            itemId: id,
+          },
+        });
+      }
+    }
+
+    revalidatePath("/items")
+    revalidatePath(`/items/${id}`)
+    return item
+  } catch (error) {
+    console.error("Error updating item:", error)
+    throw error
+  }
 }
 
 export async function deleteItem(id: string) {

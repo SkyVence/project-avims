@@ -1,11 +1,22 @@
-import "./globals.css";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { ClerkProvider } from "@clerk/nextjs";
-import { cn } from '@/lib/utils';
-import { ThemeProvider } from '@/components/theme-provider';
+// Uploadthing Imports
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { ourFileRouter } from "./api/uploadthing/core";
+import { extractRouterConfig } from "uploadthing/server";
+// Next-Intl Imports
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
+// Next-Theme Imports
+import { ThemeProvider } from '@/components/theme-provider';
+// Clerk Imports
+import { ClerkProvider } from "@clerk/nextjs";
+// SHADCN Imports
+import { cn } from '@/lib/utils';
+// Fonts Imports
+import { Inter } from "next/font/google";
+// Next Imports
+import type { Metadata } from "next";
+// Style Imports
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +38,7 @@ export default async function RootLayout({
                     <ClerkProvider>
                         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
                             <NextIntlClientProvider>
+								<NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)}/>
                                 {children}
                             </NextIntlClientProvider>
                         </ThemeProvider>

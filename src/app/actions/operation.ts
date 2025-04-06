@@ -163,7 +163,6 @@ export async function deleteOperation(id: string) {
   const existingOperation = await prisma.operation.findFirst({
     where: {
       id,
-      userId: user.id,
     },
   });
 

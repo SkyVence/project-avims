@@ -624,7 +624,8 @@
         },
         "previous": "Previous",
         "next": "Next"
-      }
+      },
+	  "empty": "No items available"
     }
   },
   "import": {
@@ -1729,7 +1730,7 @@
     "inventorySummary": {
       "title": "Inventory Status",
       "description": "Distribution of value by category",
-      "noData": "No category data available"
+      "empty": "No category data available"
     }
   },
   "pages": {

@@ -624,7 +624,8 @@
         },
         "previous": "Précédent",
         "next": "Suivant"
-      }
+      },
+	  "empty": "Aucun article disponible"
     }
   },
   "import": {
@@ -1741,7 +1742,7 @@
     "inventorySummary": {
       "title": "État de l'inventaire",
       "description": "Distribution de la valeur par catégorie",
-      "noData": "Aucune donnée de catégorie disponible"
+      "empty": "Aucune donnée de catégorie disponible"
     }
   },
   "pages": {

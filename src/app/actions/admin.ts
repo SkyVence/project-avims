@@ -14,11 +14,9 @@ export async function inviteUser(email: string) {
   await requireAdmin()
 
   try {
-    console.log(`${process.env.NEXT_PUBLIC_CLERK_INVITE_REDIRECT}?newUser=true`)
     // Create the invitation in Clerk
     await clerkClient.invitations.createInvitation({
       emailAddress: email,
-      redirectUrl: `${process.env.NEXT_PUBLIC_CLERK_INVITE_REDIRECT}?newUser=true`,
     })
     
     revalidatePath("/admin/users")

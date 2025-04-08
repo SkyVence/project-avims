@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -15,10 +15,10 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
-import { FileUpload } from "../ui/file-upload";
+import { FileUpload } from "@/components/ui/file-upload";
 import {
   Select,
   SelectContent,
@@ -42,9 +42,15 @@ export const itemFormSchema = z.object({
   width: z.coerce.number().optional(),
   height: z.coerce.number().optional(),
   weight: z.coerce.number().optional(),
-  categoryId: z.string().optional(),
-  familyId: z.string().optional(),
-  subFamilyId: z.string().optional(),
+  categoryId: z.string().min(1, {
+    message: "Category is required",
+  }),
+  familyId: z.string().min(1, {
+    message: "Family is required",
+  }),
+  subFamilyId: z.string().min(1, {
+    message: "Sub-Family is required",
+  }),
   quantity: z.coerce.number().int().positive().default(1),
   images: z
     .array(
@@ -108,22 +114,30 @@ export function ItemForm({
       insuranceValue: 0,
       hsCode: "",
       location: "",
-      length: undefined,
-      width: undefined,
-      height: undefined,
-      weight: undefined,
-      categoryId: undefined,
-      familyId: undefined,
-      subFamilyId: undefined,
+      length: 0,
+      width: 0,
+      height: 0,
+      weight: 0,
+      categoryId: "",
+      familyId: "",
+      subFamilyId: "",
       quantity: 1,
       images: [],
     },
+    mode: "all",
+    reValidateMode: "onChange",
   });
+
+  // Track form validation state
+  const isFormValid = form.formState.isValid && 
+    form.getValues("categoryId") !== "" && 
+    form.getValues("familyId") !== "" && 
+    form.getValues("subFamilyId") !== "";
 
   // Update available families when category changes
   const selectedCategoryId = form.watch("categoryId");
   useEffect(() => {
-    if (selectedCategoryId) {
+    if (selectedCategoryId && selectedCategoryId !== "") {
       const filtered = families.filter(
         (f) => f.categoryId === selectedCategoryId
       );
@@ -131,21 +145,21 @@ export function ItemForm({
 
       // Clear family selection if the selected family is not in the filtered list
       const currentFamilyId = form.getValues("familyId");
-      if (currentFamilyId && !filtered.some((f) => f.id === currentFamilyId)) {
-        form.setValue("familyId", undefined);
-        form.setValue("subFamilyId", undefined);
+      if (currentFamilyId && currentFamilyId !== "" && !filtered.some((f) => f.id === currentFamilyId)) {
+        form.setValue("familyId", "");
+        form.setValue("subFamilyId", "");
       }
     } else {
       setAvailableFamilies([]);
-      form.setValue("familyId", undefined);
-      form.setValue("subFamilyId", undefined);
+      form.setValue("familyId", "");
+      form.setValue("subFamilyId", "");
     }
   }, [selectedCategoryId, families, form]);
 
   // Update available sub-families when family changes
   const selectedFamilyId = form.watch("familyId");
   useEffect(() => {
-    if (selectedFamilyId) {
+    if (selectedFamilyId && selectedFamilyId !== "") {
       const filtered = subFamilies.filter(
         (sf) => sf.familyId === selectedFamilyId
       );
@@ -154,19 +168,30 @@ export function ItemForm({
       // Clear sub-family selection if the selected sub-family is not in the filtered list
       const currentSubFamilyId = form.getValues("subFamilyId");
       if (
-        currentSubFamilyId &&
+        currentSubFamilyId && 
+        currentSubFamilyId !== "" && 
         !filtered.some((sf) => sf.id === currentSubFamilyId)
       ) {
-        form.setValue("subFamilyId", undefined);
+        form.setValue("subFamilyId", "");
       }
     } else {
       setAvailableSubFamilies([]);
-      form.setValue("subFamilyId", undefined);
+      form.setValue("subFamilyId", "");
     }
   }, [selectedFamilyId, subFamilies, form]);
 
   const handleSubmit = async (data: ItemFormValues) => {
     try {
+      // Add explicit validation check
+      if (!data.categoryId || !data.familyId || !data.subFamilyId) {
+        toast({
+          title: "Validation Error",
+          description: "Please select a category, family, and sub-family",
+          variant: "destructive",
+        });
+        return;
+      }
+
       setIsLoading(true);
       await onSubmit(data);
       toast({
@@ -400,8 +425,8 @@ export function ItemForm({
                     <FormLabel>Category</FormLabel>
                     <Select
                       onValueChange={field.onChange}
-                      defaultValue={field.value}
-                      value={field.value}
+                      defaultValue={field.value || ""}
+                      value={field.value || ""}
                     >
                       <FormControl>
                         <SelectTrigger>
@@ -428,8 +453,8 @@ export function ItemForm({
                     <FormLabel>Family</FormLabel>
                     <Select
                       onValueChange={field.onChange}
-                      defaultValue={field.value}
-                      value={field.value}
+                      defaultValue={field.value || ""}
+                      value={field.value || ""}
                       disabled={
                         !form.getValues("categoryId") ||
                         availableFamilies.length === 0
@@ -460,8 +485,8 @@ export function ItemForm({
                     <FormLabel>Sub-Family</FormLabel>
                     <Select
                       onValueChange={field.onChange}
-                      defaultValue={field.value}
-                      value={field.value}
+                      defaultValue={field.value || ""}
+                      value={field.value || ""}
                       disabled={
                         !form.getValues("familyId") ||
                         availableSubFamilies.length === 0
@@ -531,7 +556,7 @@ export function ItemForm({
           >
             Cancel
           </Button>
-          <Button type="submit" disabled={isLoading}>
+          <Button type="submit" disabled={isLoading || !isFormValid}>
             {isLoading ? t('items.form.buttons.saving') : t('items.form.buttons.save')}
           </Button>
         </div>
